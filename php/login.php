@@ -35,8 +35,8 @@
             $email = $_POST["email"];
             $password = $_POST["psw"];
         }
-        include("utils/connect.php");
-        $conn = connectDB("localhost","pi","turbofregna","sawstuff");
+        include("../db/connect.php");
+        $conn = connectDB("localhost","USERNAME","PASSWORD","starSaw");
         mysqli_real_escape_string($conn, $email);
 
         $query = "SELECT * FROM user WHERE email = '" . $email . "'";
@@ -55,7 +55,7 @@
                 session_start();
                 $_SESSION['nome'] = $row['nome'];
                 $_SESSION['logged'] = true;
-                header('Refresh 5; Location: index.php');
+                header('Refresh 5; Location: ../index.php');
             }else{
                 echo "wrong cred";
             }

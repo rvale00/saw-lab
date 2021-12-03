@@ -9,7 +9,7 @@
 <?php
 
 
-    include("utils/connect.php");
+    include("../db/connect.php");
 
     $name = $surname = $email = $password = $cpassword = " ";
     $filename = "user.txt";
@@ -49,12 +49,12 @@
             exit;
         }
 
-        $conn = connectDB("localhost","pi","turbofregna","sawstuff");
+        $conn = connectDB("localhost","USERNAME","PASSWORD","starSaw");
         mysqli_real_escape_string($conn, $name);
         mysqli_real_escape_string($conn, $surname);
         mysqli_real_escape_string($conn, $email);
         $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
-        $query = "INSERT INTO user (nome,cognome,email,psw) VALUES ('".$name."','".$surname."','".$email."','".$hashedpsw."')";
+        $query = "INSERT INTO user (email,nome,cognome,psw) VALUES ('".$email."','".$name."','".$surname."','".$hashedpsw."')";
         $result = mysqli_query($conn, $query);
         if(!$result){
             echo"query error";

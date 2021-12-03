@@ -54,7 +54,7 @@
         mysqli_real_escape_string($conn, $surname);
         mysqli_real_escape_string($conn, $email);
         $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
-        $query = "INSERT INTO user (email,nome,cognome,psw) VALUES ('".$email."','".$name."','".$surname."','".$hashedpsw."')";
+        $query = "INSERT INTO starSawUser (email,psw,_name,_surname) VALUES ('".$email."','".$hashedpsw."','".$name."','".$surname."')";
         $result = mysqli_query($conn, $query);
         if(!$result){
             echo"query error";

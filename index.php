@@ -7,7 +7,7 @@
     
         <h1>My Beautiful Homepage!</h1>
 
-        <a href="form/form.php"> Login/register </a>
+        <a href="php/form.php"> Login/register </a>
         <br>
         <?php
         session_start();

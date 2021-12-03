@@ -39,7 +39,7 @@
         $conn = connectDB("localhost","USERNAME","PASSWORD","starSaw");
         mysqli_real_escape_string($conn, $email);
 
-        $query = "SELECT * FROM user WHERE email = '" . $email . "'";
+        $query = "SELECT * FROM starSawUser WHERE email = '" . $email . "'";
         $res = mysqli_query($conn,$query);
         if(!$res){
             echo"query error: ". mysqli_error($conn);
@@ -55,7 +55,7 @@
                 session_start();
                 $_SESSION['nome'] = $row['nome'];
                 $_SESSION['logged'] = true;
-                header('Refresh 5; Location: ../index.php');
+                header('Location: ../index.php');
             }else{
                 echo "wrong cred";
             }

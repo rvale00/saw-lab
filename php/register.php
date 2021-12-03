@@ -64,6 +64,7 @@
             
         }
         echo "Registered.";
+        echo " <a href='form.php'> Accedi </a>";
         mysqli_close($conn);
 
 

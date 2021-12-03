@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head lang="it">
-        <title>Test form</title>
+        <title>Registration form</title>
     </head>
     <body>
     
@@ -24,21 +24,6 @@
         <br>
         <Label><strong>Conferma password</strong></Label>
         <input type="password" id="cPsw" name="cPsw">
-        <br>
-        <input type="submit" >
-    </fieldset>
-    </form>
-
-    <!-- -->
-    
-    <form action="login.php" method="post">
-    <fieldset>
-    <legend>Login</legend>
-        <Label><strong>E-mail</strong></Label>
-        <input type="email" id="email" name="email">
-        <br>
-        <Label><strong>Password</strong></Label>
-        <input type="password" id="psw" name="psw">
         <br>
         <input type="submit" >
     </fieldset>

@@ -51,10 +51,10 @@
         if(mysqli_num_rows($res) == 1){
             $row = mysqli_fetch_array($res);
             if(password_verify($password,$row['psw'])){
-                echo"legged in.";
                 session_start();
-                $_SESSION['nome'] = $row['nome'];
-                $_SESSION['logged'] = true;
+                $_SESSION['nome'] = $row['_name'];
+                $_SESSION['logged'] = true; 
+                echo"logged in.";
                 header('Location: ../index.php');
             }else{
                 echo "wrong cred";

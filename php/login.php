@@ -53,6 +53,7 @@
             if(password_verify($password,$row['psw'])){
                 session_start();
                 $_SESSION['nome'] = $row['_name'];
+                $_SESSION['email'] = $row['email'];
                 $_SESSION['logged'] = true; 
                 echo"logged in.";
                 header('Location: ../index.php');

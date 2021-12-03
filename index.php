@@ -19,7 +19,7 @@
             echo "<br>";
 
             if(isset($_SESSION['logged'])){
-                echo " <a href='areaPersonale.php'> area personale </a>";
+                echo " <a href='php/personalArea.php'> area personale </a>";
                 echo "<br>";
                 echo " <a href='php/logout.php'> logout </a>";
                 echo "<br>";

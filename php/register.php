@@ -12,7 +12,6 @@
     include("../db/connect.php");
 
     $name = $surname = $email = $password = $cpassword = " ";
-    $filename = "user.txt";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["name"])){
             echo "<p> e' necessario inserire il nome</p>";
@@ -64,7 +63,7 @@
             
         }
         echo "Registered.";
-        echo " <a href='form.php'> Accedi </a>";
+        echo " <a href='formLogin.php'> Accedi </a>";
         mysqli_close($conn);
 
 

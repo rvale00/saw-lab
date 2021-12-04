@@ -25,7 +25,7 @@
         ?>
         <form action="personalArea.php" method="post">
         <fieldset>
-        <legend>Register</legend>
+        <legend>Modify</legend>
         <Label><strong>Nome</strong></Label>
         <input type="text" id="fname" name="name" value="<?php echo $row['_name'] ?>" >
         <br>
@@ -36,6 +36,8 @@
         <input type="email" id="email" name="email" value="<?php echo $row['email'] ?>">
         <br>
         <input type="submit" >
+        <a href="../index.php"> Torna alla home</a>
+        <a href='cambiaPassword.php'> Cambia Password </a>
         </fieldset>
         </form>
 

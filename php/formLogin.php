@@ -5,44 +5,44 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         html,
-body {
-  height: 100%;
-}
+    body {
+      height: 100%;
+    }
 
-body {
-  display: flex;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
-}
+    body {
+      display: flex;
+      align-items: center;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #f5f5f5;
+    }
 
-.form-signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-}
+    .form-signin {
+      width: 100%;
+      max-width: 330px;
+      padding: 15px;
+      margin: auto;
+    }
 
-.form-signin .checkbox {
-  font-weight: 400;
-}
+    .form-signin .checkbox {
+      font-weight: 400;
+    }
 
-.form-signin .form-floating:focus-within {
-  z-index: 2;
-}
+    .form-signin .form-floating:focus-within {
+      z-index: 2;
+    }
 
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
+    .form-signin input[type="email"] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
 
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
+    .form-signin input[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
 
 .bd-placeholder-img {
         font-size: 1.125rem;
@@ -59,24 +59,6 @@ body {
       }
         </style>
     </head>
-    <!--<body>
-    
-        <h1>My Beautiful Form!</h1>
-
-        <form action="login.php" method="post">
-            <fieldset>
-            <legend>Login</legend>
-                <Label><strong>E-mail</strong></Label>
-                <input type="email" id="email" name="email">
-                <br>
-                <Label><strong>Password</strong></Label>
-                <input type="password" id="psw" name="psw">
-                <br>
-                <input type="submit" >
-            </fieldset>
-        </form>
-    </body>-->
-
 
   <body class="text-center">
     
@@ -86,11 +68,11 @@ body {
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     
         <div class="form-floating">
-          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+          <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
           <label for="floatingInput">Email address</label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="psw" name="psw" placeholder="Password">
+          <input type="password" class="form-control" id="floatingPassword" name="psw" placeholder="Password">
           <label for="floatingPassword">Password</label>
         </div>
     

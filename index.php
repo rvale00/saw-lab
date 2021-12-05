@@ -10,21 +10,55 @@
 
         <?php
             session_start();
+            //header
             include ("php/layout/header.php");
         ?>
         
         
          <main>
+            <!--title-->
             <div class="position-relative overflow-hidden p-md-5 m-md-3 text-center bg-warning">
                 <div class="col-md-5 p-lg-5 mx-auto my-5">
-                  <h1 class="display-4 fw-normal">PIMP MY QUACK</h1>
-                  <p class="lead fw-normal">Customize your programming ducks</p>
-                  <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+                <img class="card-img-top" src="img/logo.png" alt="Card image" style="width:100%">
+                <p class="lead fw-normal">Customize your programming ducks</p>
+                <a class="btn btn-outline-secondary" href="#">Coming soon</a>
                 </div>
-              </div>
+            </div>
+
+
+            
+            <div class="container w-auto p-3 text-center">
+                <div class="row">
+                    <div class="col-6 my-6">
+                        <div class="card" style="width:400px">
+                            <img class="card-img-top" src="img/quack.png" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                            <h4 class="card-title">John Doe</h4>
+                            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                            <a href="#" class="btn btn-primary">See Profile</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 my-6">
+                        <div class="card" style="width:400px">
+                            <img class="card-img-top" src="img/quack.png" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                            <h4 class="card-title">John Doe</h4>
+                            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                            <a href="#" class="btn btn-primary">See Profile</a>
+                            </div>
+                        </div>                    
+                    </div>
+
+
+
+                </div>
+            </div>
          </main>
 
-         <?php
+        <?php
+            //footer
             include ("php/layout/footer.php");
         ?>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

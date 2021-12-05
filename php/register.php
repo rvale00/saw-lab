@@ -48,7 +48,8 @@
             exit;
         }
 
-        $conn = connectDB("localhost","USERNAME","PASSWORD","starSaw");
+        //$conn = connectDB("localhost","USERNAME","PASSWORD","starSaw");
+        $conn = connectDB("localhost","root","turbofregna","starSaw");
         mysqli_real_escape_string($conn, $name);
         mysqli_real_escape_string($conn, $surname);
         mysqli_real_escape_string($conn, $email);

@@ -36,7 +36,8 @@
             $password = $_POST["psw"];
         }
         include("../db/connect.php");
-        $conn = connectDB("localhost","USERNAME","PASSWORD","starSaw");
+        //$conn = connectDB("localhost","USERNAME","PASSWORD","starSaw");
+        $conn = connectDB("localhost","root","turbofregna","starSaw");
         mysqli_real_escape_string($conn, $email);
 
         $query = "SELECT * FROM starSawUser WHERE email = '" . $email . "'";

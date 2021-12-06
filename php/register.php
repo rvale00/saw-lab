@@ -48,13 +48,13 @@
             exit;
         }
 
-        //$conn = connectDB("localhost","USERNAME","PASSWORD","starSaw");
-        $conn = connectDB("localhost","root","turbofregna","starSaw");
+        $conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
+        //$conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
         mysqli_real_escape_string($conn, $name);
         mysqli_real_escape_string($conn, $surname);
         mysqli_real_escape_string($conn, $email);
         $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
-        $query = "INSERT INTO starSawUser (email,psw,_name,_surname) VALUES ('".$email."','".$hashedpsw."','".$name."','".$surname."')";
+        $query = "INSERT INTO startSawUser (email,psw,_name,_surname) VALUES ('".$email."','".$hashedpsw."','".$name."','".$surname."')";
         $result = mysqli_query($conn, $query);
         if(!$result){
             echo"query error";

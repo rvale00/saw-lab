@@ -69,12 +69,12 @@
         <h1 class="h3 mb-3 fw-normal">Please register</h1>
 
         <div class="form-floating">
-          <input type="email" class="form-control" id="fname" name="name" placeholder="Rino">
+          <input type="text" class="form-control" id="fname" name="name" placeholder="Rino">
           <label for="floatingInput">Name</label>
         </div>
 
         <div class="form-floating">
-          <input type="email" class="form-control" id="lname" name="surname" placeholder="Pape">
+          <input type="text" class="form-control" id="lname" name="surname" placeholder="Pape">
           <label for="floatingInput">Surname</label>
         </div>
 

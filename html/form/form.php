@@ -7,11 +7,8 @@
 <body>
 
 <?php
-
-
-    include("../db/connect.php");
-
     $name = $surname = $email = $password = $cpassword = " ";
+    $filename = "user.txt";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["name"])){
             echo "<p> e' necessario inserire il nome</p>";
@@ -48,25 +45,18 @@
             exit;
         }
 
-        //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-        $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
-        mysqli_real_escape_string($conn, $name);
-        mysqli_real_escape_string($conn, $surname);
-        mysqli_real_escape_string($conn, $email);
-        $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
-        $query = "INSERT INTO startSawUser (email,psw,_name,_surname) VALUES ('".$email."','".$hashedpsw."','".$name."','".$surname."')";
-        $result = mysqli_query($conn, $query);
-        if(!$result){
-            echo"query error";
+        $toWrite = $name . " " . $surname . " " . $email . " " . $password . "\n";
 
-            mysqli_close($conn);
-            exit();
-            
+        if (!$handle = fopen($filename, 'a')) {
+            echo "Cannot open file ($filename)";
+            exit;
         }
-        echo "Registered.";
-        echo " <a href='formLogin.php'> Accedi </a>";
-        mysqli_close($conn);
-
+        if (fwrite($handle, $toWrite) === FALSE) {
+            echo "Cannot write to file ($filename)";
+            exit;
+        }
+        fclose($handle);
+        echo '<h1> registrato con successo </h1>';
 
     }
 

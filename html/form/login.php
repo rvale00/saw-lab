@@ -35,30 +35,25 @@
             $email = $_POST["email"];
             $password = $_POST["psw"];
         }
-        include("../db/connect.php");
-        //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw"); //VALE
-        $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+        include("utils/connect.php");
+        $conn = connectDB("localhost: 3306","root","turbofregna","sawstuff");
         mysqli_real_escape_string($conn, $email);
 
-        $query = "SELECT * FROM startSawUser WHERE email = '" . $email . "'";
+        $query = "SELECT * FROM user WHERE email = '" . $email . "'";
         $res = mysqli_query($conn,$query);
         if(!$res){
             echo"query error: ". mysqli_error($conn);
-
             mysqli_close($conn);
             exit();
-            
         }
         if(mysqli_num_rows($res) == 1){
             $row = mysqli_fetch_array($res);
             if(password_verify($password,$row['psw'])){
+                echo"legged in.";
                 session_start();
-                $_SESSION['nome'] = $row['_name'];
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['cart'] = array();
-                $_SESSION['logged'] = true; 
-                echo"logged in.";
-                header('Location: ../index.php');
+                $_SESSION['nome'] = $row['nome'];
+                $_SESSION['logged'] = true;
+                header('Location: index.php');
             }else{
                 echo "wrong cred";
             }

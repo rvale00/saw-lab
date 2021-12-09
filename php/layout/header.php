@@ -39,6 +39,7 @@
                 <form class="form-inline my-2 my-lg-0">
                     <?php
                       if(isset($_SESSION['logged'])){
+                        echo "<a class='nav-link' href='php/cart/listaCarrello.php'>Cart</a>";
                         echo "<a class='nav-link' href='php/personalArea.php'>".$_SESSION['nome']."</a>";
                         echo "<a class='nav-link' href='php/logout.php'>Logout</a>";
                       }

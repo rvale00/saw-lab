@@ -9,9 +9,10 @@
 <?php
 
 
-    include("../db/connect.php");
+    include("utils/connect.php");
 
     $name = $surname = $email = $password = $cpassword = " ";
+    $filename = "user.txt";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["name"])){
             echo "<p> e' necessario inserire il nome</p>";
@@ -48,13 +49,12 @@
             exit;
         }
 
-        //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-        $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+        $conn = connectDB("localhost","root","turbofregna","sawstuff");
         mysqli_real_escape_string($conn, $name);
         mysqli_real_escape_string($conn, $surname);
         mysqli_real_escape_string($conn, $email);
         $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
-        $query = "INSERT INTO startSawUser (email,psw,_name,_surname) VALUES ('".$email."','".$hashedpsw."','".$name."','".$surname."')";
+        $query = "INSERT INTO user (nome,cognome,email,psw) VALUES ('".$name."','".$surname."','".$email."','".$hashedpsw."')";
         $result = mysqli_query($conn, $query);
         if(!$result){
             echo"query error";
@@ -64,7 +64,6 @@
             
         }
         echo "Registered.";
-        echo " <a href='formLogin.php'> Accedi </a>";
         mysqli_close($conn);
 
 

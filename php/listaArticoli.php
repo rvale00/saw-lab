@@ -13,8 +13,8 @@
     include ("layout/header.php");
     include("../db/connect.php");
 
-    $conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-    //$conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+    //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
+    $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
     $query = "SELECT * FROM startSawArticoli;";
     $result = mysqli_query($conn, $query);
 
@@ -35,6 +35,8 @@
                         echo"<h4 class='card-title'>".$row['Titolo']."</h4>";
                         echo"<p class='card-text'>".$row['Descrizione']."</p>";
                         echo"<a href='articolo.php?id=".$row['IdArticolo']."' class='btn btn-primary'>See Profile</a>";
+                        echo"<a href='cart/addInCart.php?id=".$row['IdArticolo']."' class='btn btn-primary'>Add to cart</a>";
+                        
                     echo"</div>";
                 echo"</div>";
             }

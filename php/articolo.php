@@ -13,8 +13,8 @@
     include ("layout/header.php");
     include("../db/connect.php");
 
-    $conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-    //$conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+    //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
+    $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
     $query = "SELECT * FROM startSawArticoli WHERE IdArticolo=".$_GET['id'].";";
     $result = mysqli_query($conn, $query);
 

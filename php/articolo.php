@@ -4,6 +4,15 @@
     <title>Articolo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
+
+    <script>
+        function getOption() {
+            selectElement = document.querySelector('#qta');
+            output = selectElement.value;
+            document.cookie = "qta="+output; 
+    }
+    </script>
+
 </head>
 
 <body>
@@ -30,7 +39,25 @@
             echo "<br>";
             echo "<p>".$row['Descrizione']."</p>"; 
             printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
+            echo"<br>";
+            echo "<select name='qta' id='qta'>";
 
+            echo "<option onclick='getOption()' value='1'>1</option>";
+            echo "<option onclick='getOption()'value='2'>2</option>";
+            echo "<option onclick='getOption()'value='3'>3</option>";
+
+            echo "</select>";
+            echo"<a href='cart/addInCart.php?id=".$_GET['id']."&qta=".$_COOKIE['qta']."' class='btn btn-primary'>Add to cart</a>";
+            
+            
+            
+            
+            /*echo "<a class='nav-link dropdown-toggle' href='http://example.com' id='dropdown01' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Dropdown</a>";
+            echo "<div class='dropdown-menu' aria-labelledby='dropdown01'>";
+            echo "  <a class='dropdown-item' href='#'>1</a>";
+            echo "  <a class='dropdown-item' href='#'>2</a>";
+            echo "  <a class='dropdown-item' href='#'>3</a>";
+            echo "</div>";*/
         }
         
         mysqli_close($conn);

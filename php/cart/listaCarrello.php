@@ -11,16 +11,21 @@
         <?php
             session_start();
             //header
-            include ("php/layout/header.php");
+            include ("../layout/header.php");
         ?>
         
         <?php
-            include("../db/connect.php");
+            include("../../db/connect.php");
 
             //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
             $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
             $cartList = implode(',', $_SESSION['cart']);
-            $query = "SELECT * FROM startSawArticoli WHERE id IN (" . $cartList . ");";
+            if(empty($_SESSION['cart'])){
+                echo "carrello vuoto";
+                exit();
+            }
+            $query = "SELECT * FROM startSawArticoli WHERE idArticolo IN (" . $cartList . ");";
+            echo $query;
             $result = mysqli_query($conn, $query);
 
                 if(!$result){
@@ -31,9 +36,6 @@
                     
                 }else {
                     while($row = mysqli_fetch_array($result)){
-                        
-
-
                         echo "<div class='card' style='width:400px'>";
                         printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
                             echo"<div class='card-body'>";
@@ -43,7 +45,10 @@
                             echo"</div>";
                         echo"</div>";
                     }
-
+                    foreach($_SESSION['cart'] as $x => $x_value) {
+                        echo "Id=" . $x . ", Qta=" . $x_value;
+                        echo "<br>";
+                      }
                 }
                 
                 mysqli_close($conn);
@@ -52,7 +57,7 @@
 
         <?php
             //footer
-            include ("php/layout/footer.php");
+            include ("../layout/footer.php");
         ?>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

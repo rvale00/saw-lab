@@ -36,7 +36,6 @@
                             <h4 class="card-title">John Doe</h4>
                             <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
                             <a href="php/articolo.php?id=1" class="btn btn-primary">See Profile</a>
-                            <a href="php/carrello.php?id=1" class="btn btn-primary">Add to cart</a>
                             </div>
                         </div>
                     </div>
@@ -47,8 +46,7 @@
                             <div class="card-body">
                             <h4 class="card-title">John Doe</h4>
                             <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                            <a href="#" class="btn btn-primary">See Profile</a>
-                            <a href="php/carrello.php?id=1" class="btn btn-primary">Add to cart</a>
+                            <a href="php/articolo.php?id=1" class="btn btn-primary">See Profile</a>
                             </div>
                         </div>                    
                     </div>

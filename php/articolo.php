@@ -5,14 +5,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
 
-    <script>
-        function getOption() {
-            selectElement = document.querySelector('#qta');
-            output = selectElement.value;
-            document.cookie = "qta="+output; 
-    }
-    </script>
-
 </head>
 
 <body>
@@ -22,9 +14,11 @@
     include ("layout/header.php");
     include("../db/connect.php");
 
-    //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-    $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
-    $query = "SELECT * FROM startSawArticoli WHERE IdArticolo=".$_GET['id'].";";
+    $id = $_GET['id'];
+
+    $conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
+    //$conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+    $query = "SELECT * FROM startSawArticoli WHERE IdArticolo=".$id.";";
     $result = mysqli_query($conn, $query);
 
         if(!$result){
@@ -40,24 +34,17 @@
             echo "<p>".$row['Descrizione']."</p>"; 
             printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
             echo"<br>";
+
+            echo "<form action='cart/addInCart.php' method='get'>";
             echo "<select name='qta' id='qta'>";
-
-            echo "<option onclick='getOption()' value='1'>1</option>";
-            echo "<option onclick='getOption()'value='2'>2</option>";
-            echo "<option onclick='getOption()'value='3'>3</option>";
-
+            echo "<option value='1'>1</option>";
+            echo "<option value='2'>2</option>";
+            echo "<option value='3'>3</option>";
             echo "</select>";
-            echo"<a href='cart/addInCart.php?id=".$_GET['id']."&qta=".$_COOKIE['qta']."' class='btn btn-primary'>Add to cart</a>";
+            echo "<input type='hidden' name='id' value='".$id."'";
+            echo"<button type='submit' href='cart/addInCart.php?id=".$_GET['id']."&qta=".$_GET['qta']."' class='btn btn-primary'>Add to cart</button>";
+            echo "</form>";
             
-            
-            
-            
-            /*echo "<a class='nav-link dropdown-toggle' href='http://example.com' id='dropdown01' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Dropdown</a>";
-            echo "<div class='dropdown-menu' aria-labelledby='dropdown01'>";
-            echo "  <a class='dropdown-item' href='#'>1</a>";
-            echo "  <a class='dropdown-item' href='#'>2</a>";
-            echo "  <a class='dropdown-item' href='#'>3</a>";
-            echo "</div>";*/
         }
         
         mysqli_close($conn);

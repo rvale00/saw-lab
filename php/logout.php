@@ -9,6 +9,7 @@
 <?php
    session_start();
    if (isset($_SESSION['logged'])){
+      session_unset();
       session_destroy();
       echo "<p>Session close</p> ";
       header('Location: ../index.php');

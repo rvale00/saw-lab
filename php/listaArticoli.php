@@ -13,9 +13,14 @@
     include ("layout/header.php");
     include("../db/connect.php");
 
-    //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-    $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
-    $query = "SELECT * FROM startSawArticoli;";
+    
+    $conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
+    //$conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+    if(isset($_GET['src']))
+        $query = "SELECT * FROM startSawArticoli WHERE Titolo LIKE '%".$_GET['src']."%';";
+
+    else
+        $query = "SELECT * FROM startSawArticoli;";
     $result = mysqli_query($conn, $query);
 
         if(!$result){
@@ -25,21 +30,30 @@
             exit();
             
         }else {
-            while($row = mysqli_fetch_array($result)){
-                
-
-
-                echo "<div class='card' style='width:400px'>";
-                printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
-                    echo"<div class='card-body'>";
-                        echo"<h4 class='card-title'>".$row['Titolo']."</h4>";
-                        echo"<p class='card-text'>".$row['Descrizione']."</p>";
-                        echo"<a href='articolo.php?id=".$row['IdArticolo']."' class='btn btn-primary'>See Profile</a>";
-                        echo"<a href='cart/addInCart.php?id=".$row['IdArticolo']."' class='btn btn-primary'>Add to cart</a>";
-                        
-                    echo"</div>";
-                echo"</div>";
+            if(mysqli_num_rows($result) == 0){
+                echo"<p> Nessun risultato per <b>".$_GET['src']."</b></p>";
+                mysqli_close($conn);
+                exit();
             }
+                
+            echo "<div class='container w-auto p-3 text-center'>";
+                echo "<div class='row'>";
+            while($row = mysqli_fetch_array($result)){
+                    echo "<div class='col-6 my-6'>";
+                        echo "<div class='card' style='width:400px'>";
+                        printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
+                            echo"<div class='card-body'>";
+                                echo"<h4 class='card-title'>".$row['Titolo']."</h4>";
+                                echo"<p class='card-text'>".$row['Descrizione']."</p>";
+                                echo"<p class='card-text'>€".$row['prezzo']."</p>";
+                                echo"<a href='articolo.php?id=".$row['IdArticolo']."' class='btn btn-primary'>See Profile</a>";
+                            echo"</div>";
+                        echo"</div>";
+                    echo"</div>";
+
+            }
+            echo"</div>";
+            echo"</div>";
 
         }
         

@@ -46,9 +46,12 @@
                         echo "<a class='nav-link' href='php/logout.php'>Logout</a>";
                       }
                     ?>
-                  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                  <button type="button" class="btn btn-outline-warning">Search</button>
                 </form>
               </div>
+
+              <form action="listaArticoli.php" method="get" class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="src">        
+                <button type="submit" class="btn btn-outline-warning">Search</button>
+              </form>
         </nav>
 </header>

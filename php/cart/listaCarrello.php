@@ -7,25 +7,25 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-
+        
         <?php
             session_start();
             //header
             include ("../layout/header.php");
         ?>
-        
+        <h1> Carrello </h1>
         <?php
             include("../../db/connect.php");
 
-            //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-            $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
-            $cartList = implode(',', $_SESSION['cart']);
+            $conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
+            //$conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+            $cartList = implode(',', array_keys($_SESSION['cart']));
             if(empty($_SESSION['cart'])){
                 echo "carrello vuoto";
                 exit();
             }
+
             $query = "SELECT * FROM startSawArticoli WHERE idArticolo IN (" . $cartList . ");";
-            echo $query;
             $result = mysqli_query($conn, $query);
 
                 if(!$result){
@@ -41,14 +41,11 @@
                             echo"<div class='card-body'>";
                                 echo"<h4 class='card-title'>".$row['Titolo']."</h4>";
                                 echo"<p class='card-text'>".$row['Descrizione']."</p>";
-                                echo"<a href='articolo.php?id=".$row['IdArticolo']."' class='btn btn-primary'>See Profile</a>";
+                                echo"<p class='card-text'> quantità: ".$_SESSION['cart'][$row['IdArticolo']]."</p>";
+                                echo"<a href='removeFromCart.php?id=".$row['IdArticolo']."' class='btn btn-primary'> Rimuovi articolo </a>";
                             echo"</div>";
                         echo"</div>";
                     }
-                    foreach($_SESSION['cart'] as $x => $x_value) {
-                        echo "Id=" . $x . ", Qta=" . $x_value;
-                        echo "<br>";
-                      }
                 }
                 
                 mysqli_close($conn);

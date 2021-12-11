@@ -9,13 +9,13 @@
 <body>
 
 <?php
-
+    session_start();
     include ("layout/header.php");
     include("../db/connect.php");
 
     
-    $conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-    //$conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+    //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
+    $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
     if(isset($_GET['src']))
         $query = "SELECT * FROM startSawArticoli WHERE Titolo LIKE '%".$_GET['src']."%';";
 

@@ -9,20 +9,20 @@
                 <ul class="navbar-nav mr-auto">
                   <li class="nav-item active">
                   <?php
-                    echo "<a class='nav-link' href=".realpath('index.php').">Home <span class='sr-only'>(current)</span></a>"
+                    echo "<a class='nav-link' href='/index.php'>Home <span class='sr-only'>(current)</span></a>"
                   ?>
                   </li>
                   <li class="nav-item active">
-                    <a class="nav-link" href="php/listaArticoli.php"> Articoli </a>
+                    <a class="nav-link" href="/php/listaArticoli.php"> Articoli </a>
                   </li>
 
                   <?php
                      if (!(isset($_SESSION['logged']))){
                         echo "<li class='nav-item'>";
-                        echo "<a class='nav-link' href='php/formRegister.php'>Register</a>";
+                        echo "<a class='nav-link' href='/php/formRegister.php'>Register</a>";
                         echo "</li>";
 
-                        echo "<a class='nav-link' href='php/formLogin.php'>Login</a>";
+                        echo "<a class='nav-link' href='/php/formLogin.php'>Login</a>";
                         echo "<li class='nav-item'>";
                         echo "</li> ";
                      }
@@ -41,15 +41,15 @@
                 <form class="form-inline my-2 my-lg-0">
                     <?php
                       if(isset($_SESSION['logged'])){
-                        echo "<a class='nav-link' href='php/cart/listaCarrello.php'>Cart</a>";
-                        echo "<a class='nav-link' href='php/personalArea.php'>".$_SESSION['nome']."</a>";
-                        echo "<a class='nav-link' href='php/logout.php'>Logout</a>";
+                        echo "<a class='nav-link' href='/php/cart/listaCarrello.php'>Cart</a>";
+                        echo "<a class='nav-link' href='/php/personalArea.php'>".$_SESSION['nome']."</a>";
+                        echo "<a class='nav-link' href='/php/logout.php'>Logout</a>";
                       }
                     ?>
                 </form>
               </div>
 
-              <form action="listaArticoli.php" method="get" class="form-inline my-2 my-lg-0">
+              <form action="/php/listaArticoli.php" method="get" class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="src">        
                 <button type="submit" class="btn btn-outline-warning">Search</button>
               </form>

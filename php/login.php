@@ -36,8 +36,8 @@
             $password = $_POST["psw"];
         }
         include("../db/connect.php");
-        $conn = connectDB("localhost","USERNAME","PASSWORD","startSaw"); //VALE
-        //$conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+        //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw"); //VALE
+        $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
         mysqli_real_escape_string($conn, $email);
 
         $query = "SELECT * FROM startSawUser WHERE email = '" . $email . "'";

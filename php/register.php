@@ -50,11 +50,19 @@
 
         //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
         $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+
         mysqli_real_escape_string($conn, $name);
+        $newname = filter_var($name, FILTER_SANITIZE_STRING);
         mysqli_real_escape_string($conn, $surname);
+        $newsname = filter_var($surname, FILTER_SANITIZE_STRING);
         mysqli_real_escape_string($conn, $email);
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+                if (!filter_var($email, FILTER_VALIDATE_EMAIL) === true) {
+                    echo("$email is invalid");
+                }
         $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
-        $query = "INSERT INTO startSawUser (email,psw,_name,_surname) VALUES ('".$email."','".$hashedpsw."','".$name."','".$surname."')";
+
+        $query = "INSERT INTO startSawUser (email,psw,_name,_surname) VALUES ('".$email."','".$hashedpsw."','".$newname."','".$newsname."')";
         $result = mysqli_query($conn, $query);
         if(!$result){
             echo"query error";

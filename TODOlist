@@ -1,0 +1,4 @@
+TODO:1-Sanificare gli input nei form
+TODO:2-mettere prepared statemant (per evitare sql injection)
+TODO:3-fare cambio psw
+TODO:4-controllare i test automatici della prof

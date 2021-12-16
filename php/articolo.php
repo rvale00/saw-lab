@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="it">
 <head>
     <title>Articolo</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
-
+    <script src="https://cdn.tiny.cloud/1/iusuolbl4ctvv7k1e66puug9agp3qz3xonjoyqj7lzeujzp8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 
 <body>
@@ -28,22 +28,50 @@
             exit();
             
         }else {
-            $row = mysqli_fetch_array($result);
-            echo "<h1>".$row['Titolo']."</h1>";
-            echo "<br>";
-            echo "<p>".$row['Descrizione']."</p>"; 
-            printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
-            echo"<br>";
 
-            echo "<form action='cart/addInCart.php' method='get'>\n";
-            echo "<select name='q' id='q'>\n";
-            echo "<option value='1'>1</option>\n";
-            echo "<option value='2'>2</option>\n";
-            echo "<option value='3'>3</option>\n";
-            echo "</select>\n";
-            echo "<input type='hidden' name='id' value='".$id."'>\n";
-            echo"<button type='submit' href='cart/addInCart.php?id=".$_GET['id']."' class='btn btn-primary'>Add to cart</button>\n";
-            echo "</form>\n";
+            $row = mysqli_fetch_array($result);
+            echo "<div class='container w-auto p-3'>\n";
+                echo "\t<div class='row'>\n";
+                    echo "\t\t<div class=col-6 my-6'>\n";
+                        echo "\t\t\t<h1>".$row['Titolo']."</h1>\n";
+                        echo "<br>";
+                        echo "<p>".$row['Descrizione']."</p>";
+                        printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
+                        echo"<br>";
+
+                        echo "<form action='cart/addInCart.php' method='get'>\n";
+                        echo "<select name='q' id='q'>\n";
+                        echo "<option value='1'>1</option>\n";
+                        echo "<option value='2'>2</option>\n";
+                        echo "<option value='3'>3</option>\n";
+                        echo "</select>\n";
+                        echo "<input type='hidden' name='id' value='".$id."'>\n";
+                        echo"<button type='submit' href='cart/addInCart.php?id=".$_GET['id']."' class='btn btn-primary'>Add to cart</button>\n";
+                        echo "</form>\n";
+                    echo "</div>";
+
+                    echo "\t\t<div class=col-6 my-6'>\n";
+                    echo "<h1>Valuta il prodotto</h1>";
+                    ?>
+                    <form>
+                    <textarea>
+                        Inserisci qui il tuo commento
+                      </textarea>
+                      <script>
+                        tinymce.init({
+                          selector: 'textarea',
+                          //plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+                          //toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+                          toolbar_mode: 'floating',
+                          tinycomments_mode: 'embedded',
+                          tinycomments_author: 'Author name',
+                        });
+                      </script>
+                     <?php
+                    echo "</div>";
+                echo "</div>";
+            echo "</div>";
+
             
         }
         

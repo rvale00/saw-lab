@@ -14,7 +14,7 @@
         $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
 
         $emailSession=$_SESSION['email'];
-        $query = "SELECT * FROM startSawUser WHERE email='$emailSession'";
+        $query = "SELECT * FROM utenti WHERE email='$emailSession'";
         $res = mysqli_query($conn, $query);
         if(!$res){
             echo"query error: ". mysqli_error($conn);
@@ -68,7 +68,7 @@
             mysqli_real_escape_string($conn, $name);
             mysqli_real_escape_string($conn, $surname);
             mysqli_real_escape_string($conn, $email);
-            $query = "UPDATE startSawUser SET email='".$email."',_name='".$name."', _surname='".$surname."' WHERE email='$emailSession' ;";
+            $query = "UPDATE utenti SET email='".$email."',_name='".$name."', _surname='".$surname."' WHERE email='$emailSession' ;";
             $res = mysqli_query($conn, $query);
             $_SESSION['email'] = $email; 
             if(!$res){

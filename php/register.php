@@ -52,19 +52,24 @@
         $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
 
         mysqli_real_escape_string($conn, $name);
+        $name=trim($name);
         $newname = filter_var($name, FILTER_SANITIZE_STRING);
         mysqli_real_escape_string($conn, $surname);
+        $surname=trim($surname);
         $newsname = filter_var($surname, FILTER_SANITIZE_STRING);
         mysqli_real_escape_string($conn, $email);
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL) === true) {
                     echo("$email is invalid");
                 }
+        $password = trim($password);
         $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
 
-        $query = "INSERT INTO startSawUser (email,psw,_name,_surname) VALUES ('".$email."','".$hashedpsw."','".$newname."','".$newsname."')";
-        $result = mysqli_query($conn, $query);
-        if(!$result){
+        $stmt = mysqli_prepare($conn,"INSERT INTO utenti (email,psw,_name,_surname) VALUES (?,?,?,?)");
+        mysqli_stmt_bind_param($stmt, 'ssss', $email,$hashedpsw,$name,$surname);
+
+        mysqli_stmt_execute($stmt); 
+        if(mysqli_affected_rows($conn) === 0){
             echo"query error";
 
             mysqli_close($conn);

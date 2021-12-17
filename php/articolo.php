@@ -18,8 +18,10 @@
 
     //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
     $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
-    $query = "SELECT * FROM startSawArticoli WHERE IdArticolo=".$id.";";
-    $result = mysqli_query($conn, $query);
+    $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE IdArticolo=?");
+    mysqli_stmt_bind_param($stmt, 's', $id);
+    mysqli_stmt_execute($stmt); 
+    $result=mysqli_stmt_get_result($stmt);
 
         if(!$result){
             echo"query error";
@@ -37,6 +39,7 @@
                         echo "<br>";
                         echo "<p>".$row['Descrizione']."</p>";
                         printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
+                        echo "<p>".$row['prezzo']."</p>";
                         echo"<br>";
 
                         echo "<form action='cart/addInCart.php' method='get'>\n";

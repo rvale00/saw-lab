@@ -39,9 +39,14 @@
         //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw"); //VALE
         $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
         mysqli_real_escape_string($conn, $email);
+        $email=trim($email);
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+        
+        $stmt = mysqli_prepare($conn,"SELECT * FROM utenti WHERE email=?");
+        mysqli_stmt_bind_param($stmt, 's', $email);
+        mysqli_stmt_execute($stmt); 
+        $res=mysqli_stmt_get_result($stmt);
 
-        $query = "SELECT * FROM startSawUser WHERE email = '" . $email . "'";
-        $res = mysqli_query($conn,$query);
         if(!$res){
             echo"query error: ". mysqli_error($conn);
 

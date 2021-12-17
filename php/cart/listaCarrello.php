@@ -25,8 +25,10 @@
                 exit();
             }
 
-            $query = "SELECT * FROM startSawArticoli WHERE idArticolo IN (" . $cartList . ");";
-            $result = mysqli_query($conn, $query);
+            $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE IdArticolo IN (?)");
+            mysqli_stmt_bind_param($stmt, 's', $cartList);
+            mysqli_stmt_execute($stmt); 
+            $result=mysqli_stmt_get_result($stmt);
 
                 if(!$result){
                     echo"query error";

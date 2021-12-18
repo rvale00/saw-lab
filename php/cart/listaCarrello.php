@@ -5,6 +5,18 @@
         <title>Carrello</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="css/style.css" rel="stylesheet">
+        <script>
+            function fetch(){
+            fetch('buy.php', {
+                method: "post", 
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                }).then(function (response) { 
+                    return response.text();
+                })then(function (result) {
+                    alert(json_decode(result));
+                });
+            }
+        </script>
     </head>
     <body>
         
@@ -49,7 +61,8 @@
                         echo"</div>";
                     }
                 }
-                
+                echo"<a onclick ='fetch()' class='btn btn-primary'> Acquista </a>";
+
                 mysqli_close($conn);
 
         ?>

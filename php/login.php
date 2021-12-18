@@ -69,7 +69,7 @@
             }
 
         }else{
-            echo "wtf";
+            echo "wrong cred";
         }
 
     }

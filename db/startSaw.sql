@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.1.1-1.fc34
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Creato il: Dic 16, 2021 alle 12:59
--- Versione del server: 10.3.31-MariaDB-0ubuntu0.20.04.1
--- Versione PHP: 7.4.3
+-- Host: localhost
+-- Generation Time: Dec 19, 2021 at 06:35 PM
+-- Server version: 10.5.13-MariaDB
+-- PHP Version: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `articoli`
+-- Table structure for table `articoli`
 --
 
 CREATE TABLE `articoli` (
@@ -37,7 +36,7 @@ CREATE TABLE `articoli` (
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 --
--- Dump dei dati per la tabella `articoli`
+-- Dumping data for table `articoli`
 --
 
 INSERT INTO `articoli` (`IdArticolo`, `Titolo`, `Descrizione`, `Immagine`, `prezzo`) VALUES
@@ -48,7 +47,7 @@ INSERT INTO `articoli` (`IdArticolo`, `Titolo`, `Descrizione`, `Immagine`, `prez
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `utenti`
+-- Table structure for table `utenti`
 --
 
 CREATE TABLE `utenti` (
@@ -59,54 +58,68 @@ CREATE TABLE `utenti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 --
--- Dump dei dati per la tabella `utenti`
+-- Dumping data for table `utenti`
 --
 
 INSERT INTO `utenti` (`email`, `psw`, `_name`, `_surname`) VALUES
+('asd@asd.it', '$2y$10$tBp5qNsf4Zgwo3pONTUhye1OCRR3NV3VcDmU1ufo824UXzgUUsE72', 'asd', 'asd'),
+('cacca@cacca.it', '$2y$10$2sH/4Im0nGYel4MuIz5pZueyYAuo2p/3cAdLZ.Nqbuhjxevu3WEf2', 'cacca', 'cacca'),
 ('sara@cinesca.it', '$2y$10$FPKqWNJ9LM1wpdZHJ8DdReM7dJoJfDv7y.tMJUnvqfmPIlGi5zzWq', 'sara', 'cinesca');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `valuta`
+-- Table structure for table `valuta`
 --
 
 CREATE TABLE `valuta` (
   `IdArticolo` int(5) NOT NULL,
   `email` varchar(50) COLLATE ascii_bin NOT NULL,
   `commento` text COLLATE ascii_bin DEFAULT NULL,
-  `valutazione` int(2) DEFAULT NULL
-) ;
+  `valutazione` int(2) DEFAULT NULL,
+  `quantita` int(1) DEFAULT NULL,
+  `dataOra` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 --
--- Indici per le tabelle scaricate
+-- Dumping data for table `valuta`
+--
+
+INSERT INTO `valuta` (`IdArticolo`, `email`, `commento`, `valutazione`, `quantita`, `dataOra`) VALUES
+(1, 'asd@asd.it', NULL, NULL, 3, '2021-12-19 19:25:58'),
+(1, 'asd@asd.it', NULL, NULL, 1, '2021-12-19 19:26:17'),
+(1, 'asd@asd.it', NULL, NULL, 2, '2021-12-19 19:27:08'),
+(2, 'asd@asd.it', NULL, NULL, 3, '2021-12-19 19:27:08');
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Indici per le tabelle `articoli`
+-- Indexes for table `articoli`
 --
 ALTER TABLE `articoli`
   ADD PRIMARY KEY (`IdArticolo`);
 
 --
--- Indici per le tabelle `utenti`
+-- Indexes for table `utenti`
 --
 ALTER TABLE `utenti`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indici per le tabelle `valuta`
+-- Indexes for table `valuta`
 --
 ALTER TABLE `valuta`
-  ADD PRIMARY KEY (`IdArticolo`,`email`),
+  ADD PRIMARY KEY (`IdArticolo`,`email`,`dataOra`) USING BTREE,
   ADD KEY `fk_usr` (`email`);
 
 --
--- Limiti per le tabelle scaricate
+-- Constraints for dumped tables
 --
 
 --
--- Limiti per la tabella `valuta`
+-- Constraints for table `valuta`
 --
 ALTER TABLE `valuta`
   ADD CONSTRAINT `fk_art` FOREIGN KEY (`IdArticolo`) REFERENCES `articoli` (`IdArticolo`),

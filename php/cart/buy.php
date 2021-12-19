@@ -1,16 +1,25 @@
 <?php
 session_start();
+
+include("../../db/connect.php");
 $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
-$cartList = implode(',', array_keys($_SESSION['cart']));
-$stmt = mysqli_prepare($conn,"UPDATE valuta SET haComprato=1 WHERE idArticolo IN(?)");
-mysqli_stmt_bind_param($stmt, 's', $cartList);
-mysqli_stmt_execute($stmt); 
-$result=mysqli_stmt_get_result($stmt);
-if(!$result){
-    $string = array("msg" => "Qualcosa e' andato storto :( ","mysqlDbg" => "err: ".mysqli_close($conn));
-    return json_encode($string);
+
+//$stmt = mysqli_prepare($conn,"UPDATE valuta SET haComprato=1 WHERE email=? AND idArticolo IN(?)");
+foreach ($_SESSION['cart'] as $artId => $qta) {
+    $stmt = mysqli_prepare($conn,"INSERT INTO valuta (idArticolo,email,quantita,dataOra) VALUES (?,?,?,NOW())");
+    mysqli_stmt_bind_param($stmt, 'ssi', $artId,$_SESSION['email'],$qta);
+    mysqli_stmt_execute($stmt); 
+    $result=mysqli_stmt_get_result($stmt);
+    if(mysqli_affected_rows($conn) === 0){
+        echo"query error";
+
+        mysqli_close($conn);
+        exit();
+        
+    }
 }
-unset($_SESSION['cart']);
-$string = array("msg" => "Acquistato con successo!");
-return json_encode($string);
+$_SESSION['cart'] = array();
+$string = "ok";
+echo $string;
+exit();
 ?>

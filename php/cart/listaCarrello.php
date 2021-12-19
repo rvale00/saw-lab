@@ -6,14 +6,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="css/style.css" rel="stylesheet">
         <script>
-            function fetch(){
+            function buyCart(){
             fetch('buy.php', {
                 method: "post", 
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
                 }).then(function (response) { 
+                    console.log(response.statusText);
                     return response.text();
-                })then(function (result) {
-                    alert(json_decode(result));
+                }).then(function (result) {
+                    alert(result);
+                    document.getElementById('cartList').innerHTML = "<h1>Acquistato con successo</h1> \
+                                                                     <a class='btn btn-primary' href='../../index.php'> Torna alla home </a>";
                 });
             }
         </script>
@@ -24,9 +26,7 @@
             session_start();
             //header
             include ("../layout/header.php");
-        ?>
-        <h1> Carrello </h1>
-        <?php
+
             include("../../db/connect.php");
 
             //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
@@ -41,7 +41,8 @@
             mysqli_stmt_bind_param($stmt, 's', $cartList);
             mysqli_stmt_execute($stmt); 
             $result=mysqli_stmt_get_result($stmt);
-
+            echo "<div id='cartList'>";
+            echo "<h1> Carrello </h1>";
                 if(!$result){
                     echo"query error";
 
@@ -49,6 +50,8 @@
                     exit();
                     
                 }else {
+                
+                    
                     while($row = mysqli_fetch_array($result)){
                         echo "<div class='card' style='width:400px'>";
                         printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
@@ -61,8 +64,8 @@
                         echo"</div>";
                     }
                 }
-                echo"<a onclick ='fetch()' class='btn btn-primary'> Acquista </a>";
-
+                echo"<a onclick='buyCart()' class='btn btn-primary'> Acquista </a>";
+                echo "</div>";
                 mysqli_close($conn);
 
         ?>

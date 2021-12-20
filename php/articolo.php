@@ -10,7 +10,7 @@
 <body>
 
 <?php
-
+    session_start();
     include ("layout/header.php");
     include("../db/connect.php");
 
@@ -49,7 +49,7 @@
                         echo "</select>\n";
                         echo "<input type='hidden' name='id' value='".$id."'>\n";
 
-                        if(!isset($_SESSION['logged']))
+                        if(!($_SESSION['logged']))
                             echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'> Add to cart</button>\n";
                         else
                             echo"<button type='submit' href='cart/addInCart.php?id=".$_GET['id']."' class='btn btn-primary'>Add to cart</button>\n";

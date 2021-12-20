@@ -6,5 +6,5 @@
     else
       $_SESSION['cart'] = $_SESSION['cart']+$auxArray;
 
-    header('Location: ../../index.php');
+    header('Location: listaCarrello.php');
 ?>

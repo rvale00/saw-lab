@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <title>Sign-up</title>
-</head>
-
-<body>
-
 <?php
-    function retriveInfoFile($filename){
-        if ($file = fopen($filename, "r")) {
-            while(!feof($file)) {
-                $line = trim(fgets($file));
-                $tkn = explode(' ', $line);
-                echo $line . "<br>";
-                echo $tkn[2] . " " . $tkn[3] ;
-                if(($tkn[2] == $email) && ($tkn[3] == $password)){
-                    echo "<p>Logged in.</p>";
-                    fclose($file);
-                    exit;
-                }
-             }
-            echo "<p>Email or password not found, retry.</p>";
-            fclose($file);
-            exit;
-        }
-    }
-
+    
     $password = $email = "";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["email"]) || empty($_POST["psw"])){
@@ -61,8 +35,8 @@
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['cart'] = array();
                 $_SESSION['logged'] = true; 
-                echo"logged in.";
-                header('Location: ../index.php');
+                echo "logged";
+                
             }else{
                 echo "wrong cred";
             }
@@ -75,6 +49,3 @@
     
 
 ?>
-
-</body>
-</html>

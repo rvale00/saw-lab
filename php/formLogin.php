@@ -58,12 +58,36 @@
         }
       }
         </style>
+
+
+
+    <script>
+            function login(){
+              var usermail = document.getElementsByName("email")[0].value;
+              var userpsw = document.getElementsByName("psw")[0].value;
+              console.log(userpsw);
+            fetch('login.php', {
+                method: "post",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                body: "email=" + usermail + "&psw=" + userpsw,
+                }).then(function (response) { 
+                    console.log(response.statusText);
+                    return response.text();
+                }).then(function (result) {
+                    
+                    alert(result);
+                    window.location.assign(document.referrer);
+                });
+            }
+
+
+        </script>
     </head>
 
   <body class="text-center">
     
     <main class="form-signin">
-      <form action="login.php" method="post">
+
         <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
     
@@ -81,9 +105,9 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>-->
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <button class="w-100 btn btn-lg btn-primary" onclick="login()">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-      </form>
+
     </main>
     
     

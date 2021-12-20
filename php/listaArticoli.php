@@ -14,8 +14,7 @@
     include("../db/connect.php");
 
     
-    //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-    $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+    $conn = connectDB();
     if(isset($_GET['src'])){
         $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE Titolo LIKE '%(?)%'");
         mysqli_stmt_bind_param($stmt, 's', $_GET['src']);

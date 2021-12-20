@@ -48,8 +48,7 @@
             exit;
         }
 
-        //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-        $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+        $conn = connectDB();
 
         mysqli_real_escape_string($conn, $name);
         $name=trim($name);

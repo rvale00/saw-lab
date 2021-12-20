@@ -16,8 +16,7 @@
 
     $id = $_GET['id'];
 
-    //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-    $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+    $conn = connectDB();
     $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE IdArticolo=?");
     mysqli_stmt_bind_param($stmt, 's', $id);
     mysqli_stmt_execute($stmt); 
@@ -49,7 +48,11 @@
                         echo "<option value='3'>3</option>\n";
                         echo "</select>\n";
                         echo "<input type='hidden' name='id' value='".$id."'>\n";
-                        echo"<button type='submit' href='cart/addInCart.php?id=".$_GET['id']."' class='btn btn-primary'>Add to cart</button>\n";
+
+                        if(!isset($_SESSION['logged']))
+                            echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'> Add to cart</button>\n";
+                        else
+                            echo"<button type='submit' href='cart/addInCart.php?id=".$_GET['id']."' class='btn btn-primary'>Add to cart</button>\n";
                         echo "</form>\n";
                     echo "</div>";
 
@@ -89,6 +92,34 @@
         }
         
         mysqli_close($conn);
+
+
+?>   
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Non sei loggato</h4>
+      </div>
+      <div class="modal-body">
+        <p>Per comprare l'articolo accedi o se non hai ancora un account crealo</p>
+      </div>
+      <div class="modal-footer">
+        <a href="formLogin.php" class="btn btn-default">Accedi</a>
+        <a href="formRegister.php" class="btn btn-default">Registrati</a>
+        <a class="btn btn-default" data-dismiss="modal">Close</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<?php
 
         include ("layout/footer.php");
 

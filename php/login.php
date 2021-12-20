@@ -36,8 +36,7 @@
             $password = $_POST["psw"];
         }
         include("../db/connect.php");
-        //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw"); //VALE
-        $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+        $conn = connectDB();
         mysqli_real_escape_string($conn, $email);
         $email=trim($email);
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);

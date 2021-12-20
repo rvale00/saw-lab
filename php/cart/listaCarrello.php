@@ -29,8 +29,7 @@
 
             include("../../db/connect.php");
 
-            //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw");//VALE
-            $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+            $conn = connectDB();
             $cartList = implode(',', array_keys($_SESSION['cart']));
             if(empty($_SESSION['cart'])){
                 echo "carrello vuoto";

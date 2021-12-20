@@ -10,8 +10,7 @@
         <?php
         include("../db/connect.php");
         session_start();
-        //$conn = connectDB("localhost","USERNAME","PASSWORD","startSaw"); //VALE
-        $conn = connectDB("localhost","root","turbofregna","startSaw"); //COZZO
+        $conn = connectDB();
 
         $emailSession=$_SESSION['email'];
         $query = "SELECT * FROM utenti WHERE email='$emailSession'";

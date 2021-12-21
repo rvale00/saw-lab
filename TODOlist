@@ -7,3 +7,11 @@ TODO:6-far vedere i commenti per ogni prodotto
 TODO:7-GRAFICA 
 TODO:8-persistenza articoli carrello (?) 
 TODO:9-se un utente ha già fatto una recensione su un articolo un 'altra recensione sullo stesso modificherà il precedente
+TODO:10- fare revisione sulla sostenibilità del codice
+
+vedi html special char per il testo del commento, non prende lettere accentate ecc
+
+presentazione
+1 home page(papere)
+2 funzionalità aggiuntive implementate
+3 schema er del db

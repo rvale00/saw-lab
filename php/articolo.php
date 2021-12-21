@@ -56,45 +56,93 @@
                         echo "</form>\n";
                     echo "</div>";
 
-                    echo "\t\t<div class=col-6 my-6'>\n";
-                    echo "<h1>Valuta il prodotto</h1>";
-                    ?>
-                    <form action="" method="get">
-                        <h4><select name='v' id='v'>
-                            <option value='1'>1</option>
-                            <option value='2'>2</option>
-                            <option value='3'>3</option>
-                            <option value='4'>4</option>
-                            <option value='5'>5</option>
-                         </select>  / 5 </h4>
+                    
+                    $stmt = mysqli_prepare($conn,"SELECT IdArticolo FROM valuta WHERE email=? AND IdArticolo=?");
+                    mysqli_stmt_bind_param($stmt, 'ss', $_SESSION['email'], $id);
+                    mysqli_stmt_execute($stmt); 
+                    $result=mysqli_stmt_get_result($stmt);
+                    
+                    if(!$result){
+                        echo"query error";
+            
+                        mysqli_close($conn);
+                        exit();
+                        
+                    }else {
+                        if(mysqli_num_rows($result) > 0){
+                    
+                            echo "\t\t<div class=col-6 my-6'>\n";
+                            echo "<h1>Valuta il prodotto</h1>";
+                            echo "<form action= '' method='get'>";
+                            echo "   <h4><select name='v' id='v'>";
+                            echo "       <option value='1'>1</option>";
+                            echo "       <option value='2'>2</option>";
+                            echo "       <option value='3'>3</option>";
+                            echo "       <option value='4'>4</option>";
+                            echo "       <option value='5'>5</option>";
+                            echo "    </select>  / 5 </h4>";
+                            
+                            echo "   <textarea name='comment'>";
+                            echo "       Inserisci qui il tuo commento";
+                            echo "   </textarea>";
+                            echo "   <script>";
+                            echo"       tinymce.init({
+                                       selector: 'textarea',
+                                       //plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+                                       //toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+                                       toolbar_mode: 'floating',
+                                       tinycomments_mode: 'embedded',
+                                       tinycomments_author: 'Author name',
+                                   });";
+                            echo "   </script>";
+                            echo "   <button type='submit'>Invia</button>";
+                            echo "   </form>";
+                        }
+                    }
 
-                        <textarea name="comment">
-                            Inserisci qui il tuo commento
-                        </textarea>
-                        <script>
-                            tinymce.init({
-                                selector: 'textarea',
-                                //plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-                                //toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
-                                toolbar_mode: 'floating',
-                                tinycomments_mode: 'embedded',
-                                tinycomments_author: 'Author name',
-                            });
-                        </script>
-                        <button type="submit">Invia</button>
-                        </form>
-                    <?php
+
+                    $stmt = mysqli_prepare($conn,"SELECT DISTINCT commento, valutazione FROM valuta WHERE IdArticolo=?");
+                    mysqli_stmt_bind_param($stmt, 's', $id);
+                    mysqli_stmt_execute($stmt); 
+                    $result=mysqli_stmt_get_result($stmt);
+                    
+                    if(!$result){
+                        echo"query error";
+            
+                        mysqli_close($conn);
+                        exit();
+                        
+                    }else {
+                        while($row = mysqli_fetch_array($result)){
+                                if($row['valutazione']!=''){
+                                    echo "<div class='card' style='width:400px'>";
+                                        echo"<div class='card-body'>";
+                                            echo"<h4 class='card-title'> valutazione:".$row['valutazione']."</h4>";
+                                            echo"<p class='card-text'>".$row['commento']."</p>";
+                                        echo"</div>";
+                                    echo"</div>";
+                                }
+                        }
+                    
+                    }
+
                     echo "</div>";
                 echo "</div>";
             echo "</div>";
 
+
             
         }
+
         
         mysqli_close($conn);
 
 
-?>   
+?> 
+
+
+
+
 
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">

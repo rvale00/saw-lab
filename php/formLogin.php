@@ -74,9 +74,10 @@
                     console.log(response.statusText);
                     return response.text();
                 }).then(function (result) {
-                    
                     alert(result);
-                    window.location.assign(document.referrer);
+                    if(result =="logged")
+                      window.location.assign(document.referrer);
+                    
                 });
             }
 

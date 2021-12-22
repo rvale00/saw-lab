@@ -5,6 +5,36 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="css/style.css" rel="stylesheet">
     <script src="https://cdn.tiny.cloud/1/iusuolbl4ctvv7k1e66puug9agp3qz3xonjoyqj7lzeujzp8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        
+    <script>
+            function sendComment(){
+              var valutazione = document.getElementsByName("v")[0].value;
+              var commento = document.getElementsByName("comment")[0].value;
+              var idArt = document.getElementsByName("id")[0].value;
+            fetch('commento.php', {
+                method: "post",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                body: "valutazione=" + valutazione + "&commento=" + commento + "&id=" + idArt,
+                }).then(function (response) { 
+                    console.log(response.statusText);
+                    return response.text();
+                }).then(function (result) {
+                    alert(result);
+                });
+            }
+
+            $(document).ready(function(){
+                $("#commento").submit(function(e){
+                    e.preventDefault();
+                    sendComment();
+                });
+            });
+
+    </script>
+
+
+
 </head>
 
 <body>
@@ -49,7 +79,7 @@
                         echo "</select>\n";
                         echo "<input type='hidden' name='id' value='".$id."'>\n";
 
-                        if(!($_SESSION['logged']))
+                        if(!(isset($_SESSION['logged'])))
                             echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'> Add to cart</button>\n";
                         else
                             echo"<button type='submit' href='cart/addInCart.php?id=".$_GET['id']."' class='btn btn-primary'>Add to cart</button>\n";
@@ -57,7 +87,7 @@
                     echo "</div>";
 
                     
-                    $stmt = mysqli_prepare($conn,"SELECT IdArticolo FROM valuta WHERE email=? AND IdArticolo=?");
+                    $stmt = mysqli_prepare($conn,"SELECT IdArticolo FROM compra WHERE email=? AND IdArticolo=?");
                     mysqli_stmt_bind_param($stmt, 'ss', $_SESSION['email'], $id);
                     mysqli_stmt_execute($stmt); 
                     $result=mysqli_stmt_get_result($stmt);
@@ -72,8 +102,8 @@
                         if(mysqli_num_rows($result) > 0){
                     
                             echo "\t\t<div class=col-6 my-6'>\n";
-                            echo "<h1>Valuta il prodotto</h1>";
-                            echo "<form action= '' method='get'>";
+                            echo "<h1>compra il prodotto</h1>";
+                            echo "<form id='commento'>";
                             echo "   <h4><select name='v' id='v'>";
                             echo "       <option value='1'>1</option>";
                             echo "       <option value='2'>2</option>";
@@ -101,7 +131,7 @@
                     }
 
 
-                    $stmt = mysqli_prepare($conn,"SELECT DISTINCT commento, valutazione FROM valuta WHERE IdArticolo=?");
+                    $stmt = mysqli_prepare($conn,"SELECT DISTINCT commento, valutazione FROM compra WHERE IdArticolo=?");
                     mysqli_stmt_bind_param($stmt, 's', $id);
                     mysqli_stmt_execute($stmt); 
                     $result=mysqli_stmt_get_result($stmt);
@@ -172,7 +202,6 @@
         include ("layout/footer.php");
 
 ?>
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>

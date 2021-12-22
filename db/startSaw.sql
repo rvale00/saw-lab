@@ -69,10 +69,10 @@ INSERT INTO `utenti` (`email`, `psw`, `_name`, `_surname`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `valuta`
+-- Table structure for table `compra`
 --
 
-CREATE TABLE `valuta` (
+CREATE TABLE `compra` (
   `IdArticolo` int(5) NOT NULL,
   `email` varchar(50) COLLATE ascii_bin NOT NULL,
   `commento` text COLLATE ascii_bin DEFAULT NULL,
@@ -82,10 +82,10 @@ CREATE TABLE `valuta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 --
--- Dumping data for table `valuta`
+-- Dumping data for table `compra`
 --
 
-INSERT INTO `valuta` (`IdArticolo`, `email`, `commento`, `valutazione`, `quantita`, `dataOra`) VALUES
+INSERT INTO `compra` (`IdArticolo`, `email`, `commento`, `valutazione`, `quantita`, `dataOra`) VALUES
 (1, 'asd@asd.it', NULL, NULL, 3, '2021-12-19 19:25:58'),
 (1, 'asd@asd.it', NULL, NULL, 1, '2021-12-19 19:26:17'),
 (1, 'asd@asd.it', NULL, NULL, 2, '2021-12-19 19:27:08'),
@@ -108,9 +108,9 @@ ALTER TABLE `utenti`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indexes for table `valuta`
+-- Indexes for table `compra`
 --
-ALTER TABLE `valuta`
+ALTER TABLE `compra`
   ADD PRIMARY KEY (`IdArticolo`,`email`,`dataOra`) USING BTREE,
   ADD KEY `fk_usr` (`email`);
 
@@ -119,9 +119,9 @@ ALTER TABLE `valuta`
 --
 
 --
--- Constraints for table `valuta`
+-- Constraints for table `compra`
 --
-ALTER TABLE `valuta`
+ALTER TABLE `compra`
   ADD CONSTRAINT `fk_art` FOREIGN KEY (`IdArticolo`) REFERENCES `articoli` (`IdArticolo`),
   ADD CONSTRAINT `fk_usr` FOREIGN KEY (`email`) REFERENCES `utenti` (`email`);
 COMMIT;

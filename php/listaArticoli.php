@@ -22,7 +22,6 @@
         $result = mysqli_stmt_get_result($stmt);
     }
     
-
     else{
         $query = "SELECT * FROM articoli;";
         $result = mysqli_query($conn, $query);

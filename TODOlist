@@ -7,6 +7,7 @@ TODO:9-se un utente ha già fatto una recensione su un articolo un 'altra recens
 TODO:10- fare revisione sulla sostenibilità del codice
 TODO:11- togliere i pop up di debug e sostituirli con altro se necessario
 TODO:12-organizzare header e cartelle
+TODO:13- nei form far illuminare campi con errori
 
 vedi html special char per il testo del commento, non prende lettere accentate ecc
 
@@ -19,7 +20,7 @@ presentazione
 1) Funzionalità obbligatorie per tutti
 
     Presentazione di startSAW (da fare)
-    Registrazione di un utente (DA FARE CON API FETCH, controllare che psw e cpsw siano uguali con js) 
+    Registrazione di un utente V 
     Login al sistema (gestione delle credenziali sbagliate)
     Modifica del profilo utente(MANCA CAMBIO PASSWORD, + grafica) 
     Motore di ricerca interno V
@@ -28,7 +29,7 @@ presentazione
 
 2) Funzionalità a scelta
 
-    Carrello per acquisti (far apparire tutti gli oggetti nel carello -> fix grafico)
+    Carrello per acquisti (far apparire tutti gli oggetti nel carello -> fetch query)
     Valutazione prodotti (rivedere, fare valutazione a livello grafico, mostrare il commento appena sottomesso subito senza refresh con dom)
     
 

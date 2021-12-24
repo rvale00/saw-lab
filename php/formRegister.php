@@ -3,6 +3,31 @@
     <head lang="it">
         <title>Registration form</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <script>
+            function register(){
+              var usermail = document.getElementsByName("email")[0].value;
+              var userpsw = document.getElementsByName("psw")[0].value;
+              var usercpsw = document.getElementsByName("cPsw")[0].value;
+              var userfname = document.getElementsByName("name")[0].value;
+              var userlname = document.getElementsByName("surname")[0].value;
+            fetch('register.php', {
+                method: "post",
+                headers: { "Content-type": "application/x-www-form-urlencoded" },
+                body: "name="+ userfname+ "&surname="+ userlname + "&email=" + usermail + "&psw=" + userpsw + "&cPsw=" + usercpsw,
+                }).then(function (response) { 
+                    console.log(response.statusText);
+                    return response.text();
+                }).then(function (result) {
+                    alert(result);
+                    document.getElementById('regForm').innerHTML = "<h1>Account registrato con successo</h1> \
+                                                                     <a class='btn btn-primary' href='formLogin.php'> Accedi </a>";
+                    
+                });
+            }
+        </script>
+        
+        
         <style>
         html,
     body {
@@ -62,8 +87,8 @@
 
     <body class="text-center">
     
-    <main class="form-signin">
-      <form action="register.php" method="post">
+    <main class="form-signin" id="regForm">
+      
         <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
         
         <h1 class="h3 mb-3 fw-normal">Please register</h1>
@@ -92,9 +117,8 @@
           <label for="floatingPassword">Confirm password</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <a type="button" onclick="register()" class="w-100 btn btn-lg btn-primary">Sign in</a>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-      </form>
     </main>
     
     

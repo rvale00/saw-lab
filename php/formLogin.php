@@ -76,7 +76,8 @@
                 }).then(function (result) {
                     alert(result);
                     if(result =="logged")
-                      window.location.assign(document.referrer);
+                      //window.location.assign(document.referrer);
+                      window.location.assign('/saw-lab/index.php');
                     
                 });
             }

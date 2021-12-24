@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <title>Sign-up</title>
-</head>
-
-<body>
 
 <?php
 
@@ -83,6 +76,3 @@
     }
 
 ?>
-
-</body>
-</html>

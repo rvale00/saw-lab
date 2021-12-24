@@ -1,13 +1,12 @@
 -TODO:1-Sanificare gli input nei form (forse fatto da chiedere a mirco)
--TODO:2-mettere prepared statemant (per evitare sql injection)(fatto)
 TODO:3-fare cambio psw
 TODO:4-controllare i test automatici della prof
--TODO:5-far valutare un prodotto solo se e' stato comprato
-TODO:6-far vedere i commenti per ogni prodotto
-TODO:7-GRAFICA 
+TODO:6-far vedere i commenti per ogni prodotto (da aggiustare la grafica)
 TODO:8-persistenza articoli carrello (?) 
 TODO:9-se un utente ha già fatto una recensione su un articolo un 'altra recensione sullo stesso modificherà il precedente
 TODO:10- fare revisione sulla sostenibilità del codice
+TODO:11- togliere i pop up di debug e sostituirli con altro se necessario
+TODO:12-organizzare header e cartelle
 
 vedi html special char per il testo del commento, non prende lettere accentate ecc
 
@@ -15,3 +14,21 @@ presentazione
 1 home page(papere)
 2 funzionalità aggiuntive implementate
 3 schema er del db
+
+
+1) Funzionalità obbligatorie per tutti
+
+    Presentazione di startSAW (da fare)
+    Registrazione di un utente (DA FARE CON API FETCH, controllare che psw e cpsw siano uguali con js) 
+    Login al sistema (gestione delle credenziali sbagliate)
+    Modifica del profilo utente(MANCA CAMBIO PASSWORD, + grafica) 
+    Motore di ricerca interno V
+    Logout V
+
+
+2) Funzionalità a scelta
+
+    Carrello per acquisti (far apparire tutti gli oggetti nel carello -> fix grafico)
+    Valutazione prodotti (rivedere, fare valutazione a livello grafico, mostrare il commento appena sottomesso subito senza refresh con dom)
+    
+

@@ -34,7 +34,20 @@
 
     </script>
 
+    <style>
+        #showComments{
+            word-wrap: break-word;
+            overflow-y:scroll;
+            max-height:400px;
+        }
 
+        .text2 {
+            font-size: 13px;
+            font-weight: 500;
+            margin-left: 6px;
+            color: red;
+        };
+    </style>
 
 </head>
 
@@ -64,7 +77,7 @@
             $row = mysqli_fetch_array($result);
             echo "<div class='container w-auto p-3'>\n";
                 echo "\t<div class='row'>\n";
-                    echo "\t\t<div class=col-6 my-6'>\n";
+                    echo "\t\t<div class='col-6 my-6'>\n";
                         echo "\t\t\t<h1>".$row['Titolo']."</h1>\n";
                         echo "<br>";
                         echo "<p>".$row['Descrizione']."</p>";
@@ -87,7 +100,7 @@
                         echo "</form>\n";
                     echo "</div>";
 
-                    
+                    echo "\t\t<div class='col-6 my-6 flex'>\n";
                     $stmt = mysqli_prepare($conn,"SELECT IdArticolo FROM compra WHERE email=? AND IdArticolo=?");
                     mysqli_stmt_bind_param($stmt, 'ss', $_SESSION['email'], $id);
                     mysqli_stmt_execute($stmt); 
@@ -102,7 +115,7 @@
                     }else {
                         if(mysqli_num_rows($result) > 0){
                     
-                            echo "\t\t<div class=col-6 my-6'>\n";
+
                             echo "<h1>compra il prodotto</h1>";
                             echo "<form id='commento'>";
                             echo "   <h4><select name='v' id='v'>";
@@ -132,30 +145,36 @@
                     }
 
 
-                    $stmt = mysqli_prepare($conn,"SELECT DISTINCT commento, valutazione FROM compra WHERE IdArticolo=?");
+                    $stmt = mysqli_prepare($conn,"SELECT DISTINCT commento, valutazione, _name FROM compra NATURAL JOIN utenti WHERE IdArticolo = ?");
                     mysqli_stmt_bind_param($stmt, 's', $id);
                     mysqli_stmt_execute($stmt); 
                     $result=mysqli_stmt_get_result($stmt);
-                    
                     if(!$result){
                         echo"query error";
             
                         mysqli_close($conn);
                         exit();
                         
-                    }else {
+                    }
+                    echo "<div id='showComments' class='container mt-5 border-left border-right overflow-auto'>";
+
                         while($row = mysqli_fetch_array($result)){
                                 if($row['valutazione']!=''){
-                                    echo "<div class='card' style='width:400px'>";
-                                        echo"<div class='card-body'>";
-                                            echo"<h4 class='card-title'> valutazione:".$row['valutazione']."</h4>";
-                                            echo"<p class='card-text'>".$row['commento']."</p>";
-                                        echo"</div>";
-                                    echo"</div>";
+                                    echo"
+                                    <div>
+                                    
+                                    <h4 class='second py-2 px-2'>".$row['valutazione']."/5</h4>
+                                    <p id='showComments' class='second py-2 px-2'>".$row['commento']."</p>
+                                    <span class='text2'>Da: ".$row['_name']."</span>
+                                    <hr>
+                                    </div>
+                                    ";
                                 }
                         }
                     
-                    }
+                    echo"</div>";
+
+                    
 
                     echo "</div>";
                 echo "</div>";

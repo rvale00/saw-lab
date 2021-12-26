@@ -35,12 +35,13 @@
                 echo "carrello vuoto";
                 exit();
             }
-
-            $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE IdArticolo IN (?)");
-            mysqli_stmt_bind_param($stmt, 's', $cartList);
+            $art = str_repeat('?,', count(array_keys($_SESSION['cart'])) - 1) . '?';
+            $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE IdArticolo IN ($art)");
+            $types = str_repeat('s', count(array_keys($_SESSION['cart'])));
+            mysqli_stmt_bind_param($stmt, $types, ...array_keys($_SESSION['cart']));
             mysqli_stmt_execute($stmt); 
             $result=mysqli_stmt_get_result($stmt);
-            echo $cartList;
+
             echo "<div id='cartList'>";
             echo "<h1> Carrello </h1>";
                 if(!$result){
@@ -52,10 +53,7 @@
                 }else {
                     echo "<div class='container w-auto p-3 text-center'>";
                     echo "<div class='row'>";
-                    $i=0;
-                    while($row = mysqli_fetch_array($result)){
-                        $i++;
-                        echo $i;
+                    while($row =  mysqli_fetch_array($result)){   
                         echo "<div class='col-6 my-6'>";
                             echo "<div class='card' style='width:400px'>";
                             printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
@@ -63,18 +61,21 @@
                                     echo"<h4 class='card-title'>".$row['Titolo']."</h4>";
                                     echo"<p class='card-text'>".$row['Descrizione']."</p>";
                                     echo"<p class='card-text'>€".$row['prezzo']."</p>";
-                                    echo"<a href='articolo.php?id=".$row['IdArticolo']."' class='btn btn-primary'>See Profile</a>";
+                                    echo"<p class='card-text'>Qta: ". $_SESSION['cart'][$row['IdArticolo']] ."</p>";
                                 echo"</div>";
                             echo"</div>";
                         echo"</div>";
                         
     
                     }
-                }
+                    echo "</div>";
+                    echo "</div>";
                 
-                echo "</div>";
                 echo"<a onclick='buyCart()' class='btn btn-primary'> Acquista </a>";
-                echo "</div>";
+                }
+            echo "</div>";
+                
+                
                 mysqli_close($conn);
 
         ?>

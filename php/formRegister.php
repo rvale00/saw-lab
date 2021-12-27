@@ -3,7 +3,7 @@
     <head lang="it">
         <title>Registration form</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        
+        <link rel="stylesheet" href="../css/form.css">
         <script>
             function register(){
               var usermail = document.getElementsByName("email")[0].value;
@@ -27,69 +27,14 @@
             }
         </script>
         
-        
-        <style>
-        html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      display: flex;
-      align-items: center;
-      padding-top: 40px;
-      padding-bottom: 40px;
-      background-color: #f5f5f5;
-    }
-
-    .form-signin {
-      width: 100%;
-      max-width: 330px;
-      padding: 15px;
-      margin: auto;
-    }
-
-    .form-signin .checkbox {
-      font-weight: 400;
-    }
-
-    .form-signin .form-floating:focus-within {
-      z-index: 2;
-    }
-
-    .form-signin input[type="email"] {
-      margin-bottom: -1px;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-
-    .form-signin input[type="password"] {
-      margin-bottom: 10px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-
-.bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-        </style>
+        <link rel="stylesheet" href="css/form.css">
     </head>
 
     <body class="text-center">
     
     <main class="form-signin" id="regForm">
       
-        <img class="mb-4" src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
         
         <h1 class="h3 mb-3 fw-normal">Please register</h1>
 

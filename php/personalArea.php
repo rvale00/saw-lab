@@ -2,12 +2,14 @@
 <html>
     <head lang="it">
         <title>Area personale</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/form.css">
     </head>
-    <body>
-    
-        <h1>My Beautiful Homepage!</h1>
-        
-        <?php
+
+
+<body class="text-center">
+            
+<?php
         include("../db/connect.php");
         session_start();
         $conn = connectDB();
@@ -24,23 +26,35 @@
         }
         $row = mysqli_fetch_array($res);
         ?>
-        <form action="personalArea.php" method="post">
-        <fieldset>
-        <legend>Modify</legend>
-        <Label><strong>Nome</strong></Label>
-        <input type="text" id="fname" name="name" value="<?php echo $row['_name'] ?>" >
-        <br>
-        <Label><strong>Cognome</strong></Label>
-        <input type="text" id="lname" name="surname" value="<?php echo $row['_surname'] ?>">
-        <br>
-        <Label><strong>E-mail</strong></Label>
-        <input type="email" id="email" name="email" value="<?php echo $row['email'] ?>">
-        <br>
-        <input type="submit" >
+    <main class="form-signin" id="regForm">
+        <form>
+        <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
+        
+        <h1 class="h3 mb-3 fw-normal">Please register</h1>
+
+        <div class="form-floating">
+          <input type="text" class="form-control" type="text" id="fname" name="name" value="<?php echo $row['_name']?>">
+          <label for="floatingInput">Nome</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="text" class="form-control" id="lname" name="surname" value="<?php echo $row['_surname']?>">
+          <label for="floatingInput">Cognome</label>
+        </div>
+
+        <div class="form-floating">
+          <input type="email" class="form-control" id="email" name="email" value="<?php echo    $row['email']?>">
+          <label for="floatingInput">Email </label>
+        </div>  
+
+        <a type="button" onclick="register()" class="w-100 btn btn-lg btn-primary">Modifica</a>
         <a href="../index.php"> Torna alla home</a>
-        <a href='cambiaPassword.php'> Cambia Password </a>
-        </fieldset>
+        <a href='formCPass.php'> Cambia Password </a>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
         </form>
+    </main>
+    
+        
 
         <?php
         $name = $surname = $email = " ";
@@ -84,6 +98,9 @@
         }
 
         ?>  
-
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      </body>
     </body>
 </html>

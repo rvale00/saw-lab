@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head lang="it">
-        <title>Login form</title>
+        <title>Cambio password</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         html,
@@ -62,22 +62,20 @@
 
 
     <script>
-            function login(){
-              var usermail = document.getElementsByName("email")[0].value;
-              var userpsw = document.getElementsByName("psw")[0].value;
-              console.log(userpsw);
-            fetch('login.php', {
+            function cPsw(){
+              var oldPsw = document.getElementsByName("oldpsw")[0].value;
+              var newPsw = document.getElementsByName("newpsw")[0].value;
+              var newCPsw = document.getElementsByName("newcpsw")[0].value;
+            fetch('cambiaPassword.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
-                body: "email=" + usermail + "&psw=" + userpsw,
+                body: "oldpsw=" + oldPsw + "&newpsw=" + newPsw + "&newcpsw=" + newCPsw,
                 }).then(function (response) { 
                     console.log(response.statusText);
                     return response.text();
                 }).then(function (result) {
                     alert(result);
-                    if(result =="logged")
-                      //window.location.assign(document.referrer);
-                      window.location.assign('/saw-lab/index.php');
+                    //window.location.assign('/saw-lab/index.php');
                     
                 });
             }
@@ -91,15 +89,20 @@
     <main class="form-signin">
 
         <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
-        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        <h1 class="h3 mb-3 fw-normal">Cambia password</h1>
+
+        <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" name="oldpsw" placeholder="Password">
+          <label for="floatingInput">Password attuale</label>
+        </div>
     
         <div class="form-floating">
-          <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com">
-          <label for="floatingInput">Email address</label>
+        <input type="password" class="form-control" id="floatingPassword" name="newpsw" placeholder="Password">
+          <label for="floatingInput">Nuova password</label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" name="psw" placeholder="Password">
-          <label for="floatingPassword">Password</label>
+          <input type="password" class="form-control" id="floatingPassword" name="newcpsw" placeholder="Password">
+          <label for="floatingPassword"> Conferma nuova password</label>
         </div>
     
         <!--<div class="checkbox mb-3">
@@ -107,7 +110,9 @@
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>-->
-        <button class="w-100 btn btn-lg btn-primary" onclick="login()">Sign in</button>
+        <button class="w-100 btn btn-lg btn-primary" onclick="cPsw()">Cambia Password</button>
+
+
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
 
     </main>

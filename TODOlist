@@ -1,14 +1,13 @@
--TODO:1-Sanificare gli input nei form (forse fatto da chiedere a mirco)
+-TODO:1-Sanificare gli input nei form (forse)
 
 TODO:4-controllare i test automatici della prof
 
-TODO:8-persistenza articoli carrello (?) 
-TODO:9-se un utente ha già fatto una recensione su un articolo un 'altra recensione sullo stesso modificherà il precedente ok
 TODO:10- fare revisione sulla sostenibilità del codice
-TODO:11- togliere i pop up di debug e sostituirli con altro se necessario
-TODO:12-organizzare header e cartelle
-TODO:13- nei form far illuminare campi con errori
-TODO:14 aggiungere l'indirizzo di consegna (?)
+
+TODO:11- togliere i pop up di debug e sostituirli con altro se necessario(register fatta in JSON)
+TODO:12- organizzare header e cartelle
+TODO:13- nei form far illuminare campi con errori (fatto su register quasi)
+TODO:14- aggiungere l'indirizzo di consegna (messi i campi)
 
 vedi html special char per il testo del commento, non prende lettere accentate ecc
 

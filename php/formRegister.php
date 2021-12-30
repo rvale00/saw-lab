@@ -73,10 +73,7 @@
               var userfname = document.getElementsByName("name")[0].value;
               var userlname = document.getElementsByName("surname")[0].value;
               //non obbligatori
-              var reg = document.getElementsByName("reg")[0].value;
-              var citta = document.getElementsByName("citta")[0].value;
-              var ind = document.getElementsByName("ind")[0].value;
-              var cap = document.getElementsByName("cap")[0].value;
+
             fetch('register.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -155,7 +152,7 @@
 
 
         <button type="submit" class="w-100 btn btn-lg btn-primary"> Registrati </button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
         </form>
     </main>
     

@@ -72,14 +72,12 @@
               var usercpsw = document.getElementsByName("cPsw")[0].value;
               var userfname = document.getElementsByName("name")[0].value;
               var userlname = document.getElementsByName("surname")[0].value;
-              //non obbligatori
-
+              
             fetch('register.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
-                body: "name="+ userfname+ "&surname="+ userlname + "&email=" \
-                       + usermail + "&psw=" + userpsw + "&cPsw=" + usercpsw + "&reg=" \
-                       + reg + "&citta=" + citta + "&indirizzo=" + ind + "&cap=" + cap,
+                body: "name="+ userfname+ "&surname="+ userlname + "&email=" 
+                       + usermail + "&psw=" + userpsw + "&cPsw=" + usercpsw ,
                 }).then(function (response) { 
                     return response.json();
                 }).then(function (result) {

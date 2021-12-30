@@ -42,25 +42,26 @@
         mysqli_real_escape_string($conn, $regione);
         mysqli_real_escape_string($conn, $citta);
         mysqli_real_escape_string($conn, $indirizzo);
-        mysqli_real_escape_string($conn, $cap);
-        /*aggiustare il database per questa query*/
-        $stmt = mysqli_prepare($conn,"INSERT INTO indirizzo (email,regione,citta,indirizzo,cap) VALUES (?,?,?,?,?)");
-        mysqli_stmt_bind_param($stmt, 'ssssi', $_SESSION['email'],$regione,$citta,$indirizzo,$cap);
+       // mysqli_real_escape_string($conn, $cap);
 
+        $stmt = mysqli_prepare($conn,"UPDATE TABLE indirizzo SET regione=?,citta=?,indirizzo=?,cap=? WHERE email=?; ");
+        mysqli_stmt_bind_param($stmt, 'sssis', $regione, $citta, $indirizzo, $cap, $_SESSION['email']);
+ 
+        /*
         if(!mysqli_stmt_execute($stmt)){
-            $err += array("email"=>"mail gia' usata");
+            echo json_encode(array("email"=>"mail gia' usata"));
             mysqli_close($conn);
-            echo json_encode($err);
             exit();
-        }
+        }*/
 
-        if(mysqli_affected_rows($conn) === 0
-        ){
+        mysqli_stmt_execute($stmt);
+
+        if(mysqli_affected_rows($conn) === 0){
             echo json_encode(array("noAffRow"=>"Errore durante la registrazione"));
             mysqli_close($conn);
-            exit();
-            
+            exit();   
         }
+
         echo json_encode(array("ok"=>"Registrato con successo!"));
        
         mysqli_close($conn);

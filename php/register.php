@@ -80,13 +80,25 @@
             exit();
         }
 
-        if(mysqli_affected_rows($conn) === 0
-        ){
+        if(mysqli_affected_rows($conn) === 0){
             echo json_encode(array("noAffRow"=>"Errore durante la registrazione"));
             mysqli_close($conn);
             exit();
             
         }
+
+        //è andato a buon fine
+        $stmt = mysqli_prepare($conn,"INSERT INTO indirizzo (email) VALUES (?)");
+        mysqli_stmt_bind_param($stmt, 's', $email);
+        mysqli_stmt_execute($stmt);
+
+        if(mysqli_affected_rows($conn) === 0){
+            echo json_encode(array("noAffRow"=>"Errore durante la registrazione"));
+            mysqli_close($conn);
+            exit();
+            
+        }
+
         echo json_encode(array("ok"=>"Registrato con successo!"));
         mysqli_close($conn);
 

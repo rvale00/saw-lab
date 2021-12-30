@@ -51,6 +51,7 @@
 
         $conn = connectDB();
 
+        /*
         mysqli_real_escape_string($conn, $name);
         $name=trim($name);
         $newname = filter_var($name, FILTER_SANITIZE_STRING);
@@ -59,6 +60,7 @@
         $newsname = filter_var($surname, FILTER_SANITIZE_STRING);
         mysqli_real_escape_string($conn, $email);
         $password = trim($password);
+        */
         
         $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
 
@@ -66,20 +68,21 @@
         mysqli_stmt_bind_param($stmt, 'ssss', $email,$hashedpsw,$name,$surname);
 
         if(!mysqli_stmt_execute($stmt)){
-            echo json_encode(array("pkErr"=>"Errore: mail gia' usata"));
-
+            //echo json_encode(array("pkErr"=>"Errore: mail gia' usata"));
+            echo "mail già usata";
             mysqli_close($conn);
             exit();
         }
 
         if(mysqli_affected_rows($conn) === 0){
-            echo json_encode(array("noAffRow"=>"Errore durante la registrazione"));
-
+            //echo json_encode(array("noAffRow"=>"Errore durante la registrazione"));
+            echo "Errore durante la registrazione";
             mysqli_close($conn);
             exit();
             
         }
-        echo json_encode(array("ok"=>"Registrato con successo!"));
+        //echo json_encode(array("ok"=>"Registrato con successo!"));
+        echo "Registered";
         mysqli_close($conn);
 
 

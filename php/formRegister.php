@@ -6,9 +6,11 @@
         <link rel="stylesheet" href="../css/form.css">
         <script>
             function checkInput(result){
+              
               if(result.fname != undefined){
                       $('#fname').css({ "border": '#FF0000 1px solid'});
                       $('#fnameErr').html(result.fname);
+                     
               }else{
                       $('#fname').removeAttr("style");
                       $('#fnameErr').empty();              
@@ -16,6 +18,7 @@
               if(result.lname != undefined){
                       $('#lname').css({ "border": '#FF0000 1px solid'});
                       $('#lnameErr').html(result.lname);
+                      
               }else{
                       $('#lname').removeAttr("style");
                       $('#lnameErr').empty();              
@@ -23,33 +26,41 @@
               if(result.email != undefined){
                       $('#email').css({ "border": '#FF0000 1px solid'});
                       $('#emailErr').html(result.email);
+                     
               }else{
                       $('#email').removeAttr("style");
                       $('#emailErr').empty();              
               }
+              //controllo campi vuoti password
               if(result.psw != undefined){
-                      $('#psw').css({ "border": '#FF0000 1px solid'});
-                      $('#pswErr').html(result.psw);
+                $('#psw').css({ "border": '#FF0000 1px solid'});
+                $('#pswErr').html(result.psw);
+               
               }else{
-                      $('#psw').removeAttr("style");
-                      $('#pswErr').empty();              
+                $('#psw').removeAttr("style");
+                $('#pswErr').empty();              
               }
               if(result.cPsw != undefined){
-                      $('#cPsw').css({ "border": '#FF0000 1px solid'});
-                      $('#cPswErr').html(result.cPsw);
+                $('#cPsw').css({ "border": '#FF0000 1px solid'});
+                $('#cPswErr').html(result.cPsw);
+               
               }else{
-                      $('#cPsw').removeAttr("style");
-                      $('#cPswErr').empty();              
-              }
-              /*if(result.nopsw != undefined){
+                $('#cPsw').removeAttr("style");
+                $('#cPswErr').empty();
+
+                //se entrambi i campi hanno del contenuto confronto che siano uguali
+                if(result.nopsw != undefined){
                       $('#psw').css({ "border": '#FF0000 1px solid'});
                       $('#cPsw').css({ "border": '#FF0000 1px solid'});
                       $('#nopsw').html(result.nopsw);
-              }else{
+                      
+                }else{ 
                       $('#psw').removeAttr("style");
                       $('#cPsw').removeAttr("style");
-                      $('#nopsw').empty();              
-              }*/
+                      $('#nopsw').empty();   
+                }              
+              }
+             
             }
 
 
@@ -66,12 +77,14 @@
                 }).then(function (response) { 
                     return response.json();
                 }).then(function (result) {
+                    alert(JSON.stringify(result));
                     checkInput(result);
-                    //alert(JSON.stringify(result));
                     
-
-                    //document.getElementById('regForm').innerHTML = "<h1>Account registrato con successo</h1> \
-                      //                                               <a class='btn btn-primary' href='formLogin.php'> Accedi </a>";
+                    //se non ci sono stati errori allora:
+                    if(result.ok!=undefined){
+                      document.getElementById('regForm').innerHTML = "<h1>Account registrato con successo</h1> \
+                                                                    <a class='btn btn-primary' href='formLogin.php'> Accedi </a>";
+                    }
                     
                 });
             }

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1-1.fc34
+-- version 4.9.5deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 19, 2021 at 06:35 PM
--- Server version: 10.5.13-MariaDB
--- PHP Version: 7.4.26
+-- Host: localhost:3306
+-- Creato il: Dic 30, 2021 alle 17:16
+-- Versione del server: 10.3.31-MariaDB-0ubuntu0.20.04.1
+-- Versione PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `articoli`
+-- Struttura della tabella `articoli`
 --
 
 CREATE TABLE `articoli` (
@@ -36,7 +37,7 @@ CREATE TABLE `articoli` (
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 --
--- Dumping data for table `articoli`
+-- Dump dei dati per la tabella `articoli`
 --
 
 INSERT INTO `articoli` (`IdArticolo`, `Titolo`, `Descrizione`, `Immagine`, `prezzo`) VALUES
@@ -47,7 +48,43 @@ INSERT INTO `articoli` (`IdArticolo`, `Titolo`, `Descrizione`, `Immagine`, `prez
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utenti`
+-- Struttura della tabella `compra`
+--
+
+CREATE TABLE `compra` (
+  `IdArticolo` int(5) NOT NULL,
+  `email` varchar(50) COLLATE ascii_bin NOT NULL,
+  `commento` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `valutazione` int(2) DEFAULT NULL,
+  `quantita` int(1) DEFAULT NULL,
+  `dataOra` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `indirizzo`
+--
+
+CREATE TABLE `indirizzo` (
+  `email` varchar(50) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `regione` varchar(30) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
+  `citta` varchar(30) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
+  `indirizzo` varchar(50) CHARACTER SET ascii COLLATE ascii_bin DEFAULT NULL,
+  `cap` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dump dei dati per la tabella `indirizzo`
+--
+
+INSERT INTO `indirizzo` (`email`, `regione`, `citta`, `indirizzo`, `cap`) VALUES
+('rino@pape.com', NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `utenti`
 --
 
 CREATE TABLE `utenti` (
@@ -58,72 +95,57 @@ CREATE TABLE `utenti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 
 --
--- Dumping data for table `utenti`
+-- Dump dei dati per la tabella `utenti`
 --
 
 INSERT INTO `utenti` (`email`, `psw`, `_name`, `_surname`) VALUES
-('asd@asd.it', '$2y$10$tBp5qNsf4Zgwo3pONTUhye1OCRR3NV3VcDmU1ufo824UXzgUUsE72', 'asd', 'asd'),
-('cacca@cacca.it', '$2y$10$2sH/4Im0nGYel4MuIz5pZueyYAuo2p/3cAdLZ.Nqbuhjxevu3WEf2', 'cacca', 'cacca'),
-('sara@cinesca.it', '$2y$10$FPKqWNJ9LM1wpdZHJ8DdReM7dJoJfDv7y.tMJUnvqfmPIlGi5zzWq', 'sara', 'cinesca');
-
--- --------------------------------------------------------
+('rino@pape.com', '$2y$10$pG2/RFEQeCkitI8HN3SZM.0/Fcqfg8BNbMMLBlGMyfK1Whhx7CC9C', 'rino', 'pape');
 
 --
--- Table structure for table `compra`
---
-
-CREATE TABLE `compra` (
-  `IdArticolo` int(5) NOT NULL,
-  `email` varchar(50) COLLATE ascii_bin NOT NULL,
-  `commento` text COLLATE ascii_bin DEFAULT NULL,
-  `valutazione` int(2) DEFAULT NULL,
-  `quantita` int(1) DEFAULT NULL,
-  `dataOra` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=ascii COLLATE=ascii_bin;
-
---
--- Dumping data for table `compra`
---
-
-INSERT INTO `compra` (`IdArticolo`, `email`, `commento`, `valutazione`, `quantita`, `dataOra`) VALUES
-(1, 'asd@asd.it', NULL, NULL, 3, '2021-12-19 19:25:58'),
-(1, 'asd@asd.it', NULL, NULL, 1, '2021-12-19 19:26:17'),
-(1, 'asd@asd.it', NULL, NULL, 2, '2021-12-19 19:27:08'),
-(2, 'asd@asd.it', NULL, NULL, 3, '2021-12-19 19:27:08');
-
---
--- Indexes for dumped tables
+-- Indici per le tabelle scaricate
 --
 
 --
--- Indexes for table `articoli`
+-- Indici per le tabelle `articoli`
 --
 ALTER TABLE `articoli`
   ADD PRIMARY KEY (`IdArticolo`);
 
 --
--- Indexes for table `utenti`
---
-ALTER TABLE `utenti`
-  ADD PRIMARY KEY (`email`);
-
---
--- Indexes for table `compra`
+-- Indici per le tabelle `compra`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`IdArticolo`,`email`,`dataOra`) USING BTREE,
   ADD KEY `fk_usr` (`email`);
 
 --
--- Constraints for dumped tables
+-- Indici per le tabelle `indirizzo`
+--
+ALTER TABLE `indirizzo`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indici per le tabelle `utenti`
+--
+ALTER TABLE `utenti`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Limiti per le tabelle scaricate
 --
 
 --
--- Constraints for table `compra`
+-- Limiti per la tabella `compra`
 --
 ALTER TABLE `compra`
   ADD CONSTRAINT `fk_art` FOREIGN KEY (`IdArticolo`) REFERENCES `articoli` (`IdArticolo`),
   ADD CONSTRAINT `fk_usr` FOREIGN KEY (`email`) REFERENCES `utenti` (`email`);
+
+--
+-- Limiti per la tabella `indirizzo`
+--
+ALTER TABLE `indirizzo`
+  ADD CONSTRAINT `indirizzo_ibfk_1` FOREIGN KEY (`email`) REFERENCES `utenti` (`email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

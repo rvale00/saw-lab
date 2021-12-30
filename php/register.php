@@ -4,7 +4,7 @@
 
     include("../db/connect.php");
 
-    $name = $surname = $email = $password = $cpassword = " ";
+    $name = $surname = $email = $password = $cpassword = $regione = $citta = $indirizzo = $cap = " ";
     $err = array();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["name"])){
@@ -43,6 +43,9 @@
         if (!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
             $err += array("email"=>"mail non valida");
         }
+        
+        
+
         //controlla se ci sono campi vuoti
         if (!empty($err)){
             echo json_encode($err);
@@ -51,16 +54,19 @@
 
         $conn = connectDB();
 
-        /*
+        
         mysqli_real_escape_string($conn, $name);
         $name=trim($name);
-        $newname = filter_var($name, FILTER_SANITIZE_STRING);
+        //$newname = filter_var($name, FILTER_SANITIZE_STRING);
+
         mysqli_real_escape_string($conn, $surname);
         $surname=trim($surname);
-        $newsname = filter_var($surname, FILTER_SANITIZE_STRING);
+        //$newsname = filter_var($surname, FILTER_SANITIZE_STRING);
+
+
         mysqli_real_escape_string($conn, $email);
         $password = trim($password);
-        */
+        
         
         $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
 
@@ -68,21 +74,20 @@
         mysqli_stmt_bind_param($stmt, 'ssss', $email,$hashedpsw,$name,$surname);
 
         if(!mysqli_stmt_execute($stmt)){
-            //echo json_encode(array("pkErr"=>"Errore: mail gia' usata"));
-            echo "mail già usata";
+            $err += array("email"=>"mail gia' usata");
             mysqli_close($conn);
+            echo json_encode($err);
             exit();
         }
 
-        if(mysqli_affected_rows($conn) === 0){
-            //echo json_encode(array("noAffRow"=>"Errore durante la registrazione"));
-            echo "Errore durante la registrazione";
+        if(mysqli_affected_rows($conn) === 0
+        ){
+            echo json_encode(array("noAffRow"=>"Errore durante la registrazione"));
             mysqli_close($conn);
             exit();
             
         }
-        //echo json_encode(array("ok"=>"Registrato con successo!"));
-        echo "Registered";
+        echo json_encode(array("ok"=>"Registrato con successo!"));
         mysqli_close($conn);
 
 

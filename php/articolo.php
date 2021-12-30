@@ -61,6 +61,7 @@
     $id = $_GET['id'];
 
     $conn = connectDB();
+    //proietta articolo
     $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE IdArticolo=?");
     mysqli_stmt_bind_param($stmt, 's', $id);
     mysqli_stmt_execute($stmt); 
@@ -101,6 +102,7 @@
                     echo "</div>";
 
                     echo "\t\t<div class='col-6 my-6 flex'>\n";
+                    //controlla che l'articolo sia stato comprato per poter lasciare una recensione
                     $stmt = mysqli_prepare($conn,"SELECT IdArticolo FROM compra WHERE email=? AND IdArticolo=?");
                     mysqli_stmt_bind_param($stmt, 'ss', $_SESSION['email'], $id);
                     mysqli_stmt_execute($stmt); 
@@ -144,7 +146,7 @@
                         }
                     }
 
-
+                    //mostra recensioni sull'articolo
                     $stmt = mysqli_prepare($conn,"SELECT DISTINCT commento, valutazione, _name FROM compra NATURAL JOIN utenti WHERE IdArticolo = ?");
                     mysqli_stmt_bind_param($stmt, 's', $id);
                     mysqli_stmt_execute($stmt); 

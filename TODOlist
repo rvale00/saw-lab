@@ -6,8 +6,8 @@ TODO:10- fare revisione sulla sostenibilità del codice
 
 TODO:11- togliere i pop up di debug e sostituirli con altro se necessario(register fatta in JSON)
 TODO:12- organizzare header e cartelle
-TODO:13- nei form far illuminare campi con errori (fatto su register quasi)
-TODO:14- aggiungere l'indirizzo di consegna (messi i campi)
+TODO:13- nei form far illuminare campi con errori (fatto su register, indirizzo, cambio psw quasi, manca su login)
+TODO:14- aggiungere l'indirizzo di consegna se non lo hai ancora fatto in fase di acquisto (controllo da aggiungere in listaCarrello)
 
 vedi html special char per il testo del commento, non prende lettere accentate ecc
 

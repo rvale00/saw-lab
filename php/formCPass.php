@@ -62,6 +62,36 @@
 
 
     <script>
+            function checkData(){
+              if(result.psw != undefined){
+                $('#psw').css({ "border": '#FF0000 1px solid'});
+                $('#pswErr').html(result.psw);
+               
+              }else{
+                $('#psw').removeAttr("style");
+                $('#pswErr').empty();              
+              }
+              if(result.cPsw != undefined){
+                $('#cPsw').css({ "border": '#FF0000 1px solid'});
+                $('#cPswErr').html(result.cPsw);
+               
+              }else{
+                $('#cPsw').removeAttr("style");
+                $('#cPswErr').empty();
+
+                //se entrambi i campi hanno del contenuto confronto che siano uguali
+                if(result.nopsw != undefined){
+                      $('#psw').css({ "border": '#FF0000 1px solid'});
+                      $('#cPsw').css({ "border": '#FF0000 1px solid'});
+                      $('#nopsw').html(result.nopsw);
+                      
+                }else{ 
+                      $('#psw').removeAttr("style");
+                      $('#cPsw').removeAttr("style");
+                      $('#nopsw').empty();   
+                }              
+              }
+            }
             function cPsw(){
               var oldPsw = document.getElementsByName("oldpsw")[0].value;
               var newPsw = document.getElementsByName("newpsw")[0].value;
@@ -71,14 +101,19 @@
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
                 body: "oldpsw=" + oldPsw + "&newpsw=" + newPsw + "&newcpsw=" + newCPsw,
                 }).then(function (response) { 
-                    console.log(response.statusText);
-                    return response.text();
+                    return response.json();
                 }).then(function (result) {
-                    alert(result);
+                    
                     //window.location.assign('/saw-lab/index.php');
                     
                 });
             }
+            $(document).ready(function(){
+                $("#formAddr").submit(function(e){
+                    e.preventDefault();
+                    cPsw();
+                });
+            });
 
 
         </script>
@@ -87,7 +122,7 @@
   <body class="text-center">
     
     <main class="form-signin">
-
+      <form id="formAddr">
         <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
         <h1 class="h3 mb-3 fw-normal">Cambia password</h1>
 
@@ -105,16 +140,12 @@
           <label for="floatingPassword"> Conferma nuova password</label>
         </div>
     
-        <!--<div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>-->
-        <button class="w-100 btn btn-lg btn-primary" onclick="cPsw()">Cambia Password</button>
+        <button type="submit" class="w-100 btn btn-lg btn-primary">Cambia Password</button>
+        <a href="../index.php"> Torna alla home</a>
+        <a href="personalArea.php"> Area utente</a>
 
-
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
+      </form>
     </main>
     
     

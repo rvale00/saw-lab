@@ -4,7 +4,7 @@
 
     include("../db/connect.php");
 
-    $name = $surname = $email = $password = $cpassword = $regione = $citta = $indirizzo = $cap = " ";
+    $name = $surname = $email = $password = $cpassword = " ";
     $err = array();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["name"])){

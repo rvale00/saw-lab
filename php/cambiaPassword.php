@@ -4,28 +4,33 @@
     include("../db/connect.php");
 
     $oldpsw = $newpsw = $newcpsw = " ";
+    $err = array();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["oldpsw"])){
-            echo "<p> e' necessario inserire la vecchia password</p>";
+            $err += array("old"=>"e' necessario inserire la vecchia password");
             exit;
         }else{
             $oldpsw = $_POST["oldpsw"];
         }
         if(empty($_POST["newpsw"])){
-            echo "<p> e' necessario inserire la nuova password</p>";
+            $err += array("new"=>"e' necessario inserire la password nuova");
             exit;
         }else{
             $newpsw = $_POST["newpsw"];
         }
         if(empty($_POST["newcpsw"])){
-            echo "<p> e' necessario confermare la nuova password</p>";
+            $err += array("cpsw"=>"e' necessario confermare la password");
             exit;
         }else{
             $newcpsw = $_POST["newcpsw"];
         }
         if($newpsw != $newcpsw){
-            echo "<p> le password non corrispondono.</p>";
+            $err += array("samepsw"=>"le password non coincidono");
             exit;
+        }
+        if (!empty($err)){
+            echo json_encode($err);
+            exit();
         }
 
         $conn = connectDB();
@@ -37,9 +42,9 @@
         mysqli_stmt_execute($stmt); 
         $result=mysqli_stmt_get_result($stmt);
         if(!$result){
-            echo"query error";
-
+            $err += array("db"=>"errore db");
             mysqli_close($conn);
+            echo json_encode($err);
             exit();
             
         }
@@ -55,13 +60,15 @@
 
             mysqli_stmt_execute($stmt); 
             if(mysqli_affected_rows($conn) === 0){
-                echo"query error";
-
+                $err += array("db"=>"errore db");
                 mysqli_close($conn);
+                echo json_encode($err);
                 exit();
             
+            }else{
+                echo json_encode(array("pswerr2"=>"la password non coincide con la password attuale"));
             }
-        echo "Password cambiata con successo";
+            echo json_encode(array("ok"=>"Password cambiata con successo!"));
         }
        
         mysqli_close($conn);

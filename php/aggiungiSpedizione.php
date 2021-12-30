@@ -44,7 +44,7 @@
         mysqli_real_escape_string($conn, $indirizzo);
        // mysqli_real_escape_string($conn, $cap);
 
-        $stmt = mysqli_prepare($conn,"UPDATE TABLE indirizzo SET regione=?,citta=?,indirizzo=?,cap=? WHERE email=?; ");
+        $stmt = mysqli_prepare($conn,"UPDATE indirizzo SET regione=?,citta=?,indirizzo=?,cap=? WHERE email=?; ");
         mysqli_stmt_bind_param($stmt, 'sssis', $regione, $citta, $indirizzo, $cap, $_SESSION['email']);
  
         /*
@@ -62,7 +62,7 @@
             exit();   
         }
 
-        echo json_encode(array("ok"=>"Registrato con successo!"));
+        echo json_encode(array("ok"=>"Indirizzo di consegna aggiunto!"));
        
         mysqli_close($conn);
 

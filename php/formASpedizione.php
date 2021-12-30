@@ -66,7 +66,7 @@
             function checkData(result){
               if(result.reg != undefined){
                       $('#reg').css({ "border": '#FF0000 1px solid'});
-                      $('#regErr').html(result.fname);
+                      $('#regErr').html(result.reg);
                      
               }else{
                       $('#reg').removeAttr("style");
@@ -74,7 +74,7 @@
               }
               if(result.citta != undefined){
                       $('#citta').css({ "border": '#FF0000 1px solid'});
-                      $('#cittaErr').html(result.lname);
+                      $('#cittaErr').html(result.citta);
                       
               }else{
                       $('#citta').removeAttr("style");
@@ -82,7 +82,7 @@
               }
               if(result.ind != undefined){
                       $('#ind').css({ "border": '#FF0000 1px solid'});
-                      $('#indErr').html(result.email);
+                      $('#indErr').html(result.ind);
                      
               }else{
                       $('#ind').removeAttr("style");
@@ -90,7 +90,7 @@
               }
               if(result.cap != undefined){
                       $('#cap').css({ "border": '#FF0000 1px solid'});
-                      $('#capErr').html(result.email);
+                      $('#capErr').html(result.cap);
                      
               }else{
                       $('#cap').removeAttr("style");
@@ -109,10 +109,13 @@
                 }).then(function (response) { 
                     return response.json();
                 }).then(function (result) {
-                  alert(JSON.stringify(result));
-                    checkData(result);
                     //alert(JSON.stringify(result));
-                    //window.location.assign('/saw-lab/index.php');
+                    checkData(result);
+                    if(result.ok!=undefined){
+                      $('#alertBox').append("<div class='alert alert-success'> \
+                        "+result.ok+" \
+                      </div> ");
+                    }
                     
                 });
             }
@@ -131,7 +134,30 @@
     <main class="form-signin">
     <form id="formAddr">
         <div class="form-floating">
-              <input type="text" class="form-control" id="reg" name="reg" placeholder="Regione">
+          <div id="alertBox"></div>
+              <!--<input type="text" class="form-control" id="reg" name="reg" placeholder="Regione">-->
+              <select class="form-control" id="reg" name="reg">
+                <option value="Abruzzo">Abruzzo</option>
+                <option value="Basilicata">Basilicata</option>
+                <option value="Calabria">Calabria</option>
+                <option value="Campania">Campania</option>
+                <option value="Emilia-Romagna">Emilia-Romagna</option>
+                <option value="Friuli-Venezia Giulia">Friuli-Venezia Giulia</option>
+                <option value="Lazio">Lazio</option>
+                <option value="Liguria">Liguria</option>
+                <option value="Lombardia">Lombardia</option>
+                <option value="Marche">Marche</option>
+                <option value="Molise">Molise</option>
+                <option value="Piemonte">Piemonte</option>
+                <option value="Puglia">Puglia</option>
+                <option value="Sardegna">Sardegna</option>
+                <option value="Sicilia">Sicilia</option>
+                <option value="Toscana">Toscana</option>
+                <option value="Trentino-Alto Adige">Trentino-Alto Adige</option>
+                <option value="Umbria">Umbria</option>
+                <option value="Valle d'Aosta">Valle d'Aosta</option>
+                <option value="Veneto">Veneto</option>
+              </select> 
               <p id="regErr" ></p>
               <label for="floatingInput">Regione</label>
         </div>
@@ -155,6 +181,8 @@
         </div>
 
         <button type="submit" class="w-100 btn btn-lg btn-primary"> Invia </button>
+        <a href="../index.php"> Torna alla home</a>
+        <a href="personalArea.php"> Area utente</a>
 
 
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p> 

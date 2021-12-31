@@ -49,7 +49,7 @@
                 </form>
               </div>
 
-              <form action="/php/listaArticoli.php" method="get" class="form-inline my-2 my-lg-0">
+              <form action="./listaArticoli.php" method="get" class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="src">        
                 <button type="submit" class="btn btn-outline-warning">Search</button>
               </form>

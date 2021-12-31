@@ -15,16 +15,20 @@
 
     
     $conn = connectDB();
+
     if(isset($_GET['src'])){
-        $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE Titolo LIKE '%(?)%'");
-        mysqli_stmt_bind_param($stmt, 's', $_GET['src']);
+        $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE Titolo LIKE ?");
+        $get="%{$_GET['src']}%";
+        mysqli_stmt_bind_param($stmt, 's', $get);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
     }
     
     else{
-        $query = "SELECT * FROM articoli;";
-        $result = mysqli_query($conn, $query);
+        $stmt = mysqli_prepare($conn,"SELECT * FROM articoli");
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
     }
 
         if(!$result){

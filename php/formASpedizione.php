@@ -163,19 +163,19 @@
         </div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="citta" name="citta" placeholder="Citta'">
+          <input type="text" class="form-control" id="citta" name="citta" placeholder="Citta'" required>
           <p id="cittaErr" ></p>
           <label for="floatingInput">Citta'</label>
         </div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="ind" name="ind" placeholder="Indirizzo">
+          <input type="text" class="form-control" id="ind" name="ind" placeholder="Indirizzo" required>
           <p id="indErr" ></p>
           <label for="floatingInput">Indirizzo</label>
         </div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="cap" name="cap" placeholder="Cap">
+          <input type="number" class="form-control" id="cap" name="cap" placeholder="Cap" required>
           <p id="capErr" ></p>
           <label for="floatingInput">Cap</label>
         </div>

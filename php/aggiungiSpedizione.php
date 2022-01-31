@@ -4,36 +4,18 @@
     include("../db/connect.php");
 
     $regione = $citta = $indirizzo = $cap = " ";
-    $err = array();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(empty($_POST["reg"])){
-            $err += array("reg" => " e' necessario inserire la regione");
+        if(empty($_POST["reg"]) || empty($_POST["citta"]) || empty($_POST["indirizzo"]) || empty($_POST["cap"])){
+            echo json_encode(array("empty" => "Campi obbligatori vuoti"));
+            exit(); 
         }else{
             $regione = $_POST["reg"];
-        }
-
-        if(empty($_POST["citta"])){
-            $err += array("citta" =>" e' necessario inserire la citta'");
-        }else{
             $citta = $_POST["citta"];
-        }
-
-        if(empty($_POST["indirizzo"])){
-            $err += array("ind" =>" e' necessario inserire l'indirizzo di spedizione");
-        }else{
             $indirizzo = $_POST["indirizzo"];
-        }
-
-        if(empty($_POST["cap"])){
-            $err += array("cap" =>" e' necessario inserire il CAP");
-        }else{
             $cap = $_POST["cap"];
         }
+   
 
-        if (!empty($err)){
-            echo json_encode($err);
-            exit();
-        }
 
         $conn = connectDB();
         

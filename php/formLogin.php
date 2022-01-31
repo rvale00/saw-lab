@@ -34,7 +34,8 @@
                 }).then(function (result) {
                     checkInput(result);
                     if(result.ok !=undefined)
-                      $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.ok+"</div>");
+                    $('#loginForm').html("<h1>"+result.ok+"</h1> \
+                                          <a class='btn btn-primary' href='../index.php'> Torna alla home </a>");
                     
                 });
             }
@@ -50,11 +51,12 @@
 
   <body class="text-center">
     
-    <main class="form-signin">
-
+    <main class="form-signin" id="loginForm">
+        
+    <form id="formlogin">
         <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-        <div class="container"id="alert"></div>
+        <div class="container" id="alert"></div>
         
         <div class="form-floating">
           <input type="email" class="form-control" id="floatingInput" name="email" placeholder="name@example.com" required>
@@ -64,9 +66,9 @@
           <input type="password" class="form-control" id="floatingPassword" name="psw" placeholder="Password" required>
           <label for="floatingPassword">Password</label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" onclick="login()"> Login </button>
+        <button type="submit" class="w-100 btn btn-lg btn-primary"> Login </button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-
+    </form>
     </main>
     
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

@@ -64,37 +64,11 @@
 
     <script>
             function checkData(result){
-              if(result.reg != undefined){
-                      $('#reg').css({ "border": '#FF0000 1px solid'});
-                      $('#regErr').html(result.reg);
-                     
-              }else{
-                      $('#reg').removeAttr("style");
-                      $('#regErr').empty();              
+              if(result.empty != undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");     
               }
-              if(result.citta != undefined){
-                      $('#citta').css({ "border": '#FF0000 1px solid'});
-                      $('#cittaErr').html(result.citta);
-                      
-              }else{
-                      $('#citta').removeAttr("style");
-                      $('#cittaErr').empty();              
-              }
-              if(result.ind != undefined){
-                      $('#ind').css({ "border": '#FF0000 1px solid'});
-                      $('#indErr').html(result.ind);
-                     
-              }else{
-                      $('#ind').removeAttr("style");
-                      $('#indErr').empty();              
-              }
-              if(result.cap != undefined){
-                      $('#cap').css({ "border": '#FF0000 1px solid'});
-                      $('#capErr').html(result.cap);
-                     
-              }else{
-                      $('#cap').removeAttr("style");
-                      $('#capErr').empty();              
+              if(result.noAffRow!=undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.noAffRow+"</div>");
               }
             }
             function aggSpedizione(){
@@ -112,9 +86,9 @@
                     //alert(JSON.stringify(result));
                     checkData(result);
                     if(result.ok!=undefined){
-                      $('#alertBox').append("<div class='alert alert-success'> \
-                        "+result.ok+" \
-                      </div> ");
+                      $('#spedForm').html("<h1>"+result.ok+"</h1> \
+                                          <a class='btn btn-primary' href='../index.php'> Torna alla home </a>");
+                    
                     }
                     
                 });
@@ -131,7 +105,7 @@
 
   <body class="text-center">
     
-    <main class="form-signin">
+    <main class="form-signin" id="spedForm">
     <form id="formAddr">
         <div class="form-floating">
           <div id="alertBox"></div>

@@ -51,7 +51,7 @@
   <body class="text-center">
     
     <main class="form-signin">
-    <form id="formLogin">
+
         <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
         <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
         <div class="container"id="alert"></div>
@@ -64,14 +64,14 @@
           <input type="password" class="form-control" id="floatingPassword" name="psw" placeholder="Password" required>
           <label for="floatingPassword">Password</label>
         </div>
-        <button type="submit" class="w-100 btn btn-lg btn-primary"> Login </button>
+        <button class="w-100 btn btn-lg btn-primary" onclick="login()"> Login </button>
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
-        </form>
+
     </main>
     
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-      </body>
+  </body>
 
 
 </html>

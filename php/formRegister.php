@@ -14,9 +14,15 @@
               }
               if(result.email != undefined){
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.email+"</div>");
+              }
+              if(result.email2 != undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.email2+"</div>");
               }   
               if(result.noAffRow!=undefined){
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.noAffRow+"</div>");
+              }
+              if(result.noAffRow2!=undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.noAffRow2+"</div>");
               }
               if(result.noPsw!=undefined){
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.noPsw+"</div>");
@@ -68,35 +74,35 @@
         <h1 class="h3 mb-3 fw-normal">Please register</h1>
         <div class="container"id="alert"></div>
         <div class="form-floating">
-          <input type="text" class="form-control bg-error" id="fname" name="name" placeholder="Rino" required>
-          <p id="fnameErr" ></p>
+          <input type="text" class="form-control bg-error" id="fname" name="name" placeholder="Rino" >
+          
           <label for="floatingInput" >Nome*</label>
         </div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="lname" name="surname" placeholder="Pape" required>
-          <p id="lnameErr" ></p>
+          <input type="text" class="form-control" id="lname" name="surname" placeholder="Pape" >
+         
           <label for="floatingInput">Cognome*</label>
         </div>
 
         <div class="form-floating">
-          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
-          <p id="emailErr" ></p>
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" >
+         
           <label for="floatingInput">Email*</label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="psw" name="psw" placeholder="Password" required>
-          <p id="pswErr" ></p>
+          <input type="password" class="form-control" id="psw" name="psw" placeholder="Password" >
+         
           <label for="floatingPassword">Password*</label>
         </div>
 
         <div class="form-floating">
-          <input type="password" class="form-control" id="cPsw" name="cPsw" placeholder="Re Password" required>
-          <p id="cPswErr" ></p>
+          <input type="password" class="form-control" id="cPsw" name="cPsw" placeholder="Re Password" >
+  
           <label for="floatingPassword">Conferma password*</label>
         </div>
         
-        <p id="nopsw" ></p>
+
 
 
         <button type="submit" class="w-100 btn btn-lg btn-primary"> Registrati </button>

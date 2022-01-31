@@ -7,7 +7,7 @@
     $name = $surname = $email = $password = $cpassword = " ";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["name"]) || empty($_POST["surname"]) || empty($_POST["email"]) || empty($_POST["psw"]) || empty($_POST["cPsw"])){
-            echo json_encode(array("empty" => "Campi obbligatori vuoti."));
+            echo json_encode(array("empty" => "Campi obbligatori vuoti"));
             exit();
         }else{
             $name = $_POST["name"];
@@ -18,7 +18,7 @@
         }
 
         if($password != $cpassword){
-            echo json_encode(array("nopsw" =>" le password non corrispondono."));
+            echo json_encode(array("nopsw" =>"le password non corrispondono"));
             mysqli_close($conn);
             exit();
         }
@@ -30,6 +30,10 @@
         
 
         $conn = connectDB();
+
+        if($conn){
+
+        }
 
         
         mysqli_real_escape_string($conn, $name);
@@ -51,7 +55,7 @@
         mysqli_stmt_bind_param($stmt, 'ssss', $email,$hashedpsw,$name,$surname);
 
         if(!mysqli_stmt_execute($stmt)){
-            echo json_encode(array("email"=>"mail gia' usata"));
+            echo json_encode(array("email2"=>"mail gia' usata"));
             mysqli_close($conn);
             exit();
         }
@@ -69,13 +73,13 @@
         mysqli_stmt_execute($stmt);
 
         if(mysqli_affected_rows($conn) === 0){
-            echo json_encode(array("noAffRow"=>"Errore durante la registrazione"));
+            echo json_encode(array("noAffRow2"=>"Errore durante la registrazione"));
             mysqli_close($conn);
             exit();
             
         }
 
-        echo json_encode(array("ok"=>"Registrato con successo!"));
+        echo json_encode(array("ok"=>"Registrato con successo"));
         mysqli_close($conn);
 
 

@@ -9,63 +9,19 @@
         <script>
             function checkInput(result){
               
-              if(result.fname != undefined){
-                      $('#fname').css({ "border": '#FF0000 1px solid'});
-                      $('#fnameErr').html(result.fname);
-                     
-              }else{
-                      $('#fname').removeAttr("style");
-                      $('#fnameErr').empty();              
-              }
-              if(result.lname != undefined){
-                      $('#lname').css({ "border": '#FF0000 1px solid'});
-                      $('#lnameErr').html(result.lname);
-                      
-              }else{
-                      $('#lname').removeAttr("style");
-                      $('#lnameErr').empty();              
+              if(result.empty != undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");     
               }
               if(result.email != undefined){
-                      $('#email').css({ "border": '#FF0000 1px solid'});
-                      $('#emailErr').html(result.email);
-                     
-              }else{
-                      $('#email').removeAttr("style");
-                      $('#emailErr').empty();              
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.email+"</div>");
+              }   
+              if(result.noAffRow!=undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.noAffRow+"</div>");
               }
-              //controllo campi vuoti password
-              if(result.psw != undefined){
-                $('#psw').css({ "border": '#FF0000 1px solid'});
-                $('#pswErr').html(result.psw);
-               
-              }else{
-                $('#psw').removeAttr("style");
-                $('#pswErr').empty();              
+              if(result.noPsw!=undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.noPsw+"</div>");
               }
-              if(result.cPsw != undefined){
-                $('#cPsw').css({ "border": '#FF0000 1px solid'});
-                $('#cPswErr').html(result.cPsw);
-               
-              }else{
-                $('#cPsw').removeAttr("style");
-                $('#cPswErr').empty();
-
-                //se entrambi i campi hanno del contenuto confronto che siano uguali
-                if(result.nopsw != undefined){
-                      $('#psw').css({ "border": '#FF0000 1px solid'});
-                      $('#cPsw').css({ "border": '#FF0000 1px solid'});
-                      $('#nopsw').html(result.nopsw);
-                      
-                }else{ 
-                      $('#psw').removeAttr("style");
-                      $('#cPsw').removeAttr("style");
-                      $('#nopsw').empty();   
-                }              
-              }
-             
             }
-
-
             function register(){
               var usermail = document.getElementsByName("email")[0].value;
               var userpsw = document.getElementsByName("psw")[0].value;
@@ -81,14 +37,7 @@
                 }).then(function (response) { 
                     return response.json();
                 }).then(function (result) {
-                    //alert(JSON.stringify(result));
                     checkInput(result);
-                    if(result.noAffRow!=undefined){
-                      $('#alertDiv').append("<div class='alert alert-danger'> \
-                        "+result.noAffRow+" \
-                      </div> ");
-                      $('#form').reset();
-                    }
                     //se non ci sono stati errori allora:
                     if(result.ok!=undefined){
                       $('#regForm').html("<h1>"+result.ok+"</h1> \
@@ -110,38 +59,39 @@
     </head>
 
     <body class="text-center">
-    
+
     <main class="form-signin" id="regForm">
+    
       <form id="formRegister">
         <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
         
         <h1 class="h3 mb-3 fw-normal">Please register</h1>
-        <div id="alertDiv"></div>
+        <div class="container"id="alert"></div>
         <div class="form-floating">
-          <input type="text" class="form-control bg-error" id="fname" name="name" placeholder="Rino">
+          <input type="text" class="form-control bg-error" id="fname" name="name" placeholder="Rino" required>
           <p id="fnameErr" ></p>
           <label for="floatingInput" >Nome*</label>
         </div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="lname" name="surname" placeholder="Pape">
+          <input type="text" class="form-control" id="lname" name="surname" placeholder="Pape" required>
           <p id="lnameErr" ></p>
           <label for="floatingInput">Cognome*</label>
         </div>
 
         <div class="form-floating">
-          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
           <p id="emailErr" ></p>
           <label for="floatingInput">Email*</label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="psw" name="psw" placeholder="Password">
+          <input type="password" class="form-control" id="psw" name="psw" placeholder="Password" required>
           <p id="pswErr" ></p>
           <label for="floatingPassword">Password*</label>
         </div>
 
         <div class="form-floating">
-          <input type="password" class="form-control" id="cPsw" name="cPsw" placeholder="Re Password">
+          <input type="password" class="form-control" id="cPsw" name="cPsw" placeholder="Re Password" required>
           <p id="cPswErr" ></p>
           <label for="floatingPassword">Conferma password*</label>
         </div>
@@ -150,11 +100,11 @@
 
 
         <button type="submit" class="w-100 btn btn-lg btn-primary"> Registrati </button>
+        <a href="../index.php"> Torna alla home</a>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
         </form>
+
     </main>
-    
-    
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       </body>

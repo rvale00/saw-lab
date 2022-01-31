@@ -5,52 +5,29 @@
     include("../db/connect.php");
 
     $name = $surname = $email = $password = $cpassword = " ";
-    $err = array();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(empty($_POST["name"])){
-            $err += array("fname" => " e' necessario inserire il nome");
+        if(empty($_POST["name"]) || empty($_POST["surname"]) || empty($_POST["email"]) || empty($_POST["psw"]) || empty($_POST["cPsw"])){
+            echo json_encode(array("empty" => "Campi obbligatori vuoti."));
+            exit();
         }else{
             $name = $_POST["name"];
-        }
-
-        if(empty($_POST["surname"])){
-            $err += array("lname" =>" e' necessario inserire il cognome");
-        }else{
             $surname = $_POST["surname"];
-        }
-
-        if(empty($_POST["email"])){
-            $err += array("email" =>" e' necessario inserire l'email");
-        }else{
             $email = $_POST["email"];
-        }
-
-        if(empty($_POST["psw"])){
-            $err += array("psw" =>" e' necessario inserire una password");
-        }else{
             $password = $_POST["psw"];
-        }
-
-        if(empty($_POST["cPsw"])){
-            $err += array("cPsw" =>" e' necessario confermare la password");
-        }else{
             $cpassword = $_POST["cPsw"];
         }
 
         if($password != $cpassword){
-            $err += array("nopsw" =>" le password non corrispondono.");
-        }
-        if (!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
-            $err += array("email"=>"mail non valida");
-        }
-        
-        
-
-        //controlla se ci sono campi vuoti
-        if (!empty($err)){
-            echo json_encode($err);
+            echo json_encode(array("nopsw" =>" le password non corrispondono."));
+            mysqli_close($conn);
             exit();
         }
+        if (!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
+            echo json_encode(array("email"=>"mail non valida"));
+            mysqli_close($conn);
+            exit();
+        }
+        
 
         $conn = connectDB();
 
@@ -74,9 +51,8 @@
         mysqli_stmt_bind_param($stmt, 'ssss', $email,$hashedpsw,$name,$surname);
 
         if(!mysqli_stmt_execute($stmt)){
-            $err += array("email"=>"mail gia' usata");
+            echo json_encode(array("email"=>"mail gia' usata"));
             mysqli_close($conn);
-            echo json_encode($err);
             exit();
         }
 

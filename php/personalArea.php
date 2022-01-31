@@ -53,7 +53,7 @@
         <a href="../index.php"> Torna alla home</a>
         <a href='formCPass.php'> Cambia Password </a>
         <a href='formASpedizione.php'> Aggiungi indirizzo di spedizione </a>
-        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
         </form>
     </main>
     

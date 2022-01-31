@@ -3,7 +3,7 @@
     $password = $email = "";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["email"]) || empty($_POST["psw"])){
-            echo "<p>Missing data, retry</p>";
+            echo json_encode(array("empty"=>"Campi vuoti."));
             exit;
         }else{
             $email = $_POST["email"];
@@ -21,8 +21,7 @@
         $res=mysqli_stmt_get_result($stmt);
 
         if(!$res){
-            echo"query error: ". mysqli_error($conn);
-
+            echo json_encode(array("email"=>"mail gia' usata"));
             mysqli_close($conn);
             exit();
             
@@ -35,17 +34,21 @@
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['cart'] = array();
                 $_SESSION['logged'] = true; 
-                echo "logged";
+                echo json_encode(array("ok"=>"Accesso eseguito"));
                 
             }else{
-                echo "wrong cred";
+                echo json_encode(array("wCred"=>"Credenziali sbagliate"));
+                mysqli_close($conn);
+                exit();
             }
 
         }else{
-            echo "wrong cred";
+            echo json_encode(array("wCred"=>"Credenziali sbagliate"));
+            mysqli_close($conn);
+            exit();
         }
 
     }
-    
+    mysqli_close($conn);
 
 ?>

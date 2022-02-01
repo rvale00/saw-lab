@@ -4,33 +4,18 @@
     include("../db/connect.php");
 
     $oldpsw = $newpsw = $newcpsw = " ";
-    $err = array();
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(empty($_POST["old"])){
-            $err += array("old"=>"e' necessario inserire la vecchia password");
-            
+        if(empty($_POST["old"]) || empty($_POST["new"]) || empty($_POST["cnew"])){
+            echo json_encode( array("empty"=>"Campi obbligatori vuoti"));            
         }else{
             $oldpsw = $_POST["old"];
-        }
-        if(empty($_POST["new"])){
-            $err += array("new"=>"e' necessario inserire la password nuova");
-            
-        }else{
             $newpsw = $_POST["new"];
-        }
-        if(empty($_POST["cnew"])){
-            $err += array("cnew"=>"e' necessario confermare la password");
-            
-        }else{
             $newcpsw = $_POST["cnew"];
         }
         if($newpsw != $newcpsw){
-            $err += array("samepsw"=>"le password non coincidono");
+            echo json_encode( array("samepsw"=>"le password non coincidono"));
         }
-        if (!empty($err)){
-            echo json_encode($err);
-            exit();
-        }
+
 
         $conn = connectDB();
         

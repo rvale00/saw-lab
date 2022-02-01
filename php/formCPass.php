@@ -8,42 +8,14 @@
 
     <script>
             function checkPass(result){
-              if(result.old != undefined){
-                $('#old').css({ "border": '#FF0000 1px solid'});
-                $('#oldErr').html(result.old);
-               
-              }else{
-                $('#old').removeAttr("style");
-                $('#oldErr').empty();              
+              if(result.old != undefined || result.new != undefined || result.cpsw != undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");
               }
-              if(result.new != undefined){
-                $('#new').css({ "border": '#FF0000 1px solid'});
-                $('#newErr').html(result.old);
-               
-              }else{
-                $('#new').removeAttr("style");
-                $('#newErr').empty();              
-              }
-              if(result.cpsw != undefined){
-                $('#cnew').css({ "border": '#FF0000 1px solid'});
-                $('#cnewErr').html(result.new);
-               
-              }else{
-                $('#cnew').removeAttr("style");
-                $('#cnewErr').empty();
-
                 //se entrambi i campi hanno del contenuto confronto che siano uguali
-                if(result.samepsw != undefined){
-                      $('#new').css({ "border": '#FF0000 1px solid'});
-                      $('#cnew').css({ "border": '#FF0000 1px solid'});
-                      $('#samepswErr').html(result.samepsw);
-                      
-                }else{ 
-                      $('#new').removeAttr("style");
-                      $('#cnew').removeAttr("style");
-                      $('#samepswErr').empty();   
-                }              
+              if(result.samepsw != undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.samepsw+"</div>");
               }
+              
             }
             function cPsw(){
               var oldPsw = document.getElementsByName("old")[0].value;
@@ -59,17 +31,16 @@
                     //alert(JSON.stringify(result));
                     checkPass(result);
                     //alert(JSON.stringify(result));
-                    if(result.db1!=undefined){
-                      $('#alertDiv').append("<div class='alert alert-danger'> "+result.db1+" </div> ");
-                      $('#formAddr').reset();
-                    }
                     if(result.no!=undefined){
-                      $('#alertDiv').append("<div class='alert alert-danger'> "+result.no+" </div> ");
-                      $('#formAddr').reset();
+                      $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.no+"</div>");
                     }
+                    if(result.db1!=undefined){
+                      $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.db1+"</div>");
+                    }   
                     //se non ci sono stati errori allora:
                     if(result.ok!=undefined){
-                      $('#formAddr').html("<h1>"+result.ok+"</h1>");
+                      $('#cpassForm').html("<h1>"+result.ok+"</h1> \
+                                          <a class='btn btn-primary' href='../index.php'> Torna alla Home </a>");
                     }
                     
                 });
@@ -87,7 +58,7 @@
 
   <body class="text-center">
     
-    <main class="form-signin">
+    <main class="form-signin" id="cpassForm">
       <div id="alertDiv"></div>
       <form id="formAddr">
         <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">

@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-include("../../db/connect.php");
+include("../db/connect.php");
 //si controlla se l'utente ha inserito i dati di spedizione
 $ind = $_SESSION['ind'];
 if(empty($ind)){

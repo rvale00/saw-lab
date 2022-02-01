@@ -11,7 +11,7 @@
 <?php
     session_start();
     include ("layout/header.php");
-    include("../db/connect.php");
+    include("db/connect.php");
     ?>
     <div class='container w-auto p-3 text-center'>
     <form action="./listaArticoli.php" method="get" >

@@ -35,7 +35,7 @@
               var userfname = document.getElementsByName("name")[0].value;
               var userlname = document.getElementsByName("surname")[0].value;
               
-            fetch('register.php', {
+            fetch('API/register.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
                 body: "name="+ userfname+ "&surname="+ userlname + "&email=" 

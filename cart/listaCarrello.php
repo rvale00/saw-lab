@@ -45,7 +45,7 @@
             //header
             include ("../layout/header.php");
 
-            include("../../db/connect.php");
+            include("../db/connect.php");
 
             $conn = connectDB();
             $cartList = implode(',', array_keys($_SESSION['cart']));
@@ -97,7 +97,7 @@
                 }
             echo "</div>";    
             echo "</div>";
-                
+            echo "</div>";    
                 
                 mysqli_close($conn);
 

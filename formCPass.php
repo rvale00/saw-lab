@@ -21,7 +21,7 @@
               var oldPsw = document.getElementsByName("old")[0].value;
               var newPsw = document.getElementsByName("new")[0].value;
               var newCPsw = document.getElementsByName("cnew")[0].value;
-            fetch('cambiaPassword.php', {
+            fetch('API/cambiaPassword.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
                 body: "old=" + oldPsw + "&new=" + newPsw + "&cnew=" + newCPsw,

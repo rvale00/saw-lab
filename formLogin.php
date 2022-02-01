@@ -3,7 +3,7 @@
     <head lang="it">
         <title>Login form</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/form.css">
+        <link rel="stylesheet" href="css/form.css">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
     <script>
@@ -29,7 +29,7 @@
             function login(){
               var usermail = document.getElementsByName("email")[0].value;
               var userpsw = document.getElementsByName("psw")[0].value;
-            fetch('login.php', {
+            fetch('API/login.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
                 body: "email=" + usermail + "&psw=" + userpsw,
@@ -39,7 +39,7 @@
                     checkInput(result);
                     if(result.ok !=undefined)
                     $('#loginForm').html("<h1>"+result.ok+"</h1> \
-                                          <a class='btn btn-primary' href='../index.php'> Torna alla home </a>");
+                                          <a class='btn btn-primary' href='index.php'> Torna alla home </a>");
                     
                 });
             }

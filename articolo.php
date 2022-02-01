@@ -56,7 +56,7 @@
 <?php
     session_start();
     include ("layout/header.php");
-    include("../db/connect.php");
+    include("db/connect.php");
 
     $id = $_GET['id'];
 

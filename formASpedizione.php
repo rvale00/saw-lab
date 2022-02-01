@@ -76,7 +76,7 @@
               var citta = document.getElementsByName("citta")[0].value;
               var ind = document.getElementsByName("ind")[0].value;
               var cap = document.getElementsByName("cap")[0].value;
-            fetch('aggiungiSpedizione.php', {
+            fetch('API/aggiungiSpedizione.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
                 body: "reg=" + reg + "&citta=" + citta + "&indirizzo=" + ind + "&cap=" + cap,

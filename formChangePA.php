@@ -3,7 +3,7 @@
     <head lang="it">
         <title>Registration form</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/form.css">
+        <link rel="stylesheet" href="css/form.css">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
         <script>
@@ -21,7 +21,7 @@
               var userfname = document.getElementsByName("name")[0].value;
               var userlname = document.getElementsByName("surname")[0].value;
               
-            fetch('personalArea.php', {
+            fetch('API/personalArea.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
                 body: "name="+ userfname+ "&surname="+ userlname + "&email=" 
@@ -33,7 +33,7 @@
                     //se non ci sono stati errori allora:
                     if(result.ok!=undefined){
                       $('#credForm').html("<h1>"+result.ok+"</h1> \
-                                          <a class='btn btn-primary' href='../index.php'> Torna alla Home </a>");
+                                          <a class='btn btn-primary' href='index.php'> Torna alla Home </a>");
                     }
                     
                 });
@@ -54,7 +54,7 @@
 
             <?php
 
-                include("../db/connect.php");
+                include("db/connect.php");
                 session_start();
                 $conn = connectDB();
             

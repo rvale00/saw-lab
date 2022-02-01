@@ -5,13 +5,14 @@
         <title>Homepage</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link href="css/style.css" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/28ff0f2fac.js" crossorigin="anonymous"></script>
     </head>
     <body>
 
         <?php
             session_start();
             //header
-            include ("php/layout/header.php");
+            include ("layout/header.php");
         ?>
         
         
@@ -59,7 +60,7 @@
 
         <?php
             //footer
-            include ("php/layout/footer.php");
+            include ("layout/footer.php");
         ?>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

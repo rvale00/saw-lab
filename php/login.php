@@ -48,7 +48,7 @@
             mysqli_close($conn);
             exit();
         }
-
+        $_SESSION['ind'] = false;
         $conn = connectDB();       
         $stmt = mysqli_prepare($conn,"SELECT regione,citta,indirizzo,cap FROM indirizzo WHERE email=?");
         mysqli_stmt_bind_param($stmt, 's', $email);
@@ -57,7 +57,7 @@
         if(mysqli_num_rows($res) == 1){
             $row = mysqli_fetch_array($res);
             //torna true se l'utente ha inserito i dati di consegna, false altrimenti
-            $_SESSION['ind'] =(($row['regione'] != NULL) && ($row['citta'] != NULL) && ($row['indirizzo'] != NULL) && ($row['cap'] != NULL));
+            $_SESSION['ind'] = (($row['regione'] != NULL) && ($row['citta'] != NULL) && ($row['indirizzo'] != NULL) && ($row['cap'] != NULL));
         }
         else{
             echo json_encode(array("error"=>"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));

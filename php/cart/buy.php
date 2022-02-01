@@ -4,7 +4,7 @@ session_start();
 include("../../db/connect.php");
 //si controlla se l'utente ha inserito i dati di spedizione
 $ind = $_SESSION['ind'];
-if(!$ind){
+if(empty($ind)){
     echo json_encode(array("ind"=>"Non e' stato inserito l'indirizzo di consegna"));
     exit();
 }

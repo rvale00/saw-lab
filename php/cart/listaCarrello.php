@@ -11,7 +11,7 @@
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");     
               }
               if(result.ind != undefined){
-                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.ind+"</div>");     
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.ind+" <a class='btn btn-primary' href='../formASpedizione.php'> Aggiungi indirizzo </a> </div>");     
               }
             }
 
@@ -24,7 +24,7 @@
                     checkCart(result);
                     if(result.ok!=undefined){
                       $('#regForm').html("<h1>"+result.ok+"</h1> \
-                                          <a class='btn btn-primary' href='formLogin.php'> Accedi </a>");
+                                          <a class='btn btn-primary' href='../listaArticoli.php'> Continua gli acquisti </a>");
                     }
                 });
             }
@@ -62,7 +62,7 @@
 
             echo "<div id='cartList'>";
             echo "<h1> Carrello </h1>";
-            echo "<div class='container'id='alert></div>";
+            echo "<div class='container'id='alert'></div>";
                 if(!$result){
                     echo"query error";
 
@@ -89,12 +89,13 @@
                         
     
                     }
-                    echo "</div>";
-                    echo "</div>";
+                    
+
                 
                 echo"<button type='submit' class='w-100 btn btn-lg btn-primary'> Acquista </button>";
                 echo"</form></main>";
                 }
+            echo "</div>";    
             echo "</div>";
                 
                 

@@ -60,7 +60,6 @@
             $_SESSION['ind'] = (($row['regione'] != NULL) && ($row['citta'] != NULL) && ($row['indirizzo'] != NULL) && ($row['cap'] != NULL));
         }
         else{
-            echo json_encode(array("error"=>"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"));
             mysqli_close($conn);
             exit();
         }

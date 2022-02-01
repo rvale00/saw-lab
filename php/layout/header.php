@@ -28,31 +28,18 @@
                      }
 
                   ?>
-
-                  <li class="navtem dropdown">
-                    <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <?php
                       if(isset($_SESSION['logged'])){
                         echo "<a class='nav-link' href='/saw-lab/php/cart/listaCarrello.php'>Cart</a>";
                         echo "<a class='nav-link' href='/saw-lab/php/formChangePA.php'>".$_SESSION['nome']."</a>";
-                        echo "<a class='nav-link' >".$_SESSION['ind']."</a>";
                         echo "<a class='nav-link' href='/saw-lab/php/logout.php'>Logout</a>";
                       }
                     ?>
                 </form>
               </div>
 
-              <form action="./listaArticoli.php" method="get" class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="src">        
-                <button type="submit" class="btn btn-outline-warning">Search</button>
-              </form>
+
         </nav>
 </header>

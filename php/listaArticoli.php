@@ -12,8 +12,14 @@
     session_start();
     include ("layout/header.php");
     include("../db/connect.php");
-
-    
+    ?>
+    <div class='container w-auto p-3 text-center'>
+    <form action="./listaArticoli.php" method="get" >
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="src">        
+      <button type="submit" class="btn btn-warning px-5">Search</button>
+    </form>
+    </div>
+    <?php
     $conn = connectDB();
 
     if(isset($_GET['src'])){

@@ -11,7 +11,7 @@
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");     
               }
               if(result.ind != undefined){
-                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.ind+" <a class='btn btn-primary' href='../formASpedizione.php'> Aggiungi indirizzo </a> </div>");     
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.ind+" <a href='../formASpedizione.php'> Aggiungi indirizzo </a> </div>");     
               }
             }
 

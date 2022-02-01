@@ -1,0 +1,12 @@
+#showComments{
+    word-wrap: break-word;
+    overflow-y:scroll;
+    max-height:400px;
+}
+
+.text2 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 6px;
+    color: red;
+};

@@ -5,6 +5,7 @@
         <title>Carrello</title>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://kit.fontawesome.com/28ff0f2fac.js" crossorigin="anonymous"></script>
         <script>
             function checkCart(result){
               if(result.error != undefined){
@@ -83,6 +84,7 @@
                                     echo"<p class='card-text'>".$row['Descrizione']."</p>";
                                     echo"<p class='card-text'>€".$row['prezzo']."</p>";
                                     echo"<p class='card-text'>Qta: ". $_SESSION['cart'][$row['IdArticolo']] ."</p>";
+                                    echo"<a href='removeFromCart.php?id=".$row['IdArticolo']."' class='btn btn-primary'> Rimuovi articolo </a>";
                                 echo"</div>";
                             echo"</div>";
                         echo"</div>";
@@ -92,7 +94,7 @@
                     
 
                 
-                echo"<button type='submit' class='w-100 btn btn-lg btn-primary'> Acquista </button>";
+                echo"<button type='submit' class='w-100 btn btn-lg btn-primary'> Acquista </button>";   
                 echo"</form></main>";
                 }
             echo "</div>";    

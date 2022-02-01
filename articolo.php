@@ -4,10 +4,10 @@
     <title>Articolo</title>
     <meta charset='utf-8'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/articolo.css" rel="stylesheet">
     <script src="https://cdn.tiny.cloud/1/iusuolbl4ctvv7k1e66puug9agp3qz3xonjoyqj7lzeujzp8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        
+    <script src="https://kit.fontawesome.com/28ff0f2fac.js" crossorigin="anonymous"></script>   
     <script>
             function sendComment(){
               var valutazione = document.getElementsByName("v")[0].value;
@@ -34,21 +34,7 @@
 
     </script>
 
-    <style>
-        #showComments{
-            word-wrap: break-word;
-            overflow-y:scroll;
-            max-height:400px;
-        }
-
-        .text2 {
-            font-size: 13px;
-            font-weight: 500;
-            margin-left: 6px;
-            color: red;
-        };
-    </style>
-
+    
 </head>
 
 <body>

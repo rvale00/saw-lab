@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="css/form.css">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-
+        <script src="https://kit.fontawesome.com/28ff0f2fac.js" crossorigin="anonymous"></script>
         <script>
             function checkInput(result){
               
@@ -90,7 +90,7 @@
 
         
         <button type="submit" class="w-100 btn btn-lg btn-primary"> Conferma modifiche </button>
-        <a href="../index.php"> Torna alla home</a>
+        <a href="index.php"> Torna alla home</a>
         <a href='formCPass.php'> Cambia Password </a>
         <a href='formASpedizione.php'> Aggiungi indirizzo di spedizione </a>
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>

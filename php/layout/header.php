@@ -43,7 +43,6 @@
                       if(isset($_SESSION['logged'])){
                         echo "<a class='nav-link' href='/saw-lab/php/cart/listaCarrello.php'>Cart</a>";
                         echo "<a class='nav-link' href='/saw-lab/php/formChangePA.php'>".$_SESSION['nome']."</a>";
-                        echo "<a class='nav-link' >".$_SESSION['ind']."</a>";
                         echo "<a class='nav-link' href='/saw-lab/php/logout.php'>Logout</a>";
                       }
                     ?>

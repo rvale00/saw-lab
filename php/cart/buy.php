@@ -2,10 +2,14 @@
 session_start();
 
 include("../../db/connect.php");
-$conn = connectDB();
 //si controlla se l'utente ha inserito i dati di spedizione
-
+$ind = $_SESSION['ind'];
+if(!$ind){
+    echo json_encode(array("ind"=>"Non e' stato inserito l'indirizzo di consegna"));
+    exit();
+}
 //si effettua l'acquisto
+$conn = connectDB();
 foreach ($_SESSION['cart'] as $artId => $qta) {
     $stmt = mysqli_prepare($conn,"INSERT INTO compra (idArticolo,email,quantita,dataOra) VALUES (?,?,?,NOW())");
     mysqli_stmt_bind_param($stmt, 'ssi', $artId,$_SESSION['email'],$qta);

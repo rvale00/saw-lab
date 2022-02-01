@@ -21,6 +21,9 @@
               if(result.wCred!=undefined){
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.wCred+"</div>");
               }
+              if(result.wCred!=undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.wCred+"</div>");
+              }
             }
 
             function login(){
@@ -33,7 +36,6 @@
                 }).then(function (response) { 
                     return response.json();
                 }).then(function (result) {
-                    alert(JSON.stringify(result));
                     checkInput(result);
                     if(result.ok !=undefined)
                     $('#loginForm').html("<h1>"+result.ok+"</h1> \

@@ -43,7 +43,8 @@
             mysqli_close($conn);
             exit();   
         }
-
+        
+        $_SESSION['ind'] = true;
         echo json_encode(array("ok"=>"Indirizzo di consegna aggiunto!"));
        
         mysqli_close($conn);

@@ -3,8 +3,8 @@
     function connectDB(){
         $hostname="localhost";
         $user="root";
-        //$psw="turbofregna";
-        $psw="piediculo";
+        $psw="turbofregna";
+        //$psw="piediculo";
         $db="startSaw";
         
         $mysqli = mysqli_connect($hostname,$user,$psw,$db);
@@ -14,4 +14,6 @@
         }
         return $mysqli;
     }
+
+
 ?>

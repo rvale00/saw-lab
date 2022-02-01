@@ -14,17 +14,18 @@
               }
               if(result.email != undefined){
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.email+"</div>");
-              }   
+              }
+              if(result.error != undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.error+"</div>");
+              }      
               if(result.wCred!=undefined){
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.wCred+"</div>");
               }
             }
 
             function login(){
-              console.log("Asdasdasdasdasdasdsa");
               var usermail = document.getElementsByName("email")[0].value;
               var userpsw = document.getElementsByName("psw")[0].value;
-              console.log(userpsw);
             fetch('login.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
@@ -32,6 +33,7 @@
                 }).then(function (response) { 
                     return response.json();
                 }).then(function (result) {
+                    alert(JSON.stringify(result));
                     checkInput(result);
                     if(result.ok !=undefined)
                     $('#loginForm').html("<h1>"+result.ok+"</h1> \

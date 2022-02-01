@@ -48,7 +48,7 @@
 
         </script>
     </head>
-    <body>
+    <body class="text-center">
         <main class="form-signin" id="credForm">
         <form id="cCredForm">
 

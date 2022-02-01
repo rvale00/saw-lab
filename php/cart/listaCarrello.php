@@ -5,15 +5,18 @@
         <title>Carrello</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script>
+            function checkCart(response){
+
+            }
+
             function buyCart(){
             fetch('buy.php', {
                 method: "post", 
                 }).then(function (response) { 
-                    console.log(response.statusText);
-                    return response.text();
+                    return response.json();
                 }).then(function (result) {
-                    alert(result);
-                    document.getElementById('cartList').innerHTML = "<h1>Acquistato con successo</h1> \
+                    checkCart(response);
+                    document.getElementById('cartList').innerHTML = "<h1>"+result.ok+"</h1> \
                                                                      <a class='btn btn-primary' href='../../index.php'> Torna alla home </a>";
                 });
             }

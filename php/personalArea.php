@@ -17,16 +17,17 @@
         mysqli_real_escape_string($conn, $name);
         mysqli_real_escape_string($conn, $surname);
         mysqli_real_escape_string($conn, $email);
-        $query = "UPDATE utenti SET email='".$email."',_name='".$name."', _surname='".$surname."' WHERE email='$emailSession' ;";
-        $res = mysqli_query($conn, $query);
-        $_SESSION['email'] = $email; 
-        if(!$res){
-            echo json_encode(array("error"=> mysqli_error($conn)));
-
+        $stmt = mysqli_prepare($conn,"UPDATE utenti SET email=?,_name=?, _surname=? WHERE email=?");
+        mysqli_stmt_bind_param($stmt, 'ssss', $email,$name,$surname,$emailSession);
+        mysqli_stmt_execute($stmt); 
+        $res=mysqli_stmt_get_result($stmt);
+        if(mysqli_affected_rows($conn) === 0){
+            echo json_encode(array("error"=>"errore"));
             mysqli_close($conn);
             exit();
             
         }
+        $_SESSION['email'] = $email; //aggiorna la sessione
         echo json_encode(array("ok"=>"Aggiornato con successo"));
         mysqli_close($conn);
     }

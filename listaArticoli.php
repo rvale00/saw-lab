@@ -61,7 +61,7 @@
                                 echo"<h4 class='card-title'>".$row['Titolo']."</h4>";
                                 echo"<p class='card-text'>".$row['Descrizione']."</p>";
                                 echo"<p class='card-text'>€".$row['prezzo']."</p>";
-                                echo"<a href='articolo.php?id=".$row['IdArticolo']."' class='btn btn-primary'>See Profile</a>";
+                                echo"<a href='articolo.php?id=".$row['IdArticolo']."' class='btn btn-primary'>Visualizza</a>";
                             echo"</div>";
                         echo"</div>";
                     echo"</div>";

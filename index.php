@@ -29,32 +29,49 @@
 
             
             <div class="container w-auto p-3 text-center">
-                <div class="row">
-                    <div class="col-6 my-6">
-                        <div class="card" style="width:400px">
-                            <img class="card-img-top" src="img/quack.png" alt="Card image" style="width:100%">
-                            <div class="card-body">
-                            <h4 class="card-title">John Doe</h4>
-                            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                            <a href="php/articolo.php?id=1" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>
-                    </div>
+                <?php
+                    include("db/connect.php");
+                    $conn = connectDB();
+                    $stmt = mysqli_prepare($conn,"SELECT * FROM articoli ORDER BY idArticolo DESC LIMIT 2 ");
+                    mysqli_stmt_execute($stmt);
+                    $result = mysqli_stmt_get_result($stmt);
 
-                    <div class="col-6 my-6">
-                        <div class="card" style="width:400px">
-                            <img class="card-img-top" src="img/quack.png" alt="Card image" style="width:100%">
-                            <div class="card-body">
-                            <h4 class="card-title">John Doe</h4>
-                            <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-                            <a href="php/articolo.php?id=1" class="btn btn-primary">See Profile</a>
-                            </div>
-                        </div>                    
-                    </div>
+                    if(!$result){
+                        echo"query error";
+                    
+                        mysqli_close($conn);
+                        exit();
 
+                    }else {
+                        if(mysqli_num_rows($result) == 0){
+                            echo"<p> Nessun risultato per <b>".$_GET['src']."</b></p>";
+                            mysqli_close($conn);
+                            exit();
+                        }
 
+                        echo "<div class='container w-auto p-3 text-center'>";
+                            echo "<div class='row'>";
+                        while($row = mysqli_fetch_array($result)){
+                                echo "<div class='col-6 my-6'>";
+                                    echo "<div class='card' style='width:400px'>";
+                                    printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
+                                        echo"<div class='card-body'>";
+                                            echo"<h4 class='card-title'>".$row['Titolo']."</h4>";
+                                            echo"<p class='card-text'>".$row['Descrizione']."</p>";
+                                            echo"<p class='card-text'>€".$row['prezzo']."</p>";
+                                            echo"<a href='articolo.php?id=".$row['IdArticolo']."' class='btn btn-primary'>Visualizza</a>";
+                                        echo"</div>";
+                                    echo"</div>";
+                                echo"</div>";
+                        
+                        }
+                        echo"</div>";
+                        echo"</div>";
+                    
+                    }
 
-                </div>
+                    mysqli_close($conn);
+                ?>
             </div>
          </main>
 

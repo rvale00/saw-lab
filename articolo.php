@@ -9,19 +9,29 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/28ff0f2fac.js" crossorigin="anonymous"></script>   
     <script>
+
+            function checkInput(result){
+              
+              if(result.error != undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.error+"</div>");     
+              }
+              if(result.ok != undefined){
+                $("#alert").html("<div class='alert alert-success' role='alert'>"+result.ok+"</div>");
+              }
+            }
+
             function sendComment(){
               var valutazione = document.getElementsByName("v")[0].value;
               var commento = document.getElementsByName("comment")[0].value;
               var idArt = document.getElementsByName("id")[0].value;
-            fetch('commento.php', {
+            fetch('API/commento.php', {
                 method: "post",
                 headers: { "Content-type": "application/x-www-form-urlencoded" },
                 body: "valutazione=" + valutazione + "&commento=" + commento + "&id=" + idArt,
                 }).then(function (response) { 
-                    console.log(response.statusText);
-                    return response.text();
+                    return response.json();
                 }).then(function (result) {
-                    alert(result);
+                    checkInput(result);
                 });
             }
 
@@ -62,7 +72,8 @@
         }else {
 
             $row = mysqli_fetch_array($result);
-            echo "<div class='container w-auto p-3'>\n";
+            echo "<div class='container w-auto p-3'>\n
+            <div class='container' id='alert'></div>";
                 echo "\t<div class='row'>\n";
                     echo "\t\t<div class='col-6 my-6'>\n";
                         echo "\t\t\t<h1>".$row['Titolo']."</h1>\n";
@@ -81,9 +92,9 @@
                         echo "<input type='hidden' name='id' value='".$id."'>\n";
 
                         if(!(isset($_SESSION['logged'])))
-                            echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'> Add to cart</button>\n";
+                            echo "<button type='button' class='btn btn-primary' data-toggle='modal' data-target='#myModal'> Aggiungi al carrello</button>\n";
                         else
-                            echo"<button type='submit' href='cart/addInCart.php?id=".$_GET['id']."' class='btn btn-primary'>Add to cart</button>\n";
+                            echo"<button type='submit' href='cart/addInCart.php?id=".$_GET['id']."' class='btn btn-primary'>Aggiungi al carrello</button>\n";
                         echo "</form>\n";
                     echo "</div>";
 

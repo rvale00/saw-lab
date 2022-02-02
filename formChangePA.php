@@ -48,14 +48,19 @@
 
         </script>
     </head>
+    
     <body class="text-center">
+    <?php
+      include("utilPHP/private.php");
+    ?>
         <main class="form-signin" id="credForm">
+
         <form id="cCredForm">
 
             <?php
 
                 include("db/connect.php");
-                session_start();
+                //session_start();
                 $conn = connectDB();
             
                 $emailSession=$_SESSION['email'];

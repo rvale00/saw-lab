@@ -27,7 +27,9 @@
             exit();
             
         }
-        $_SESSION['email'] = $email; //aggiorna la sessione
+        //si aggiornano le variabili di sessione
+        $_SESSION['email'] = $email;
+        $_SESSION['nome'] = $name;
         echo json_encode(array("ok"=>"Aggiornato con successo"));
         mysqli_close($conn);
     }

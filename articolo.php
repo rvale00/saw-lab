@@ -8,20 +8,33 @@
     <script src="https://cdn.tiny.cloud/1/iusuolbl4ctvv7k1e66puug9agp3qz3xonjoyqj7lzeujzp8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/28ff0f2fac.js" crossorigin="anonymous"></script>   
+
+    <!-- default styles -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all" rel="stylesheet" type="text/css" />
+
+<!-- with v4.1.0 Krajee SVG theme is used as default (and must be loaded as below) - include any of the other theme CSS files as mentioned below (and change the theme property of the plugin) -->
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all" rel="stylesheet" type="text/css" />
+
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js" type="text/javascript"></script>
+
+<!-- with v4.1.0 Krajee SVG theme is used as default (and must be loaded as below) - include any of the other theme JS files as mentioned below (and change the theme property of the plugin) -->
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.js"></script>
+
+
     <script>
 
             function checkInput(result){
               
               if(result.error != undefined){
-                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.error+"</div>");     
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.error+"</div>");
+                return;
               }
-              if(result.ok != undefined){
-                $("#alert").html("<div class='alert alert-success' role='alert'>"+result.ok+"</div>");
-              }
+
             }
 
             function sendComment(){
-              var valutazione = document.getElementsByName("v")[0].value;
+              var valutazione = $("#input-id").val();
               var commento = document.getElementsByName("comment")[0].value;
               var idArt = document.getElementsByName("id")[0].value;
             fetch('API/commento.php', {
@@ -32,6 +45,10 @@
                     return response.json();
                 }).then(function (result) {
                     checkInput(result);
+                    
+                    if(result.ok != undefined){
+                        window.location.reload();
+                    }
                 });
             }
 
@@ -117,13 +134,7 @@
 
                             echo "<h1>compra il prodotto</h1>";
                             echo "<form id='commento'>";
-                            echo "   <h4><select name='v' id='v'>";
-                            echo "       <option value='1'>1</option>";
-                            echo "       <option value='2'>2</option>";
-                            echo "       <option value='3'>3</option>";
-                            echo "       <option value='4'>4</option>";
-                            echo "       <option value='5'>5</option>";
-                            echo "    </select>  / 5 </h4>";
+                            echo "<input id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >";
                             
                             echo "   <textarea name='comment'>";
                             echo "       Inserisci qui il tuo commento";

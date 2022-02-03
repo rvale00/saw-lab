@@ -53,6 +53,7 @@
             }
 
             $(document).ready(function(){
+                $('.valStar').rating({displayOnly: true, step: 1});
                 $("#commento").submit(function(e){
                     e.preventDefault();
                     sendComment();
@@ -134,7 +135,7 @@
 
                             echo "<h3>Valuta il prodotto</h3>";
                             echo "<form id='commento'>";
-                            echo "<input id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >";
+                            echo "<input  data-show-clear='false' data-show-caption='true' id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >";
                             
                             echo "   <textarea name='comment'>";
                             echo "       Inserisci qui il tuo commento";
@@ -142,8 +143,6 @@
                             echo "   <script>";
                             echo"       tinymce.init({
                                        selector: 'textarea',
-                                       //plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
-                                       //toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
                                        toolbar_mode: 'floating',
                                        tinycomments_mode: 'embedded',
                                        tinycomments_author: 'Author name',
@@ -182,7 +181,7 @@
                                     echo"
                                     <div>
                                     <hr>
-                                    <h4 class='second py-2 px-2'>".$row['valutazione']."/5</h4>
+                                    <input data-size='sm' value='".$row['valutazione']."' class='valStar'>
                                     <p id='showComments' class='second py-2 px-2'>".$row['commento']."</p>
                                     <span class='text2'>Da: ".$row['_name']."</span>
                                     <hr>

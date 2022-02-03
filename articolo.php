@@ -96,7 +96,7 @@
                         echo "\t\t\t<h1>".$row['Titolo']."</h1>\n";
                         echo "<br>";
                         echo "<p>".$row['Descrizione']."</p>";
-                        printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
+                        echo "<img src='".$row['Immagine']."'>" ;
                         echo "<p>".$row['prezzo']."</p>";
                         echo"<br>";
 
@@ -132,7 +132,7 @@
                         if(mysqli_num_rows($result) > 0){
                     
 
-                            echo "<h1>compra il prodotto</h1>";
+                            echo "<h3>Valuta il prodotto</h3>";
                             echo "<form id='commento'>";
                             echo "<input id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >";
                             
@@ -153,7 +153,8 @@
                             echo "   </form>";
                         }
                     }
-
+                    echo "<div>";
+                    echo "<h3> Valutazioni e commenti:</h3>";
                     //mostra recensioni sull'articolo
                     $stmt = mysqli_prepare($conn,"SELECT DISTINCT commento, valutazione, _name FROM compra NATURAL JOIN utenti WHERE IdArticolo = ?");
                     mysqli_stmt_bind_param($stmt, 's', $id);
@@ -166,13 +167,21 @@
                         exit();
                         
                     }
+                    if(mysqli_num_rows($result) == 0){
+                        echo"
+                        <div>
+                        <small class='second py-2 px-2 text-muted'> Non ci sono commenti per questo articolo </small>
+                        </div>
+                        ";
+                    }
+
                     echo "<div id='showComments' class='container mt-5 border-left border-right overflow-auto'>";
 
                         while($row = mysqli_fetch_array($result)){
                                 if($row['valutazione']!=''){
                                     echo"
                                     <div>
-                                    
+                                    <hr>
                                     <h4 class='second py-2 px-2'>".$row['valutazione']."/5</h4>
                                     <p id='showComments' class='second py-2 px-2'>".$row['commento']."</p>
                                     <span class='text2'>Da: ".$row['_name']."</span>
@@ -183,7 +192,7 @@
                         }
                     
                     echo"</div>";
-
+                    echo"</div>";
                     
 
                     echo "</div>";

@@ -51,6 +51,9 @@
     </head>
 
   <body class="text-center">
+  <?php
+      include("utilPHP/private.php");
+  ?>
     
     <main class="form-signin" id="spedForm">
     <form id="formAddr">

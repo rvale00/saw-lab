@@ -31,10 +31,6 @@
 
         $conn = connectDB();
 
-        if($conn){
-
-        }
-
         
         mysqli_real_escape_string($conn, $name);
         $name=trim($name);

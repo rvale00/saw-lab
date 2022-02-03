@@ -56,7 +56,7 @@
             while($row = mysqli_fetch_array($result)){
                     echo "<div class='col-6 my-6'>";
                         echo "<div class='card' style='width:400px'>";
-                        printf('<img src="data:image/png;base64,%s" />', $row['Immagine']);
+                        echo "<img src='".$row['Immagine']."'>";
                             echo"<div class='card-body'>";
                                 echo"<h4 class='card-title'>".$row['Titolo']."</h4>";
                                 echo"<p class='card-text'>".$row['Descrizione']."</p>";

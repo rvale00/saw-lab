@@ -57,6 +57,9 @@
     </head>
 
   <body class="text-center">
+    <?php
+      include("utilPHP/private.php");
+    ?>
     
     <main class="form-signin" id="cpassForm">
       <div id="alertDiv"></div>

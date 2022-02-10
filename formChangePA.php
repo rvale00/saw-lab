@@ -64,7 +64,7 @@
                 $conn = connectDB();
             
                 $emailSession=$_SESSION['email'];
-                $query = "SELECT * FROM utenti WHERE email='$emailSession'";
+                $query = "SELECT * FROM utente WHERE email='$emailSession'";
                 $res = mysqli_query($conn, $query);
                 if(!$res){
                     echo"query error: ". mysqli_error($conn);
@@ -79,17 +79,17 @@
         <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
         <div class="container"id="alert"></div>
         <div class="form-floating">
-          <input type="text" class="form-control" type="text" id="fname" name="name" value=" <?php echo $row['_name'] ?>">
+          <input type="text" class="form-control" type="text" id="fname" name="name" value=" <?php echo htmlspecialchars($row['_name']) ?>">
           <label for="floatingInput">Nome</label>
         </div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="lname" name="surname" value="<?php echo $row['_surname'] ?>">
+          <input type="text" class="form-control" id="lname" name="surname" value="<?php echo htmlspecialchars($row['_surname']) ?>">
           <label for="floatingInput">Cognome</label>
         </div>
 
         <div class="form-floating">
-          <input type="email" class="form-control" id="email" name="email" value="<?php echo $row['email'] ?>">
+          <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($row['email']) ?>">
           <label for="floatingInput">Email </label>
         </div>
 

@@ -28,6 +28,9 @@
               if(result.noPsw!=undefined){
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.noPsw+"</div>");
               }
+              if(result.error!=undefined){
+                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.error+"</div>");
+              }
             }
             function register(){
               var usermail = document.getElementsByName("email")[0].value;
@@ -75,30 +78,30 @@
         <h1 class="h3 mb-3 fw-normal">Please register</h1>
         <div class="container"id="alert"></div>
         <div class="form-floating">
-          <input type="text" class="form-control bg-error" id="fname" name="name" placeholder="Rino" >
+          <input type="text" class="form-control bg-error" id="fname" name="name" placeholder="Rino" required>
           
           <label for="floatingInput" >Nome*</label>
         </div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="lname" name="surname" placeholder="Pape" >
+          <input type="text" class="form-control" id="lname" name="surname" placeholder="Pape" required>
          
           <label for="floatingInput">Cognome*</label>
         </div>
 
         <div class="form-floating">
-          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" >
+          <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
          
           <label for="floatingInput">Email*</label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="psw" name="psw" placeholder="Password" >
+          <input type="password" class="form-control" minlength="12" id="psw" name="psw" placeholder="Password"  required>
          
           <label for="floatingPassword">Password*</label>
         </div>
 
         <div class="form-floating">
-          <input type="password" class="form-control" id="cPsw" name="cPsw" placeholder="Re Password" >
+          <input type="password" class="form-control" minlength="12" id="cPsw" name="cPsw" placeholder="Re Password"  required>
   
           <label for="floatingPassword">Conferma password*</label>
         </div>

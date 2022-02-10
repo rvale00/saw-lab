@@ -12,7 +12,7 @@
                 $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");     
               }
               if(result.ind != undefined){
-                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.ind+" <a href='../formASpedizione.php'> Aggiungi indirizzo </a> </div>");     
+                $("#alert").html("<div class='alert alert-warning' role='alert'>"+result.ind+" <a href='../formASpedizione.php'> Aggiungi indirizzo </a> </div>");     
               }
             }
 
@@ -57,7 +57,7 @@
                 exit();
             }
             $art = str_repeat('?,', count(array_keys($_SESSION['cart'])) - 1) . '?';
-            $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE IdArticolo IN ($art)");
+            $stmt = mysqli_prepare($conn,"SELECT * FROM articolo WHERE IdArticolo IN ($art)");
             $types = str_repeat('s', count(array_keys($_SESSION['cart'])));
             mysqli_stmt_bind_param($stmt, $types, ...array_keys($_SESSION['cart']));
             mysqli_stmt_execute($stmt); 

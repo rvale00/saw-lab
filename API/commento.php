@@ -4,8 +4,8 @@
         session_start();
         $conn = connectDB();
 
-        $stmt = mysqli_prepare($conn,"UPDATE compra SET valutazione = ?, commento = ? WHERE IdArticolo=? AND email=?; ");
-        mysqli_stmt_bind_param($stmt, 'isss', $_POST['valutazione'], $_POST['commento'], $_POST['id'] ,$_SESSION['email'] );
+        $stmt = mysqli_prepare($conn,"INSERT INTO valuta (email,IdArticolo,valutazione,commento) VALUES (?,?,?,?); ");
+        mysqli_stmt_bind_param($stmt, 'siis',$_SESSION['email'],  $_POST['id'] ,$_POST['valutazione'], $_POST['commento'] );
         mysqli_stmt_execute($stmt); 
         if(mysqli_affected_rows($conn) === 0){
             echo json_encode(array("error"=>"errore"));

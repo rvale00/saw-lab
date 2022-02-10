@@ -32,7 +32,7 @@
                 <?php
                     include("db/connect.php");
                     $conn = connectDB();
-                    $stmt = mysqli_prepare($conn,"SELECT * FROM articoli ORDER BY idArticolo DESC LIMIT 2 ");
+                    $stmt = mysqli_prepare($conn,"SELECT * FROM articolo ORDER BY idArticolo DESC LIMIT 2 ");
                     mysqli_stmt_execute($stmt);
                     $result = mysqli_stmt_get_result($stmt);
 
@@ -43,11 +43,6 @@
                         exit();
 
                     }else {
-                        if(mysqli_num_rows($result) == 0){
-                            echo"<p> Nessun risultato per <b>".$_GET['src']."</b></p>";
-                            mysqli_close($conn);
-                            exit();
-                        }
 
                         echo "<div class='container w-auto p-3 text-center'>";
                             echo "<div class='row'>";

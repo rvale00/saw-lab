@@ -31,23 +31,17 @@
 
         $conn = connectDB();
 
-        
-        mysqli_real_escape_string($conn, $name);
         $name=trim($name);
-        //$newname = filter_var($name, FILTER_SANITIZE_STRING);
-
-        mysqli_real_escape_string($conn, $surname);
         $surname=trim($surname);
-        //$newsname = filter_var($surname, FILTER_SANITIZE_STRING);
+        if(strlen($password)<=12){
+            echo json_encode(array("error"=>"La password deve essere lunga almeno 12 caratteri"));
+            mysqli_close($conn);
+            exit();
+        }
 
-
-        mysqli_real_escape_string($conn, $email);
-        $password = trim($password);
-        
-        
         $hashedpsw = password_hash($password,PASSWORD_DEFAULT);
 
-        $stmt = mysqli_prepare($conn,"INSERT INTO utenti (email,psw,_name,_surname) VALUES (?,?,?,?)");
+        $stmt = mysqli_prepare($conn,"INSERT INTO utente (email,psw,_name,_surname) VALUES (?,?,?,?)");
         mysqli_stmt_bind_param($stmt, 'ssss', $email,$hashedpsw,$name,$surname);
 
         if(!mysqli_stmt_execute($stmt)){

@@ -24,7 +24,7 @@
     $conn = connectDB();
 
     if(isset($_GET['src'])){
-        $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE Titolo LIKE ?");
+        $stmt = mysqli_prepare($conn,"SELECT * FROM articolo WHERE Titolo LIKE ?");
         $get="%{$_GET['src']}%";
         mysqli_stmt_bind_param($stmt, 's', $get);
         mysqli_stmt_execute($stmt);
@@ -32,7 +32,7 @@
     }
     
     else{
-        $stmt = mysqli_prepare($conn,"SELECT * FROM articoli");
+        $stmt = mysqli_prepare($conn,"SELECT * FROM articolo");
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
 
@@ -45,13 +45,12 @@
             exit();
             
         }else {
-            if(mysqli_num_rows($result) == 0){
-                echo"<p> Nessun risultato per <b>".$_GET['src']."</b></p>";
-                mysqli_close($conn);
-                exit();
-            }
-                
             echo "<div class='container w-auto p-3 text-center'>";
+            if(mysqli_num_rows($result) == 0){
+                echo"<h2> Non ci sono articoli :( </h2>";
+            }else{
+                
+            
                 echo "<div class='row'>";
             while($row = mysqli_fetch_array($result)){
                     echo "<div class='col-6 my-6'>";
@@ -68,6 +67,7 @@
 
             }
             echo"</div>";
+            }
             echo"</div>";
 
         }

@@ -14,10 +14,8 @@
             $email = $_POST["email"];
         }
         $emailSession = $_SESSION['email'] ;
-        mysqli_real_escape_string($conn, $name);
-        mysqli_real_escape_string($conn, $surname);
-        mysqli_real_escape_string($conn, $email);
-        $stmt = mysqli_prepare($conn,"UPDATE utenti SET email=?,_name=?, _surname=? WHERE email=?");
+
+        $stmt = mysqli_prepare($conn,"UPDATE utente SET email=?,_name=?, _surname=? WHERE email=?");
         mysqli_stmt_bind_param($stmt, 'ssss', $email,$name,$surname,$emailSession);
         mysqli_stmt_execute($stmt); 
         $res=mysqli_stmt_get_result($stmt);

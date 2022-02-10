@@ -22,7 +22,7 @@
         session_start();
 
         //prendiamo la vecchia password dell'utente
-        $stmt = mysqli_prepare($conn,"SELECT psw FROM utenti WHERE email = ?;");
+        $stmt = mysqli_prepare($conn,"SELECT psw FROM utente WHERE email = ?;");
         mysqli_stmt_bind_param($stmt, 's', $_SESSION['email'] );
         mysqli_stmt_execute($stmt); 
         $result=mysqli_stmt_get_result($stmt);
@@ -43,7 +43,7 @@
             $newhashedpsw = password_hash($newpsw,PASSWORD_DEFAULT);
 
             //se la vecchia password inserita corrisponde a quella salvata sul db allora la aggiorniamo
-            $stmt = mysqli_prepare($conn,"UPDATE utenti SET psw = ? WHERE email= ?; ");
+            $stmt = mysqli_prepare($conn,"UPDATE utente SET psw = ? WHERE email= ?; ");
             mysqli_stmt_bind_param($stmt, 'ss', $newhashedpsw,$_SESSION['email']);
 
             mysqli_stmt_execute($stmt);

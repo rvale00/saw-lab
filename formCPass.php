@@ -28,9 +28,8 @@
                 }).then(function (response) { 
                     return response.json();
                 }).then(function (result) {
-                    //alert(JSON.stringify(result));
+
                     checkPass(result);
-                    //alert(JSON.stringify(result));
                     if(result.no!=undefined){
                       $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.no+"</div>");
                     }
@@ -68,19 +67,19 @@
         <h1 class="h3 mb-3 fw-normal">Cambia password</h1>
 
         <div class="form-floating"  id="floatingPassword">
-        <input type="password" class="form-control"  id="old" name="old" placeholder="Password">
+        <input type="password" class="form-control"  id="old" name="old" placeholder="Password" required>
         <p id="oldErr"></p>  
         <label for="floatingInput">Password attuale</label>
         </div>
     
         <div class="form-floating"  id="floatingPassword">
-        <input type="password" class="form-control" id="new" name="new" placeholder="Password">
+        <input type="password" class="form-control" id="new" name="new" placeholder="Password" pattern="{12}" title="La password deve contenere 12 caratteri." required>
         <p id="newErr" ></p>
         <label for="floatingInput">Nuova password</label>
         </div>
         <div class="form-floating"  id="floatingPassword">
         <p id="cnewErr" ></p>
-        <input type="password" class="form-control" id="cnew" name="cnew" placeholder="Password">
+        <input type="password" class="form-control" id="cnew" name="cnew" placeholder="Password" pattern="{12}" title="La password deve contenere 12 caratteri." required>
         <label for="floatingPassword"> Conferma nuova password</label>
         </div>
             

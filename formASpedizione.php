@@ -12,10 +12,10 @@
     <script>
             function checkData(result){
               if(result.empty != undefined){
-                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");     
+                $("#alertBox").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");     
               }
-              if(result.noAffRow!=undefined){
-                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.noAffRow+"</div>");
+              if(result.error!=undefined){
+                $("#alertBox").html("<div class='alert alert-danger' role='alert'>"+result.error+"</div>");
               }
             }
             function aggSpedizione(){
@@ -33,9 +33,7 @@
                     //alert(JSON.stringify(result));
                     checkData(result);
                     if(result.ok!=undefined){
-                      $('#spedForm').html("<h1>"+result.ok+"</h1> \
-                                          <a class='btn btn-primary' href='index.php'> Torna alla home </a>");
-                    
+                        $('#spedForm').html("<h1>"+result.ok+"</h1><a class='btn btn-primary' href='index.php'> Torna alla home </a>");
                     }
                     
                 });

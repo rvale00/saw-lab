@@ -35,6 +35,10 @@
 
             function sendComment(){
               var valutazione = $("#input-id").val();
+              if (valutazione == 0){
+                $("#alert").html("<div class='alert alert-warning' role='alert'> Inserire valutazione </div>");
+                return; 
+              }
               var commento = document.getElementsByName("comment")[0].value;
               var idArt = document.getElementsByName("id")[0].value;
             fetch('API/commento.php', {
@@ -76,7 +80,7 @@
 
     $conn = connectDB();
     //proietta articolo
-    $stmt = mysqli_prepare($conn,"SELECT * FROM articoli WHERE IdArticolo=?");
+    $stmt = mysqli_prepare($conn,"SELECT * FROM articolo WHERE IdArticolo=?");
     mysqli_stmt_bind_param($stmt, 's', $id);
     mysqli_stmt_execute($stmt); 
     $result=mysqli_stmt_get_result($stmt);
@@ -135,19 +139,10 @@
 
                             echo "<h3>Valuta il prodotto</h3>";
                             echo "<form id='commento'>";
-                            echo "<input  data-show-clear='false' data-show-caption='true' id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >";
-                            
-                            echo "   <textarea name='comment'>";
+                            echo "<input  data-show-clear='false' data-show-caption='true' id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >"; 
+                            echo "   <textarea name='comment' class='container mt-5 border-left border-right overflow-auto'>";
                             echo "       Inserisci qui il tuo commento";
                             echo "   </textarea>";
-                            echo "   <script>";
-                            echo"       tinymce.init({
-                                       selector: 'textarea',
-                                       toolbar_mode: 'floating',
-                                       tinycomments_mode: 'embedded',
-                                       tinycomments_author: 'Author name',
-                                   });";
-                            echo "   </script>";
                             echo "   <button type='submit'>Invia</button>";
                             echo "   </form>";
                         }
@@ -155,7 +150,7 @@
                     echo "<div>";
                     echo "<h3> Valutazioni e commenti:</h3>";
                     //mostra recensioni sull'articolo
-                    $stmt = mysqli_prepare($conn,"SELECT DISTINCT commento, valutazione, _name FROM compra NATURAL JOIN utenti WHERE IdArticolo = ?");
+                    $stmt = mysqli_prepare($conn,"SELECT commento, valutazione, _name FROM valuta NATURAL JOIN utente WHERE IdArticolo = ?");
                     mysqli_stmt_bind_param($stmt, 's', $id);
                     mysqli_stmt_execute($stmt); 
                     $result=mysqli_stmt_get_result($stmt);
@@ -182,8 +177,8 @@
                                     <div>
                                     <hr>
                                     <input data-size='sm' value='".$row['valutazione']."' class='valStar'>
-                                    <p id='showComments' class='second py-2 px-2'>".$row['commento']."</p>
-                                    <span class='text2'>Da: ".$row['_name']."</span>
+                                    <p id='showComments' class='second py-2 px-2'>".htmlspecialchars($row['commento'])."</p>
+                                    <span class='text2'>Da: ".htmlspecialchars($row['_name'])."</span>
                                     <hr>
                                     </div>
                                     ";

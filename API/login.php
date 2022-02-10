@@ -15,7 +15,7 @@
         $email=trim($email);
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
         
-        $stmt = mysqli_prepare($conn,"SELECT * FROM utenti WHERE email=?");
+        $stmt = mysqli_prepare($conn,"SELECT * FROM utente WHERE email=?");
         mysqli_stmt_bind_param($stmt, 's', $email);
         mysqli_stmt_execute($stmt); 
         $res=mysqli_stmt_get_result($stmt);

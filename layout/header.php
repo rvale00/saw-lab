@@ -33,7 +33,7 @@
                     <?php
                       if(isset($_SESSION['logged'])){
                         echo "<a class='nav-link fas fa-shopping-cart' href='/saw-lab/cart/listaCarrello.php'>Cart</a>";
-                        echo "<a class='nav-link fas fa-user-cog' href='/saw-lab/formChangePA.php'>".$_SESSION['nome']."</a>";
+                        echo "<a class='nav-link fas fa-user-cog' href='/saw-lab/show_profile.php'>".$_SESSION['nome']."</a>";
                         echo "<a class='nav-link fas fa-sign-out-alt' href='/saw-lab/API/logout.php'>Logout</a>";
                       }
                     ?>

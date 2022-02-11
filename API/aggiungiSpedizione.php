@@ -6,7 +6,7 @@
     $regione = $citta = $indirizzo = $cap = " ";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["reg"]) || empty($_POST["citta"]) || empty($_POST["indirizzo"]) || empty($_POST["cap"])){
-            echo json_encode(array("empty" => "Campi obbligatori vuoti"));
+            echo json_encode(array("error" => "Campi obbligatori vuoti"));
             exit(); 
         }else{
             $regione = $_POST["reg"];

@@ -6,24 +6,24 @@
 
     $name = $surname = $email = $password = $cpassword = " ";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(empty($_POST["name"]) || empty($_POST["surname"]) || empty($_POST["email"]) || empty($_POST["psw"]) || empty($_POST["cPsw"])){
-            echo json_encode(array("empty" => "Campi obbligatori vuoti"));
+        if(empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"]) || empty($_POST["pass"]) || empty($_POST["confirm"])){
+            echo json_encode(array("error" => "Campi obbligatori vuoti"));
             exit();
         }else{
-            $name = $_POST["name"];
-            $surname = $_POST["surname"];
+            $name = $_POST["firstname"];
+            $surname = $_POST["lastname"];
             $email = $_POST["email"];
-            $password = $_POST["psw"];
-            $cpassword = $_POST["cPsw"];
+            $password = $_POST["pass"];
+            $cpassword = $_POST["confirm"];
         }
 
         if($password != $cpassword){
-            echo json_encode(array("nopsw" =>"le password non corrispondono"));
+            echo json_encode(array("error" =>"le password non corrispondono"));
             mysqli_close($conn);
             exit();
         }
         if (!(filter_var($email, FILTER_VALIDATE_EMAIL))) {
-            echo json_encode(array("email"=>"mail non valida"));
+            echo json_encode(array("error"=>"mail non valida"));
             mysqli_close($conn);
             exit();
         }
@@ -33,7 +33,7 @@
 
         $name=trim($name);
         $surname=trim($surname);
-        if(strlen($password)<=12){
+        if(strlen($password)<12){
             echo json_encode(array("error"=>"La password deve essere lunga almeno 12 caratteri"));
             mysqli_close($conn);
             exit();
@@ -45,13 +45,13 @@
         mysqli_stmt_bind_param($stmt, 'ssss', $email,$hashedpsw,$name,$surname);
 
         if(!mysqli_stmt_execute($stmt)){
-            echo json_encode(array("email2"=>"mail gia' usata"));
+            echo json_encode(array("error"=>"mail gia' usata"));
             mysqli_close($conn);
             exit();
         }
 
         if(mysqli_affected_rows($conn) === 0){
-            echo json_encode(array("noAffRow"=>"Errore durante la registrazione"));
+            echo json_encode(array("error"=>"Errore durante la registrazione"));
             mysqli_close($conn);
             exit();
             
@@ -63,7 +63,7 @@
         mysqli_stmt_execute($stmt);
 
         if(mysqli_affected_rows($conn) === 0){
-            echo json_encode(array("noAffRow2"=>"Errore durante la registrazione"));
+            echo json_encode(array("error"=>"Errore durante la registrazione"));
             mysqli_close($conn);
             exit();
             

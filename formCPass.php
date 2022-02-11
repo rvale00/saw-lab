@@ -3,55 +3,17 @@
     <head lang="it">
         <title>Cambio password</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" href="../css/form.css">
+        <link rel="stylesheet" href="css/form.css">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/28ff0f2fac.js" crossorigin="anonymous"></script>
-    <script>
-            function checkPass(result){
-              if(result.old != undefined || result.new != undefined || result.cpsw != undefined){
-                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");
-              }
-                //se entrambi i campi hanno del contenuto confronto che siano uguali
-              if(result.samepsw != undefined){
-                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.samepsw+"</div>");
-              }
-              
-            }
-            function cPsw(){
-              var oldPsw = document.getElementsByName("old")[0].value;
-              var newPsw = document.getElementsByName("new")[0].value;
-              var newCPsw = document.getElementsByName("cnew")[0].value;
-            fetch('API/cambiaPassword.php', {
-                method: "post",
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
-                body: "old=" + oldPsw + "&new=" + newPsw + "&cnew=" + newCPsw,
-                }).then(function (response) { 
-                    return response.json();
-                }).then(function (result) {
-
-                    checkPass(result);
-                    if(result.no!=undefined){
-                      $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.no+"</div>");
-                    }
-                    if(result.db1!=undefined){
-                      $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.db1+"</div>");
-                    }   
-                    //se non ci sono stati errori allora:
-                    if(result.ok!=undefined){
-                      $('#cpassForm').html("<h1>"+result.ok+"</h1> \
-                                          <a class='btn btn-primary' href='../index.php'> Torna alla Home </a>");
-                    }
-                    
-                });
-            }
+        <script src="js/fetchData.js"></script>
+    <script> 
             $(document).ready(function(){
                 $("#formAddr").submit(function(e){
                     e.preventDefault();
                     cPsw();
                 });
             });
-
-
         </script>
     </head>
 
@@ -60,34 +22,29 @@
       include("utilPHP/private.php");
     ?>
     
-    <main class="form-signin" id="cpassForm">
-      <div id="alertDiv"></div>
+    <main class="form-signin" id="cpForm">
+      <div id="alert"></div>
       <form id="formAddr">
         <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
         <h1 class="h3 mb-3 fw-normal">Cambia password</h1>
 
         <div class="form-floating"  id="floatingPassword">
         <input type="password" class="form-control"  id="old" name="old" placeholder="Password" required>
-        <p id="oldErr"></p>  
         <label for="floatingInput">Password attuale</label>
         </div>
     
         <div class="form-floating"  id="floatingPassword">
-        <input type="password" class="form-control" id="new" name="new" placeholder="Password" pattern="{12}" title="La password deve contenere 12 caratteri." required>
-        <p id="newErr" ></p>
+        <input type="password" class="form-control" id="new" name="new" placeholder="Password" minlength="12" title="La password deve contenere 12 caratteri." required>
         <label for="floatingInput">Nuova password</label>
         </div>
         <div class="form-floating"  id="floatingPassword">
-        <p id="cnewErr" ></p>
-        <input type="password" class="form-control" id="cnew" name="cnew" placeholder="Password" pattern="{12}" title="La password deve contenere 12 caratteri." required>
+        <input type="password" class="form-control" id="cnew" name="cnew" placeholder="Password" minlength="12" title="La password deve contenere 12 caratteri." required>
         <label for="floatingPassword"> Conferma nuova password</label>
         </div>
-            
-        <p id="samepswErr" ></p>
 
         <button type="submit" class="w-100 btn btn-lg btn-primary">Cambia Password</button>
         <a href="index.php"> Torna alla home</a>
-        <a href="formChangePA.php"> Area utente</a>
+        <a href="show_profile.php"> Area utente</a>
 
         <p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
       </form>

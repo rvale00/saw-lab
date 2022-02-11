@@ -2,12 +2,12 @@
 
     $password = $email = "";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(empty($_POST["email"]) || empty($_POST["psw"])){
+        if(empty($_POST["email"]) || empty($_POST["pass"])){
             echo json_encode(array("empty"=>"Campi vuoti."));
             exit;
         }else{
             $email = $_POST["email"];
-            $password = $_POST["psw"];
+            $password = $_POST["pass"];
         }
         include("../db/connect.php");
         $conn = connectDB();
@@ -21,7 +21,7 @@
         $res=mysqli_stmt_get_result($stmt);
 
         if(!$res){
-            echo json_encode(array("email"=>"mail gia' usata"));
+            echo json_encode(array("error"=>"mail gia' usata"));
             mysqli_close($conn);
             exit();
             
@@ -38,13 +38,13 @@
                 echo json_encode(array("ok"=>"Accesso eseguito"));
                 
             }else{
-                echo json_encode(array("wCred"=>"Credenziali sbagliate"));
+                echo json_encode(array("error"=>"Credenziali sbagliate"));
                 mysqli_close($conn);
                 exit();
             }
 
         }else{
-            echo json_encode(array("wCred"=>"Credenziali sbagliate"));
+            echo json_encode(array("error"=>"Credenziali sbagliate"));
             mysqli_close($conn);
             exit();
         }

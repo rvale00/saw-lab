@@ -6,14 +6,14 @@
     $oldpsw = $newpsw = $newcpsw = " ";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(empty($_POST["old"]) || empty($_POST["new"]) || empty($_POST["cnew"])){
-            echo json_encode( array("empty"=>"Campi obbligatori vuoti"));            
+            echo json_encode( array("error"=>"Campi obbligatori vuoti"));            
         }else{
             $oldpsw = $_POST["old"];
             $newpsw = $_POST["new"];
             $newcpsw = $_POST["cnew"];
         }
         if($newpsw != $newcpsw){
-            echo json_encode( array("samepsw"=>"le password non coincidono"));
+            echo json_encode( array("error"=>"le password non coincidono"));
         }
 
 
@@ -27,10 +27,8 @@
         mysqli_stmt_execute($stmt); 
         $result=mysqli_stmt_get_result($stmt);
         if(!$result){
-            //$err += array("db1"=>"errore db");
-            echo json_encode(array("db1"=>"errore db"));
+            echo json_encode(array("error"=>"errore db"));
             mysqli_close($conn);
-            
             exit();
             
         }
@@ -50,14 +48,14 @@
 
             if(mysqli_affected_rows($conn) === 0){
                 //$err += array("db"=>"errore db");
-                echo json_encode(array("db1"=>"errore db"));
+                echo json_encode(array("error"=>"errore db"));
                 mysqli_close($conn);
                 exit();
             
             }
 
             echo json_encode(array("ok"=>"Password cambiata con successo!"));
-        }else echo json_encode(array("no"=>"la password è sbagliata"));
+        }else echo json_encode(array("error"=>"la password è sbagliata"));
        
         mysqli_close($conn);
 

@@ -5,12 +5,12 @@
 
     $name = $surname = $email = " ";
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if(empty($_POST["name"]) || empty($_POST["surname"]) || empty($_POST["email"])){
+        if(empty($_POST["firstname"]) || empty($_POST["lastname"]) || empty($_POST["email"])){
             echo json_encode(array("empty" => "Campi obbligatori vuoti"));
             exit();
         }else{
-            $name = $_POST["name"];
-            $surname = $_POST["surname"];
+            $name = $_POST["firstname"];
+            $surname = $_POST["lastname"];
             $email = $_POST["email"];
         }
         $emailSession = $_SESSION['email'] ;

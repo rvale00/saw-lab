@@ -1,43 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head lang="it">
-        <title>Cambio password</title>
+        <title>Dati Spedizione</title>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <link href="css/spedizione.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://kit.fontawesome.com/28ff0f2fac.js" crossorigin="anonymous"></script>
-    
-
-
-    <script>
-            function checkData(result){
-              if(result.empty != undefined){
-                $("#alertBox").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");     
-              }
-              if(result.error!=undefined){
-                $("#alertBox").html("<div class='alert alert-danger' role='alert'>"+result.error+"</div>");
-              }
-            }
-            function aggSpedizione(){
-              var reg = document.getElementsByName("reg")[0].value;
-              var citta = document.getElementsByName("citta")[0].value;
-              var ind = document.getElementsByName("ind")[0].value;
-              var cap = document.getElementsByName("cap")[0].value;
-            fetch('API/aggiungiSpedizione.php', {
-                method: "post",
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
-                body: "reg=" + reg + "&citta=" + citta + "&indirizzo=" + ind + "&cap=" + cap,
-                }).then(function (response) { 
-                    return response.json();
-                }).then(function (result) {
-                    //alert(JSON.stringify(result));
-                    checkData(result);
-                    if(result.ok!=undefined){
-                        $('#spedForm').html("<h1>"+result.ok+"</h1><a class='btn btn-primary' href='index.php'> Torna alla home </a>");
-                    }
-                    
-                });
-            }
+        <script src="js/fetchData.js"></script>
+    <script>          
             $(document).ready(function(){
                 $("#formAddr").submit(function(e){
                     e.preventDefault();
@@ -56,7 +26,7 @@
     <main class="form-signin" id="spedForm">
     <form id="formAddr">
         <div class="form-floating">
-          <div id="alertBox"></div>
+          <div id="alert"></div>
               <!--<input type="text" class="form-control" id="reg" name="reg" placeholder="Regione">-->
               <select class="form-control" id="reg" name="reg">
                 <option value="Abruzzo">Abruzzo</option>
@@ -104,7 +74,7 @@
 
         <button type="submit" class="w-100 btn btn-lg btn-primary"> Invia </button>
         <a href="index.php"> Torna alla home</a>
-        <a href="formChangePA.php"> Area utente</a>
+        <a href="show_profile.php"> Area utente</a>
 
 
         <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p> 

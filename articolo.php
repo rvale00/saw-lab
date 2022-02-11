@@ -20,42 +20,9 @@
 
 <!-- with v4.1.0 Krajee SVG theme is used as default (and must be loaded as below) - include any of the other theme JS files as mentioned below (and change the theme property of the plugin) -->
 <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.js"></script>
-
+<script src="js/fetchData.js"></script>
 
     <script>
-
-            function checkInput(result){
-              
-              if(result.error != undefined){
-                $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.error+"</div>");
-                return;
-              }
-
-            }
-
-            function sendComment(){
-              var valutazione = $("#input-id").val();
-              if (valutazione == 0){
-                $("#alert").html("<div class='alert alert-warning' role='alert'> Inserire valutazione </div>");
-                return; 
-              }
-              var commento = document.getElementsByName("comment")[0].value;
-              var idArt = document.getElementsByName("id")[0].value;
-            fetch('API/commento.php', {
-                method: "post",
-                headers: { "Content-type": "application/x-www-form-urlencoded" },
-                body: "valutazione=" + valutazione + "&commento=" + commento + "&id=" + idArt,
-                }).then(function (response) { 
-                    return response.json();
-                }).then(function (result) {
-                    checkInput(result);
-                    
-                    if(result.ok != undefined){
-                        window.location.reload();
-                    }
-                });
-            }
-
             $(document).ready(function(){
                 $('.valStar').rating({displayOnly: true, step: 1});
                 $("#commento").submit(function(e){
@@ -138,6 +105,7 @@
                     
 
                             echo "<h3>Valuta il prodotto</h3>";
+                            
                             echo "<form id='commento'>";
                             echo "<input  data-show-clear='false' data-show-caption='true' id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >"; 
                             echo "   <textarea name='comment' class='container mt-5 border-left border-right overflow-auto'>";

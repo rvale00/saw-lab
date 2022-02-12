@@ -25,7 +25,7 @@
     <main class="form-signin" id="cpForm">
       <div id="alert"></div>
       <form id="formAddr">
-        <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
+        <img class="mb-4" src="/~S4852454/img/logo.png" alt="" width="170" height="100">
         <h1 class="h3 mb-3 fw-normal">Cambia password</h1>
 
         <div class="form-floating"  id="floatingPassword">

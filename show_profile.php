@@ -47,7 +47,7 @@
                 $row = mysqli_fetch_array($res);
             ?>
 
-        <img class="mb-4" src="/saw-lab/img/logo.png" alt="" width="170" height="100">
+        <img class="mb-4" src="/~S4852454/img/logo.png" alt="" width="170" height="100">
         <div class="container"id="alert"></div>
         <div class="form-floating">
           <input type="text" class="form-control" type="text" id="fname" name="firstname" value=" <?php echo htmlspecialchars($row['_name']) ?>">

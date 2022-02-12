@@ -6,7 +6,7 @@
                 <h1> Accesso consentito solo agli utenti registrati!</h1> \n
                 <img src='https://media.giphy.com/media/CXwq57Bjaza3S/giphy.gif' class='img-rounded' alt='no quack quack qua'>\n
                 <br> \n
-                <a href='/saw-lab/index.php'> Torna alla home</a>
+                <a href='/~S4852454/index.php'> Torna alla home</a>
                 <br>
                 <a href='formLogin.php'> Accedi </a>
                 <a href='formRegister.php'> Registrati</a>

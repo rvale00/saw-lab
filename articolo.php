@@ -102,29 +102,45 @@
                         
                     }else {
                         if(mysqli_num_rows($result) > 0){
-                    
-
+                            $modified = false;
+                            //controlla se l'articolo e' stato recensito dall'utente
+                            $stmt = mysqli_prepare($conn,"SELECT * FROM valuta WHERE email=? AND IdArticolo=?");
+                            mysqli_stmt_bind_param($stmt, 'ss', $_SESSION['email'], $id);
+                            mysqli_stmt_execute($stmt); 
+                            $resultV=mysqli_stmt_get_result($stmt);
+                        
+                            //se vero, l'utente ha gia fatto una recensione
+                            if(mysqli_num_rows($resultV) > 0){
+                                $modified=true;
+                                $rowV = mysqli_fetch_array($resultV);
+                            }
                             echo "<h3>Valuta il prodotto</h3>";
-                            
                             echo "<form id='commento'>";
-                            echo "<input  data-show-clear='false' data-show-caption='true' id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >"; 
+                            if(!$modified)
+                                echo "<input  data-show-clear='false' data-show-caption='true' id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >"; 
+                            else
+                                echo "<input value='".$rowV['valutazione']."' data-show-clear='false' data-show-caption='true' id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >";                            
                             echo "   <textarea name='comment' class='container mt-5 border-left border-right overflow-auto'>";
-                            echo "       Inserisci qui il tuo commento";
+                            if(!$modified)
+                                echo "Inserisci qui il tuo commento";
+                            else
+                                echo $rowV['commento'];
                             echo "   </textarea>";
+                            echo "<input type='hidden' value='".$modified."' id='mod' name='mod'>";
                             echo "   <button type='submit'>Invia</button>";
                             echo "   </form>";
                         }
                     }
+
                     echo "<div>";
                     echo "<h3> Valutazioni e commenti:</h3>";
                     //mostra recensioni sull'articolo
-                    $stmt = mysqli_prepare($conn,"SELECT commento, valutazione, _name FROM valuta NATURAL JOIN utente WHERE IdArticolo = ?");
+                    $stmt = mysqli_prepare($conn,"SELECT commento, valutazione, _name,modificato FROM valuta NATURAL JOIN utente WHERE IdArticolo = ?");
                     mysqli_stmt_bind_param($stmt, 's', $id);
                     mysqli_stmt_execute($stmt); 
                     $result=mysqli_stmt_get_result($stmt);
                     if(!$result){
                         echo"query error";
-            
                         mysqli_close($conn);
                         exit();
                         
@@ -147,6 +163,10 @@
                                     <input data-size='sm' value='".$row['valutazione']."' class='valStar'>
                                     <p id='showComments' class='second py-2 px-2'>".htmlspecialchars($row['commento'])."</p>
                                     <span class='text2'>Da: ".htmlspecialchars($row['_name'])."</span>
+                                    ";
+                                    if($row['modificato'])
+                                        echo"<span class='text2'><small class='second py-2 px-2 text-muted'><i>Modificato</i> </small></span>";
+                                    echo"    
                                     <hr>
                                     </div>
                                     ";

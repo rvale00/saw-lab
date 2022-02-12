@@ -96,8 +96,7 @@ function sendComment(){
     }
     var commento = document.getElementsByName("comment")[0].value;
     var idArt = document.getElementsByName("id")[0].value;
-    var mod = document.getElementsByName("mod")[0].value;
-    console.log(mod);
+    var mod = $("#mod").val();
   fetch('API/commento.php', {
       method: "post",
       headers: { "Content-type": "application/x-www-form-urlencoded" },

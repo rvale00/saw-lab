@@ -3,7 +3,6 @@
 <head>
     <title>Lista articoli</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="css/style.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/28ff0f2fac.js" crossorigin="anonymous"></script>
 </head>
 
@@ -49,10 +48,8 @@
             if(mysqli_num_rows($result) == 0){
                 echo"<h2> Non ci sono articoli :( </h2>";
             }else{
-                
-            
                 echo "<div class='row'>";
-            while($row = mysqli_fetch_array($result)){
+                while($row = mysqli_fetch_array($result)){
                     echo "<div class='col-6 my-6'>";
                         echo "<div class='card' style='width:400px'>";
                         echo "<img src='".$row['Immagine']."'>";

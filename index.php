@@ -22,7 +22,7 @@
                 <div class="col-md-5 p-lg-5 mx-auto my-5">
                 <img class="card-img-top" src="img/logo.png" alt="Card image" style="width:100%">
                 <p class="lead fw-normal">Customize your programming ducks</p>
-                <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+                <a class="btn btn-outline-secondary" href="personalizza.php">Coming soon</a>
                 </div>
             </div>
 

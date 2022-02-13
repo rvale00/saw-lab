@@ -69,7 +69,7 @@
                         echo "<br>";
                         echo "<p>".$row['Descrizione']."</p>";
                         echo "<img src='".$row['Immagine']."'>" ;
-                        echo "<p>".$row['prezzo']."</p>";
+                        echo "<h4 class='text-center'>".$row['prezzo']."€</h4>";
                         echo"<br>";
 
                         echo "<form action='cart/addInCart.php' method='get'>\n";
@@ -101,6 +101,12 @@
                         exit();
                         
                     }else {
+                        $stmt = mysqli_prepare($conn,"SELECT avg(valutazione) as media FROM valuta WHERE IdArticolo = ?");
+                        mysqli_stmt_bind_param($stmt, 's', $id);
+                        mysqli_stmt_execute($stmt); 
+                        $resultMedia=mysqli_stmt_get_result($stmt);
+                        $rowMedia = mysqli_fetch_array($resultMedia);
+                        echo "<span> <h3>Media valutazione</h3> <input data-size='sm' value='".$rowMedia['media']."' class='valStar'> </span>";
                         if(mysqli_num_rows($result) > 0){
                             $modified = false;
                             //controlla se l'articolo e' stato recensito dall'utente
@@ -120,15 +126,15 @@
                                 echo "<input  data-show-clear='false' data-show-caption='true' id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >"; 
                             else
                                 echo "<input value='".$rowV['valutazione']."' data-show-clear='false' data-show-caption='true' id='input-id' type='text' class='rating' data-size='sm' data-min='0' data-max='5' data-step='1' >";                            
-                            echo "   <textarea name='comment' class='container mt-5 border-left border-right overflow-auto'>";
+                            echo "   <textarea name='comment' class='container mt-1 mb-1 border-left border-right overflow-auto'>";
                             if(!$modified)
                                 echo "Inserisci qui il tuo commento";
                             else
                                 echo $rowV['commento'];
-                            echo "   </textarea>";
+                            echo "</textarea>";
                             echo "<input type='hidden' value='".$modified."' id='mod' name='mod'>";
-                            echo "   <button type='submit'>Invia</button>";
-                            echo "   </form>";
+                            echo "<button type='submit' class='btn btn-primary' >Invia</button>";
+                            echo "</form>";
                         }
                     }
 
@@ -160,7 +166,7 @@
                                     echo"
                                     <div>
                                     <hr>
-                                    <input data-size='sm' value='".$row['valutazione']."' class='valStar'>
+                                    <input data-size='xs' value='".$row['valutazione']."' displayOnly='true' class='valStar'>
                                     <p id='showComments' class='second py-2 px-2'>".htmlspecialchars($row['commento'])."</p>
                                     <span class='text2'>Da: ".htmlspecialchars($row['_name'])."</span>
                                     ";

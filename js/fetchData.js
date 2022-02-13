@@ -4,6 +4,14 @@ function checkInput(result){
       $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.error+"</div>");
     }
 }
+function checkCart(result){
+  if(result.error != undefined){
+    $("#alert").html("<div class='alert alert-danger' role='alert'>"+result.empty+"</div>");     
+  }
+  if(result.ind != undefined){
+    $("#alert").html("<div class='alert alert-warning' role='alert'>"+result.ind+" <a href='../formASpedizione.php'> Aggiungi indirizzo </a> </div>");     
+  }
+}
 
 //funzione di registrazione
 function register(){
@@ -130,3 +138,17 @@ function changeCred(){
           $('#credForm').html("<h1>"+result.ok+"</h1> \<a class='btn btn-primary' href='index.php'> Torna alla Home </a>");
       });
   }
+
+  function buyCart(){
+    fetch('buy.php', {
+        method: "post", 
+        }).then(function (response) { 
+            return response.json();
+        }).then(function (result) {
+            checkCart(result);
+            if(result.ok!=undefined){
+              $('#regForm').html("<h1>"+result.ok+"</h1> \
+                                  <a class='btn btn-primary' href='../listaArticoli.php'> Continua gli acquisti </a>");
+            }
+        });
+    }
